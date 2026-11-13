@@ -1,0 +1,40 @@
+---
+/**
+ * One chapter of the homepage story. The chapter is taller than the screen;
+ * its contents stay pinned while you scroll, and a script sets --p from 0 to 1
+ * as you move through it. Scenes use --p to animate. Without JavaScript, or
+ * with reduced motion, --p is 1, so everything shows in its finished state.
+ */
+interface Props {
+  id: string;
+  bg: string; // background colour while this chapter is on screen
+  tone?: 'dark' | 'light';
+  side?: 'left' | 'right'; // which side the scene sits on (desktop)
+  number?: string;
+  eyebrow?: string;
+  title: string;
+  height?: number; // in viewport heights
+}
+const { id, bg, tone = 'dark', side = 'left', number, eyebrow, title, height = 170 } = Astro.props;
+const dark = tone === 'dark';
+---
+<section id={id} class="chapter relative" style={`height:${height}svh`} data-chapter data-bg={bg} aria-labelledby={`${id}-title`}>
+  <div class="sticky top-0 flex h-[100svh] items-center overflow-hidden">
+    <div class:list={['container-page grid w-full items-center gap-6 md:grid-cols-2 md:gap-16', dark ? 'text-ivory on-dark' : 'text-midnight']}>
+      <div class:list={['scene relative mx-auto h-[28svh] w-full max-w-[34rem] md:h-[62svh]', side === 'right' && 'md:order-2']} aria-hidden="true">
+        <slot name="scene" />
+      </div>
+      <div class="story-text text-center md:text-left">
+        {(number || eyebrow) && (
+          <p class:list={['eyebrow', dark ? 'text-gold' : 'text-restoration-deep']}>
+            {number && <span class="mr-2 not-italic font-sans text-sm tracking-[0.2em] opacity-80">{number}</span>}{eyebrow}
+          </p>
+        )}
+        <h2 id={`${id}-title`} class="mt-2 text-[2rem] leading-tight md:mt-3 md:text-6xl">{title}</h2>
+        <div class:list={['mt-4 space-y-3 text-[1.05rem] md:mt-5 md:space-y-4 md:text-xl', dark ? 'text-ivory/85' : 'text-ink-soft']}>
+          <slot />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

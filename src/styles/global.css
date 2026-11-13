@@ -151,6 +151,32 @@
     html.js [data-reveal].is-visible { opacity: 1; transform: none; }
   }
 
+  /* ---------- Homepage story ---------- */
+  .story-bg { transition: background-color 1.1s ease; }
+  /* Shorthands built from the chapter's scroll progress --p (0 to 1). */
+  .chapter { --p: 1; }
+  html.js .chapter { --p: 0; }
+  .story-text {
+    --t: clamp(0, calc((var(--p) - 0.06) * 5), 1);
+    opacity: var(--t);
+    transform: translateY(calc((1 - var(--t)) * 28px));
+  }
+  /* Small looping life inside scenes */
+  @keyframes flicker { 0%,100% { transform: scale(1) rotate(-1deg); } 50% { transform: scale(1.06, .96) rotate(1.5deg); } }
+  @keyframes beat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.09); } 30% { transform: scale(1); } 45% { transform: scale(1.05); } }
+  @keyframes twinkle { 0%,100% { opacity: .25; } 50% { opacity: 1; } }
+  @keyframes glow { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+  @keyframes drift { from { transform: translateY(0); } to { transform: translateY(-14px); } }
+  .anim-flicker { animation: flicker 1.6s ease-in-out infinite; transform-origin: 50% 90%; transform-box: fill-box; }
+  .anim-beat { animation: beat 2.4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+  .anim-twinkle { animation: twinkle 3s ease-in-out infinite; }
+  .anim-glow { animation: glow 4s ease-in-out infinite; }
+  .anim-drift { animation: drift 5s ease-in-out infinite alternate; }
+  @media (prefers-reduced-motion: reduce) {
+    html.js .chapter { --p: 1; }
+    .anim-flicker, .anim-beat, .anim-twinkle, .anim-glow, .anim-drift { animation: none; }
+  }
+
   /* Visible only while site.showPlaceholders is true */
   .placeholder {
     border: 1.5px dashed var(--color-gold-deep);

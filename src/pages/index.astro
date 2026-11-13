@@ -1,62 +1,255 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import StoryChapter from '../components/story/StoryChapter.astro';
 import DoorCard from '../components/DoorCard.astro';
 import HeartKey from '../components/HeartKey.astro';
-import KeyMotif from '../components/KeyMotif.astro';
-import Placeholder from '../components/Placeholder.astro';
 import { journeyWays } from '../config/site';
 import shamrock from '../assets/brand/shamrock-badge.png';
 import ivaPortrait from '../assets/people/iva-portrait.jpg';
-import veronicaCover from '../assets/books/veronicas-bookstore-cover.jpg';
 
-// DRAFT for Iva to approve: values spelling ARISE, drawn from her own words.
-const arise = [
-  { letter: 'A', word: 'Accompaniment', line: 'You don’t walk alone.' },
-  { letter: 'R', word: 'Restoration', line: 'Becoming who you were created to be.' },
-  { letter: 'I', word: 'Image of God', line: 'Every person is created in God’s image.' },
-  { letter: 'S', word: 'Soul', line: 'Like a diamond within you, declaring your dignity.' },
-  { letter: 'E', word: 'Encounter', line: 'Meeting God’s love afresh.' },
+// Helper: a value that runs from 0 to 1 between two points of the chapter's progress.
+const seg = (a: number, b: number) => `clamp(0, calc((var(--p) - ${a}) / ${b - a}), 1)`;
+
+const companions = [
+  { name: 'St Philip Neri', symbol: 'fire' },
+  { name: 'St Thérèse of Lisieux', symbol: 'heart' },
+  { name: 'St John of the Cross', symbol: 'cross' },
+  { name: 'St Patrick', symbol: 'shamrock' },
 ];
 ---
-<BaseLayout headerTone="dark">
-  <!-- 1. THE DOOR: a painterly night, light breaking through -->
-  <section class="relative isolate overflow-hidden bg-midnight text-ivory on-dark" aria-labelledby="hero-title">
-    <div class="absolute inset-0 -z-20 bg-cover bg-center opacity-40 mix-blend-luminosity" style="background-image:url('/textures/red-watercolour.jpg')" aria-hidden="true"></div>
-    <div
-      class="absolute inset-0 -z-10"
-      style="background:
-        radial-gradient(ellipse 60% 40% at 50% 38%, rgb(217 173 101 / .22), transparent 70%),
-        radial-gradient(ellipse 70% 45% at 50% 110%, rgb(203 91 89 / .45), transparent 70%),
-        linear-gradient(180deg, rgb(20 27 45 / .92) 0%, rgb(32 43 68 / .78) 55%, rgb(44 70 129 / .7) 100%);"
-      aria-hidden="true"
-    ></div>
-    <div class="container-page flex min-h-[100svh] flex-col items-center justify-center pt-32 pb-16 text-center md:pt-36">
-      <!-- A doorway of light, slightly open -->
-      <div class="relative h-40 w-30 md:h-48 md:w-36" aria-hidden="true">
-        <div class="absolute -inset-10 rounded-full bg-gold/25 blur-3xl"></div>
-        <div class="absolute inset-0 rounded-t-full border border-gold/60 bg-gradient-to-b from-[#f3dcae] via-[#e9b77c] to-[#e1806f] shadow-[0_0_80px_rgba(217,173,101,.45)]"></div>
-        <div class="absolute inset-y-0 left-0 w-[46%] origin-left rounded-tl-full border border-gold/50 bg-midnight/85 [transform:perspective(500px)_rotateY(-28deg)]"></div>
-        <Image src={shamrock} alt="" width={72} height={72} densities={[1, 2]} class="absolute left-1/2 top-[38%] h-14 w-14 -translate-x-[15%] rounded-full md:h-16 md:w-16" loading="eager" />
-      </div>
-      <h1 id="hero-title" class="mt-10 max-w-5xl text-[2.2rem] leading-[1.12] sm:text-6xl md:text-7xl lg:text-[5.25rem]">
-        <span class="whitespace-nowrap">Underneath all pain,</span><br />
-        <span class="italic text-ivory/95">joy is hidden.</span>
-      </h1>
-      <ul class="mt-12 grid w-full max-w-3xl gap-3 sm:grid-cols-3 sm:gap-5">
-        {journeyWays.map((w) => (
-          <li><a href={w.href} class="btn-caps w-full">{w.title}</a></li>
+<BaseLayout headerTone="dark" description="Step through the door. A journey of healing, hope and the golden thread of God’s presence, with Dr Iva Beranek and I Arise Ministry.">
+  <!-- Background that shifts from night to dawn as the story unfolds -->
+  <div id="story-bg" class="story-bg pointer-events-none fixed inset-0 -z-10" style="background-color:#141b2d" aria-hidden="true"></div>
+
+  <!-- ============ 1. THE DOOR ============ -->
+  <section id="door" class="chapter relative" style="height:210svh" data-chapter data-bg="#141b2d" aria-labelledby="hero-title">
+    <div class="sticky top-0 flex h-[100svh] flex-col items-center justify-center overflow-hidden px-5 pt-20 text-center text-ivory on-dark">
+      <!-- stars -->
+      <svg class="absolute inset-0 h-full w-full" aria-hidden="true">
+        {Array.from({ length: 40 }).map((_, i) => (
+          <circle cx={`${(i * 37) % 100}%`} cy={`${(i * 53) % 70}%`} r={i % 5 === 0 ? 1.6 : 1} fill="#f8f1e8" class="anim-twinkle" style={`animation-delay:${(i % 7) * 0.4}s`} />
         ))}
-      </ul>
-      <a href="#welcome" class="mt-14 flex flex-col items-center gap-2 text-sm text-ivory/75 no-underline hover:text-ivory">
-        <span class="font-display text-lg italic">Step inside</span>
-        <svg class="h-5 w-5 animate-bounce motion-reduce:animate-none" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8l5 5 5-5" /></svg>
-      </a>
+      </svg>
+      <div style={`opacity:calc(1 - ${seg(0.35, 0.6)}); transform: translateY(calc(${seg(0.35, 0.6)} * -40px))`}>
+        <p class="eyebrow text-gold">Welcome to I Arise Ministry</p>
+        <h1 id="hero-title" class="mt-3 text-[2.2rem] leading-[1.1] sm:text-6xl md:text-7xl">
+          <span class="whitespace-nowrap">Underneath all pain,</span><br /><span class="italic">joy is hidden.</span>
+        </h1>
+      </div>
+      <!-- the door -->
+      <div class="relative mt-10 h-56 w-40 md:h-72 md:w-52" style={`transform: scale(calc(1 + ${seg(0.55, 1)} * ${seg(0.55, 1)} * 7)); transform-origin: 50% 55%`} aria-hidden="true">
+        <div class="absolute -inset-12 rounded-full bg-gold/30 blur-3xl anim-glow"></div>
+        <div class="absolute inset-0 rounded-t-full bg-gradient-to-b from-[#fff3d6] via-[#f0c98a] to-[#e1806f]"></div>
+        <Image src={shamrock} alt="" width={64} height={64} densities={[1, 2]} class="absolute left-1/2 top-[34%] h-14 w-14 -translate-x-1/2 rounded-full" loading="eager" />
+        <div class="absolute inset-0 [perspective:900px]">
+          <div class="absolute inset-0 origin-left rounded-t-full border-2 border-gold/70 bg-gradient-to-b from-[#2b3656] to-[#1a2236] shadow-2xl" style={`transform: rotateY(calc(${seg(0.05, 0.5)} * -100deg))`}>
+            <span class="absolute right-4 top-1/2 h-3 w-3 rounded-full bg-gold"></span>
+            <span class="absolute inset-3 rounded-t-full border border-gold/30"></span>
+          </div>
+        </div>
+        <div class="absolute -inset-1 rounded-t-full border-[6px] border-[#3b2f2a]"></div>
+      </div>
+      <p class="mt-10 font-display text-xl italic text-ivory/80" style={`opacity:calc(1 - ${seg(0.05, 0.25)})`}>Scroll to step through the door</p>
+      <!-- light flooding in -->
+      <div class="pointer-events-none absolute inset-0 bg-[#fdf6e7]" style={`opacity:${seg(0.78, 1)}`}></div>
     </div>
   </section>
 
-  <!-- 2. WELCOME (editorial: large word beside the text) -->
-  <section id="welcome" class="scroll-mt-4 py-24 md:py-32" aria-labelledby="welcome-title">
+  <!-- ============ 2. THE THAW ============ -->
+  <StoryChapter id="thaw" bg="#e8eef3" tone="light" side="left" number="I" eyebrow="Through the door" title="A land of wonder and beauty">
+    <div slot="scene" class="h-full w-full">
+      <svg viewBox="0 0 400 400" class="h-full w-full">
+        <defs>
+          <g id="flake" stroke="#7d98b8" stroke-width="3" stroke-linecap="round" fill="none">
+            <path d="M0-30V30M-26-15 26 15M-26 15 26-15M0-30l-7-7M0-30l7-7M0 30l-7 7M0 30l7 7" />
+          </g>
+          <g id="bloom">
+            {[0, 72, 144, 216, 288].map((r) => <ellipse cx="0" cy="-14" rx="9" ry="15" fill="#e1806f" transform={`rotate(${r})`} />)}
+            <circle r="7" fill="#d9ad65" />
+          </g>
+        </defs>
+        {[[90, 90], [300, 70], [200, 190], [80, 290], [320, 300], [210, 340]].map(([x, y], i) => (
+          <g transform={`translate(${x} ${y})`}>
+            <g style={`opacity:calc(1 - ${seg(0.1 + i * 0.04, 0.45 + i * 0.04)}); transform: rotate(calc(var(--p) * 120deg)) scale(calc(1 - var(--p) * .5)); transform-box: fill-box; transform-origin:center`}><use href="#flake" /></g>
+            <g style={`opacity:${seg(0.35 + i * 0.04, 0.65 + i * 0.04)}; transform: scale(${seg(0.35 + i * 0.04, 0.7 + i * 0.04)}); transform-box: fill-box; transform-origin:center`}><use href="#bloom" /></g>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p>In the stories we love, someone steps through a door into another world, and what was frozen begins to thaw.</p>
+    <p>Here too, what has been frozen deep inside us can slowly come back to life.</p>
+  </StoryChapter>
+
+  <!-- From here a golden thread runs down the page -->
+  <div id="thread-wrap" class="relative">
+    <svg class="pointer-events-none absolute left-0 top-[40svh] bottom-[40svh] z-0 h-[calc(100%-80svh)] w-3 md:left-1/2 md:w-10 md:-translate-x-1/2" viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden="true">
+      <path id="thread" d="M20 0 C34 50 6 100 20 150 S34 250 20 300 S6 400 20 450 S34 550 20 600 S6 700 20 750 S34 850 20 900 S20 980 20 1000" fill="none" stroke="#d9ad65" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" style="filter: drop-shadow(0 0 4px rgb(217 173 101 / .8))" />
+    </svg>
+
+    <!-- ============ 3. THE GOLDEN SHAMROCK ============ -->
+    <StoryChapter id="gold" bg="#1b2440" tone="dark" side="right" number="II" eyebrow="The golden thread" title="Ireland is covered in gold">
+      <div slot="scene" class="h-full w-full">
+        <svg viewBox="0 0 400 400" class="h-full w-full">
+          <defs>
+            <radialGradient id="sh-glow"><stop offset="0" stop-color="#f3d79c" stop-opacity=".9" /><stop offset="1" stop-color="#d9ad65" stop-opacity="0" /></radialGradient>
+            <linearGradient id="sh-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6dfa6" /><stop offset=".5" stop-color="#d9ad65" /><stop offset="1" stop-color="#a87a2c" /></linearGradient>
+            <path id="leaf" d="M0 0 C-30 -18 -46 -58 -24 -78 C-10 -90 0 -80 0 -66 C0 -80 10 -90 24 -78 C46 -58 30 -18 0 0Z" />
+          </defs>
+          <circle cx="200" cy="180" r="160" fill="url(#sh-glow)" class="anim-glow" style={`opacity:${seg(0, 0.4)}`} />
+          <g transform="translate(200 185)" style={`transform: translate(200px,185px) scale(calc(.6 + ${seg(0, 0.45)} * .4)); opacity:${seg(0, 0.3)}`}>
+            <use href="#leaf" fill="url(#sh-gold)" />
+            <use href="#leaf" fill="url(#sh-gold)" transform="rotate(118)" />
+            <use href="#leaf" fill="url(#sh-gold)" transform="rotate(-118)" />
+            <path d="M0 0 C6 40 4 80 -6 120" stroke="url(#sh-gold)" stroke-width="7" fill="none" stroke-linecap="round" />
+          </g>
+          {[[90, 80], [320, 110], [110, 300], [300, 290], [200, 40]].map(([x, y], i) => (
+            <path d={`M${x} ${y - 8}V${y + 8}M${x - 8} ${y}H${x + 8}`} stroke="#f3d79c" stroke-width="2" class="anim-twinkle" style={`animation-delay:${i * 0.5}s`} />
+          ))}
+        </svg>
+      </div>
+      <p>Gold is His presence, and so few of us notice it. The shamrock speaks of the Trinity, and with it St Patrick brought baptism to a nation.</p>
+      <p>There is a golden thread running through your life. Pull on it, and follow where it leads.</p>
+    </StoryChapter>
+
+    <!-- ============ 4. THE WOUNDED HEART ============ -->
+    <StoryChapter id="heart" bg="#efe4d4" tone="light" side="left" number="III" eyebrow="The wounded heart" title="Conflict happens everywhere">
+      <div slot="scene" class="h-full w-full">
+        <svg viewBox="0 0 400 400" class="h-full w-full">
+          <path d="M200 340 C110 280 50 220 60 150 C70 90 140 70 200 130 C260 70 330 90 340 150 C350 220 290 280 200 340Z" fill="#cb5b59" />
+          <path d="M200 130 L185 175 L215 205 L180 245 L210 280 L200 340" fill="none" stroke="#7a2e2d" stroke-width="5" stroke-linejoin="round" style={`opacity:calc(1 - ${seg(0.3, 0.7)})`} />
+          <path d="M200 130 L185 175 L215 205 L180 245 L210 280 L200 340" fill="none" stroke="#e9c785" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1" style={`stroke-dashoffset:calc(1 - ${seg(0.2, 0.75)}); filter: drop-shadow(0 0 6px rgb(217 173 101 / .9))`} />
+        </svg>
+      </div>
+      <p>In cities and families, in churches and workplaces. My research began in Belfast, “a city with a wounded heart”, and its hope of redemption.</p>
+      <p>Reconciliation is possible. Wounds can be filled with gold.</p>
+    </StoryChapter>
+
+    <!-- ============ 5. THE INNER DIAMOND ============ -->
+    <StoryChapter id="diamond" bg="#1d2740" tone="dark" side="right" number="IV" eyebrow="The inner diamond" title="Everyone is created in God’s image">
+      <div slot="scene" class="h-full w-full">
+        <svg viewBox="0 0 400 400" class="h-full w-full">
+          <defs><linearGradient id="dia" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" /><stop offset=".5" stop-color="#cfe0f5" /><stop offset="1" stop-color="#8fb0db" /></linearGradient></defs>
+          <g style={`opacity:calc(.25 + ${seg(0, 0.6)} * .75)`}>
+            <path d="M120 140 L160 95 H240 L280 140 L200 320 Z" fill="url(#dia)" style={`opacity:${seg(0.1, 0.6)}`} />
+            <g fill="none" stroke="#e8f1ff" stroke-width="2.5" stroke-linejoin="round">
+              <path d="M120 140 L160 95 H240 L280 140 L200 320 Z" />
+              <path d="M120 140 H280 M160 95 L180 140 L200 95 L220 140 L240 95 M180 140 L200 320 L220 140" />
+            </g>
+          </g>
+          <path d="M180 60 L200 20 L220 60" fill="none" stroke="#d9ad65" stroke-width="3" style={`opacity:${seg(0.4, 0.7)}`} />
+          {[[110, 90], [300, 100], [290, 250], [120, 260], [205, 360]].map(([x, y], i) => (
+            <path d={`M${x} ${y - 10}V${y + 10}M${x - 10} ${y}H${x + 10}`} stroke="#ffffff" stroke-width="2" class="anim-twinkle" style={`animation-delay:${i * 0.6}s; opacity:${seg(0.3, 0.6)}`} />
+          ))}
+        </svg>
+      </div>
+      <p>Everyone. St Teresa of Ávila pictured the soul as a castle made of a single diamond. Thomas Merton wrote of a hidden point in each of us that belongs to God alone.</p>
+      <p>Life can cover it over. Nothing can destroy it. Healing is the restoring of this image.</p>
+    </StoryChapter>
+
+    <!-- ============ 6. THE DARK NIGHT ============ -->
+    <StoryChapter id="night" bg="#11172a" tone="dark" side="left" number="V" eyebrow="The dark night" title="The night has a purpose" height={190}>
+      <div slot="scene" class="h-full w-full overflow-hidden rounded-t-[999px]">
+        <svg viewBox="0 0 400 400" class="h-full w-full" preserveAspectRatio="xMidYMid slice">
+          <defs><linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c4681" /><stop offset=".6" stop-color="#e1806f" /><stop offset="1" stop-color="#f3d79c" /></linearGradient></defs>
+          <rect width="400" height="400" fill="#0d1222" />
+          <rect width="400" height="400" fill="url(#dawn)" style={`opacity:${seg(0.3, 0.95)}`} />
+          {Array.from({ length: 26 }).map((_, i) => (
+            <circle cx={(i * 61) % 400} cy={(i * 37) % 230} r={i % 4 === 0 ? 2 : 1.2} fill="#fff" class="anim-twinkle" style={`animation-delay:${(i % 6) * 0.5}s; opacity:calc(1 - ${seg(0.4, 0.9)})`} />
+          ))}
+          <path d="M300 80 a34 34 0 1 0 22 60 a28 28 0 1 1 -22 -60Z" fill="#f8f1e8" style={`opacity:calc(1 - ${seg(0.3, 0.7)})`} />
+          <circle cx="200" cy="330" r="60" fill="#f6dfa6" style={`transform: translateY(calc((1 - ${seg(0.3, 1)}) * 120px)); filter: drop-shadow(0 0 30px #f3d79c)`} />
+          <path d="M0 330 C80 290 140 320 200 300 S320 280 400 320 V400 H0Z" fill="#1a2236" />
+        </svg>
+      </div>
+      <p>St John of the Cross teaches that the dark night draws us closer to God. First we grow in prayer, and then we can go deeper.</p>
+      <p>Often it is the night itself that restores the image of God in us.</p>
+    </StoryChapter>
+
+    <!-- ============ 7. THE BATTLES ============ -->
+    <StoryChapter id="battles" bg="#e9dccb" tone="light" side="right" number="VI" eyebrow="The battles" title="The battles make you. They don’t break you.">
+      <div slot="scene" class="h-full w-full">
+        <svg viewBox="0 0 400 400" class="h-full w-full">
+          <g style={`opacity:${seg(0.2, 0.7)}`}>
+            {Array.from({ length: 12 }).map((_, i) => (
+              <path d={`M200 200 L${200 + Math.cos((i * Math.PI) / 6) * 190} ${200 + Math.sin((i * Math.PI) / 6) * 190}`} stroke="#d9ad65" stroke-width="5" stroke-linecap="round" opacity=".55" />
+            ))}
+            <circle cx="200" cy="200" r="50" fill="#f3d79c" />
+          </g>
+          <g fill="#6f7a8c" style={`transform: translateX(calc(${seg(0.15, 0.85)} * -170px))`}>
+            <ellipse cx="150" cy="200" rx="110" ry="60" /><ellipse cx="90" cy="160" rx="70" ry="50" /><ellipse cx="160" cy="250" rx="90" ry="45" />
+          </g>
+          <g fill="#59647a" style={`transform: translateX(calc(${seg(0.15, 0.85)} * 170px))`}>
+            <ellipse cx="260" cy="190" rx="110" ry="62" /><ellipse cx="320" cy="240" rx="70" ry="48" /><ellipse cx="250" cy="140" rx="80" ry="45" />
+          </g>
+        </svg>
+      </div>
+      <p>In the stories of C. S. Lewis and J. R. R. Tolkien, ordinary people face real battles and become who they are called to be. We go through what hurts, rather than bury it.</p>
+      <p>Good triumphs over evil. God is always at work.</p>
+    </StoryChapter>
+
+    <!-- ============ 8. THE KEY ============ -->
+    <StoryChapter id="key" bg="#2c4681" tone="dark" side="left" number="VII" eyebrow="The key" title="The key of forgotten dreams">
+      <div slot="scene" class="h-full w-full">
+        <svg viewBox="0 0 400 400" class="h-full w-full">
+          <defs><linearGradient id="kg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="400" y2="0"><stop offset="0" stop-color="#f6dfa6" /><stop offset="1" stop-color="#b8873a" /></linearGradient></defs>
+          <circle cx="140" cy="200" r="110" fill="#f3d79c" style={`opacity:calc(${seg(0.7, 1)} * .5); filter: blur(30px)`} />
+          <rect x="80" y="110" width="120" height="180" rx="20" fill="#202b44" stroke="#d9ad65" stroke-width="3" />
+          <circle cx="140" cy="185" r="16" fill="#0d1222" /><path d="M132 195 L148 195 L144 235 L136 235Z" fill="#0d1222" />
+          <g style={`transform: translateX(calc((1 - ${seg(0.1, 0.6)}) * 150px)) rotate(calc(${seg(0.65, 0.9)} * 90deg)); transform-origin: 140px 205px`}>
+            <path d="M140 205 H330" stroke="url(#kg)" stroke-width="9" stroke-linecap="round" />
+            <path d="M330 205 m-28 0 a28 28 0 1 0 56 0 a28 28 0 1 0 -56 0" fill="none" stroke="url(#kg)" stroke-width="9" />
+            <path d="M330 222 C318 205 318 196 330 192 C342 196 342 205 330 222Z" fill="#cb5b59" />
+            <path d="M160 205 v18 h10 v-10 h10 v14" fill="none" stroke="url(#kg)" stroke-width="8" stroke-linejoin="round" />
+          </g>
+        </svg>
+      </div>
+      <p>Life can bring so many disappointments. Keep hope. Uncovering the deep things can be painful, but it is worth it.</p>
+      <p>Perhaps there is a dream you were too afraid to pursue, or a new calling waiting to be found.</p>
+    </StoryChapter>
+
+    <!-- ============ 9. COMPANIONS ============ -->
+    <StoryChapter id="companions" bg="#f8f1e8" tone="light" side="right" number="VIII" eyebrow="Companions on the way" title="You don’t walk alone">
+      <div slot="scene" class="grid h-full w-full grid-cols-2 place-items-center gap-4">
+        {companions.map((c, i) => (
+          <div class="flex flex-col items-center gap-2 text-center" style={`opacity:${seg(0.05 + i * 0.12, 0.25 + i * 0.12)}; transform: translateY(calc((1 - ${seg(0.05 + i * 0.12, 0.25 + i * 0.12)}) * 20px))`}>
+            <div class="grid h-20 w-20 place-items-center rounded-full bg-midnight shadow-xl md:h-28 md:w-28">
+              <svg viewBox="0 0 60 60" class="h-11 w-11 md:h-14 md:w-14">
+                {c.symbol === 'fire' && <path class="anim-flicker" d="M30 54 C16 54 12 42 16 33 C19 27 24 25 23 16 C30 20 34 26 33 33 C36 30 37 26 36 22 C44 29 46 37 44 43 C42 50 37 54 30 54Z" fill="#e1806f" />}
+                {c.symbol === 'heart' && <path class="anim-beat" d="M30 50 C18 42 10 34 12 25 C14 17 24 15 30 23 C36 15 46 17 48 25 C50 34 42 42 30 50Z" fill="#cb5b59" />}
+                {c.symbol === 'cross' && <path d="M27 8 H33 V22 H46 V28 H33 V54 H27 V28 H14 V22 H27Z" fill="#d9ad65" />}
+                {c.symbol === 'shamrock' && (
+                  <g fill="#d9ad65" transform="translate(30 30)">
+                    {[0, 120, 240].map((r) => <path transform={`rotate(${r}) translate(0 -2)`} d="M0 0 C-9 -5 -14 -17 -7 -23 C-3 -26 0 -24 0 -20 C0 -24 3 -26 7 -23 C14 -17 9 -5 0 0Z" />)}
+                    <path d="M0 0 C2 10 1 18 -3 24" stroke="#d9ad65" stroke-width="3" fill="none" />
+                  </g>
+                )}
+              </svg>
+            </div>
+            <span class="font-display text-base leading-tight text-midnight md:text-lg">{c.name}</span>
+          </div>
+        ))}
+      </div>
+      <p>The saints walk with us: St Philip Neri’s fire of joy, the heart of St Thérèse of Lisieux, the cross of St John of the Cross, and St Patrick’s shamrock.</p>
+      <p>And friends on the page: Jane Austen, with her wisdom and quiet virtue, and C. S. Lewis, whose writing has brought so much healing.</p>
+    </StoryChapter>
+
+    <!-- ============ 10. ARISE ============ -->
+    <StoryChapter id="arise" bg="#efe4d4" tone="light" side="left" number="IX" eyebrow="Arise" title="Their story is your story">
+      <div slot="scene" class="flex h-full w-full items-center justify-center" style={`opacity:${seg(0, 0.4)}; transform: scale(calc(.85 + ${seg(0, 0.5)} * .15))`}>
+        <HeartKey class="w-full" />
+      </div>
+      <p>Come back to yourself, and know that God reigns.</p>
+      <p class="font-display text-2xl italic text-midnight">“I arise today through a mighty strength.”<span class="mt-1 block font-sans text-sm not-italic text-ink-soft">St Patrick’s Breastplate</span></p>
+      <div class="flex flex-col gap-3 pt-2 sm:flex-row md:justify-start">
+        <a href="/journey/" class="btn btn-primary">Journey with me</a>
+        <a href="/vision/" class="btn btn-ghost">Read the vision</a>
+      </div>
+    </StoryChapter>
+  </div>
+
+  <!-- ============ WELCOME FROM IVA ============ -->
+  <section id="welcome" class="py-24 md:py-32" data-bg="#f8f1e8" data-after-story aria-labelledby="welcome-title">
     <div class="container-page grid gap-12 md:grid-cols-[5fr_7fr] md:gap-20">
       <div data-reveal>
         <h2 id="welcome-title" class="font-display text-6xl italic text-restoration-deep md:text-7xl">Welcome</h2>
@@ -77,28 +270,8 @@ const arise = [
     </div>
   </section>
 
-  <!-- 3. ARISE values -->
-  <section class="bg-parchment py-24 md:py-32" aria-labelledby="arise-title">
-    <div class="container-page">
-      <div class="mx-auto max-w-2xl text-center" data-reveal>
-        <h2 id="arise-title" class="font-display text-5xl italic text-restoration-deep md:text-6xl">What I believe</h2>
-        <p class="mt-6 text-lg text-ink-soft">Life’s wounds can make us forget who we are. Healing is possible, and we can arise into the fullness of who we were created to be.</p>
-      </div>
-      <ol class="mt-16 grid gap-10 text-center sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
-        {arise.map((v) => (
-          <li data-reveal>
-            <span class="block font-display text-7xl leading-none text-restoration" aria-hidden="true">{v.letter}</span>
-            <h3 class="mt-4 text-2xl text-midnight">{v.word}</h3>
-            <p class="mx-auto mt-2 max-w-[14rem] text-ink-soft">{v.line}</p>
-          </li>
-        ))}
-      </ol>
-      <Placeholder class="mx-auto mt-14 max-w-xl" label="Draft for Iva">The five words spelling ARISE are a suggestion, drawn from your own words. Change any of them.</Placeholder>
-    </div>
-  </section>
-
-  <!-- 4. JOURNEY WITH ME -->
-  <section class="py-24 md:py-32" aria-labelledby="journey-title">
+  <!-- ============ JOURNEY WITH ME ============ -->
+  <section class="pb-24 md:pb-32" aria-labelledby="journey-title">
     <div class="container-page">
       <div class="mx-auto max-w-2xl text-center" data-reveal>
         <h2 id="journey-title" class="font-display text-5xl italic text-restoration-deep md:text-6xl">Journey with me</h2>
@@ -116,48 +289,39 @@ const arise = [
     </div>
   </section>
 
-  <!-- 5. QUOTE: the prayer behind the name -->
-  <section class="relative isolate overflow-hidden bg-midnight py-24 text-center text-ivory on-dark md:py-32" aria-label="A prayer of St Patrick">
-    <div class="absolute inset-0 -z-10 bg-cover bg-center opacity-25 mix-blend-luminosity" style="background-image:url('/textures/red-watercolour.jpg')" aria-hidden="true"></div>
-    <figure class="container-page" data-reveal>
-      <KeyMotif class="mx-auto text-gold" size={90} />
-      <blockquote class="mx-auto mt-8 max-w-3xl font-display text-4xl italic leading-snug md:text-5xl">
-        “I arise today through a mighty strength.”
-      </blockquote>
-      <figcaption class="mt-6 text-sm uppercase tracking-[0.2em] text-ivory/75">St Patrick’s Breastplate</figcaption>
-    </figure>
-  </section>
+  <script>
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const chapters = Array.from(document.querySelectorAll<HTMLElement>('[data-chapter]'));
+    const bg = document.getElementById('story-bg');
+    const after = document.querySelector<HTMLElement>('[data-after-story]');
+    const wrap = document.getElementById('thread-wrap');
+    const thread = document.getElementById('thread');
+    let ticking = false;
 
-  <!-- 6. EXPLORE FURTHER -->
-  <section class="py-24 md:py-32" aria-labelledby="explore-title">
-    <div class="container-page">
-      <div class="mx-auto max-w-2xl text-center" data-reveal>
-        <h2 id="explore-title" class="font-display text-5xl italic text-restoration-deep md:text-6xl">Wander a little further</h2>
-      </div>
-      <div class="mt-16 grid gap-8 md:grid-cols-2">
-        <DoorCard href="/treasures/" title="Treasures" tone="midnight" cta="Open the treasures">
-          <div slot="top" class="relative mx-auto mb-8 text-gold"><KeyMotif size={150} /></div>
-          <p class="mx-auto max-w-sm">The beauty, places and people that shape my life, my work and my journey with God.</p>
-        </DoorCard>
-        <DoorCard href="/books/" title="Books" tone="parchment" cta="See my books">
-          <Image slot="top" src={veronicaCover} alt="" widths={[160, 320]} sizes="160px" class="relative mx-auto -mt-8 mb-6 w-28 rotate-[-4deg] rounded shadow-xl shadow-midnight/25" />
-          <p class="mx-auto max-w-sm">Stories for children full of wonder, poems and reflections.</p>
-        </DoorCard>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. INVITATION -->
-  <section class="bg-parchment py-24 text-center md:py-32" aria-labelledby="close-title">
-    <div class="container-page" data-reveal>
-      <HeartKey />
-      <h2 id="close-title" class="mx-auto mt-10 max-w-3xl text-4xl text-midnight md:text-5xl">
-        Come on a journey with me, and with God, <span class="italic">and discover more that God has for you.</span>
-      </h2>
-      <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-        <a href="/journey/" class="btn btn-primary">Journey with me</a>
-        <a href="#contact" class="btn btn-ghost">Contact me</a>
-      </div>
-    </div>
-  </section>
+    function update() {
+      ticking = false;
+      const vh = window.innerHeight;
+      const mid = vh * 0.5;
+      let colour = after?.dataset.bg ?? '#f8f1e8';
+      for (const ch of chapters) {
+        const r = ch.getBoundingClientRect();
+        if (!reduce) {
+          const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh)));
+          ch.style.setProperty('--p', p.toFixed(3));
+        }
+        if (r.top <= mid && r.bottom > mid) colour = ch.dataset.bg ?? colour;
+      }
+      if (after && after.getBoundingClientRect().top < mid) colour = after.dataset.bg ?? colour;
+      if (bg) bg.style.backgroundColor = colour;
+      if (wrap && thread) {
+        const r = wrap.getBoundingClientRect();
+        const t = reduce ? 1 : Math.min(1, Math.max(0, (vh * 0.6 - r.top) / r.height));
+        thread.style.strokeDashoffset = String(1 - t);
+      }
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  </script>
 </BaseLayout>

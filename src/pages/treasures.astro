@@ -11,12 +11,15 @@ type Treasure = { slug: string; kind: string; title: string; dates?: string; lin
 const treasures: Treasure[] = [
   { slug: 'beauty', kind: 'What I treasure', title: 'Beauty', line: 'In nature, in art, in people. Beauty can open a closed heart to God.', tone: 'bg-parchment text-midnight' },
   { slug: 'healing', kind: 'What I treasure', title: 'Healing', line: 'The heart of my ministry. Underneath all pain, joy is hidden.', tone: 'bg-restoration-deep text-white on-dark' },
-  { slug: 'oxford', kind: 'A place I love', title: 'Oxford', line: 'A city of learning, prayer and old stone.', tone: 'bg-contemplative text-ivory on-dark' },
-  { slug: 'st-patrick', kind: 'Someone who inspires me', title: 'St Patrick', dates: '5th century', line: 'Taken to Ireland as a slave, he came back to bring the Gospel. The inspiration for I Arise.', tone: 'bg-sage text-ivory on-dark' },
-  { slug: 'st-john-of-the-cross', kind: 'Someone who inspires me', title: 'St John of the Cross', dates: '1542 to 1591', line: 'Carmelite poet and mystic, who found God close in the dark night.', tone: 'bg-midnight text-ivory on-dark' },
-  { slug: 'st-philip-neri', kind: 'Someone who inspires me', title: 'St Philip Neri', dates: '1515 to 1595', line: 'The joyful saint of Rome, loved for his humour and kindness.', tone: 'bg-parchment text-midnight' },
-  { slug: 'jane-austen', kind: 'Someone who inspires me', title: 'Jane Austen', dates: '1775 to 1817', line: 'Wit, warmth and the quiet drama of ordinary lives.', tone: 'bg-ivory text-midnight border border-midnight/15' },
-  { slug: 'cs-lewis', kind: 'Someone who inspires me', title: 'C. S. Lewis', dates: '1898 to 1963', line: 'Born in Belfast, a scholar at Oxford, and a storyteller who opened doors into other worlds.', tone: 'bg-contemplative text-ivory on-dark' },
+  { slug: 'golden-shamrock', kind: 'What I treasure', title: 'The golden shamrock', line: 'Ireland is covered in gold, and gold is His presence. The shamrock is the Trinity, and St Patrick baptised with it.', tone: 'bg-midnight text-ivory on-dark' },
+  { slug: 'oxford', kind: 'A place I love', title: 'Oxford', line: 'A city of learning, prayer and old stone, and home to C. S. Lewis and J. R. R. Tolkien.', tone: 'bg-contemplative text-ivory on-dark' },
+  { slug: 'st-patrick', kind: 'The shamrock', title: 'St Patrick', dates: '5th century', line: 'Taken to Ireland as a slave, he came back to bring the Gospel. The inspiration for I Arise.', tone: 'bg-sage text-ivory on-dark' },
+  { slug: 'st-john-of-the-cross', kind: 'The cross', title: 'St John of the Cross', dates: '1542 to 1591', line: 'Carmelite poet and mystic. The dark night has a purpose: to draw us closer to God.', tone: 'bg-midnight text-ivory on-dark' },
+  { slug: 'st-philip-neri', kind: 'The fire', title: 'St Philip Neri', dates: '1515 to 1595', line: 'The joyful saint of Rome, his heart on fire with the love of God.', tone: 'bg-parchment text-midnight' },
+  { slug: 'st-therese', kind: 'The heart', title: 'St Thérèse of Lisieux', dates: '1873 to 1897', line: 'The Little Flower, whose little way was love.', tone: 'bg-restoration-deep text-white on-dark' },
+  { slug: 'jane-austen', kind: 'A friend on the page', title: 'Jane Austen', dates: '1775 to 1817', line: 'A deep connection. Her wisdom, the living of the virtues, and the way her characters hold themselves.', tone: 'bg-ivory text-midnight border border-midnight/15' },
+  { slug: 'cs-lewis', kind: 'A friend on the page', title: 'C. S. Lewis', dates: '1898 to 1963', line: 'Born in Belfast, a scholar at Oxford. His stories have brought so much healing. Narnia is a word for life.', tone: 'bg-contemplative text-ivory on-dark' },
+  { slug: 'tolkien', kind: 'A friend on the page', title: 'J. R. R. Tolkien', dates: '1892 to 1973', line: 'Stories where the battles make the heroes rather than break them, and good triumphs over evil.', tone: 'bg-sage text-ivory on-dark' },
 ];
 ---
 <PageLayout
@@ -24,7 +27,7 @@ const treasures: Treasure[] = [
   eyebrow="Building blocks of my life and work"
   intro="These are the things I treasure. They shape my work and my life, what drives me, and what inspires my retreats, talks and journey with God."
 >
-  <Placeholder class="mb-12" label="For Iva">Your own opening paragraph, and a line or two on what each treasure means to you. The short lines below are placeholders to show the layout.</Placeholder>
+  <Placeholder class="mb-12" label="For Iva">Check each line, and add anything you would like to say in your own words. You can also add treasures at any time.</Placeholder>
 
   <ul class="columns-1 gap-8 md:columns-2 lg:columns-3 [&>li]:mb-8 [&>li]:break-inside-avoid">
     {treasures.map((t, i) => (

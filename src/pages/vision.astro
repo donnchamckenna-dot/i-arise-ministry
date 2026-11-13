@@ -1,0 +1,88 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Placeholder from '../components/Placeholder.astro';
+
+// DRAFT for Iva to approve: values spelling ARISE, drawn from her own words.
+const arise = [
+  { letter: 'A', word: 'Accompaniment', line: 'You don’t walk alone.' },
+  { letter: 'R', word: 'Restoration', line: 'Becoming who you were created to be.' },
+  { letter: 'I', word: 'Image of God', line: 'Every person is created in God’s image.' },
+  { letter: 'S', word: 'Soul', line: 'Like a diamond within you, declaring your dignity.' },
+  { letter: 'E', word: 'Encounter', line: 'Meeting God’s love afresh.' },
+];
+
+const chapters = [
+  { id: 'door', title: 'The door', body: [
+    'In the stories I love, someone opens a door and steps into another world. In Narnia, a land held in winter begins to thaw. It is a picture of life: something deep inside us, long covered over, being slowly unfrozen.',
+    'Narnia is a land of wonder and beauty. For me it is a word for life itself, and Aslan is always at work there, even when no one can see him.',
+  ] },
+  { id: 'golden-thread', title: 'The golden thread', body: [
+    'Ireland is covered in gold. Gold is His presence, and so few of us notice it. The shamrock speaks of the Trinity, and with it St Patrick brought baptism to this island. St Patrick, God’s presence and Ireland are woven together.',
+    'There is a golden thread running through each of our lives. Sometimes it is a simple thing: a word, a person, a moment of beauty. If we pull on it and follow it, it leads us further in.',
+  ] },
+  { id: 'wounded-heart', title: 'The wounded heart', body: [
+    'Conflict happens everywhere: in nations and cities, in families and churches, and in offices and boardrooms. My research began in Belfast, a city with a wounded heart, asking what its hope of redemption might look like.',
+    'What I learned there applies everywhere. Reconciliation is possible, and it begins with healing in the human heart.',
+  ] },
+  { id: 'inner-diamond', title: 'The inner diamond', body: [
+    'The foundation of everything is this: every person is created in God’s image. Everyone. St Teresa of Ávila pictured the soul as a castle made of a single diamond. Thomas Merton wrote of a hidden point at the centre of each of us that belongs to God alone.',
+    'Life’s wounds can cover that diamond over, until we forget who we are. They cannot destroy it. Healing is the restoring of this image.',
+  ] },
+  { id: 'dark-night', title: 'The dark night', body: [
+    'St John of the Cross teaches that the dark night of the soul has a purpose: to draw us closer to God. We need to grow in prayer first, and then we can go deeper. Often it is the night itself that restores the image.',
+    'M. Scott Peck wrote that life is difficult, and that we grow when we face our pain instead of avoiding it. It helps to go through it, rather than suppress it.',
+  ] },
+  { id: 'battles', title: 'The battles that make us', body: [
+    'In the stories of C. S. Lewis and J. R. R. Tolkien, ordinary people face real battles. Through them they become who they are called to be. The battles make them. They don’t break them.',
+    'These are stories of hope, where the good we know triumphs over evil. They remind us to come back to ourselves, and to know that God reigns.',
+  ] },
+  { id: 'key', title: 'The key of forgotten dreams', body: [
+    'The key is for forgotten dreams. Life can bring so many disappointing things, but we need to keep hope. Uncovering the deep things can be painful, but it is worth it.',
+    'As we heal, good things that were buried come back to light: dreams we were too afraid to pursue, perhaps even a new calling.',
+  ] },
+  { id: 'companions', title: 'Companions on the way', body: [
+    'The saints walk with us, each with a symbol. St Philip Neri: fire, the joy of the Holy Spirit. St Thérèse of Lisieux: the heart, her little way of love. St John of the Cross: the cross. St Patrick: the shamrock.',
+    'I also count two writers as friends. Jane Austen, for her wisdom, her living of the virtues and the way her characters hold themselves. C. S. Lewis, whose writing has brought so much healing.',
+  ] },
+];
+---
+<PageLayout
+  title="Vision"
+  eyebrow="Their story is your story"
+  intro="The story behind I Arise Ministry: a door, a golden thread, and a journey from woundedness to hope."
+>
+  <div class="grid gap-16 lg:grid-cols-[15rem_1fr]">
+    <nav aria-label="On this page" class="hidden lg:block">
+      <ul class="sticky top-8 space-y-3 border-l border-gold-deep/40 pl-5">
+        {chapters.map((c) => <li><a href={`#${c.id}`} class="block text-ink-soft no-underline hover:text-restoration-deep hover:underline">{c.title}</a></li>)}
+        <li><a href="#arise" class="block text-ink-soft no-underline hover:text-restoration-deep hover:underline">ARISE</a></li>
+      </ul>
+    </nav>
+    <div class="measure">
+      {chapters.map((c, i) => (
+        <section id={c.id} class="scroll-mt-8 border-t border-midnight/15 pt-10 pb-12 first:border-t-0 first:pt-0" aria-labelledby={`${c.id}-h`} data-reveal>
+          <p class="font-display text-3xl italic text-restoration" aria-hidden="true">{['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'][i]}</p>
+          <h2 id={`${c.id}-h`} class="mt-1 text-4xl text-midnight">{c.title}</h2>
+          <div class="prose-page mt-5">{c.body.map((p) => <p>{p}</p>)}</div>
+        </section>
+      ))}
+
+      <section id="arise" class="scroll-mt-8 rounded-3xl bg-parchment p-8 md:p-12" aria-labelledby="arise-h">
+        <h2 id="arise-h" class="font-display text-5xl italic text-restoration-deep">Arise</h2>
+        <p class="mt-4 text-lg text-ink-soft">Healing is painful, but with God it is possible, and we can arise into the fullness of who we were created to be.</p>
+        <ol class="mt-10 grid gap-8 sm:grid-cols-2">
+          {arise.map((v) => (
+            <li class="flex gap-4">
+              <span class="font-display text-5xl leading-none text-restoration" aria-hidden="true">{v.letter}</span>
+              <span><span class="block font-display text-2xl text-midnight">{v.word}</span><span class="text-ink-soft">{v.line}</span></span>
+            </li>
+          ))}
+        </ol>
+        <Placeholder class="mt-10" label="Draft for Iva">The ARISE words are a suggestion. Change any of them.</Placeholder>
+      </section>
+
+      <Placeholder class="mt-10" label="To add">Short quotes from Iva’s articles that tell this story, with the article name.</Placeholder>
+      <a href="/journey/" class="btn btn-primary mt-10">Journey with me</a>
+    </div>
+  </div>
+</PageLayout>
