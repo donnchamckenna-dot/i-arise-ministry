@@ -1,7 +1,49 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import RetreatList from '../components/RetreatList.astro';
+import Placeholder from '../components/Placeholder.astro';
+
+const kinds = [
+  { title: 'Quiet days', text: 'A single day of prayer, reflection and silence. A gentle way in if you have never made a retreat before.' },
+  { title: 'Weekend retreats', text: 'Time away to rest, pray and listen, with talks, guided prayer and space to be alone with God.' },
+  { title: 'Evenings of prayer', text: 'An evening of reflection, Scripture and healing prayer, in a parish or online.' },
+  { title: 'Retreats for your group', text: 'Iva can lead a retreat or quiet day for your parish, prayer group, school or community, shaped around your needs.' },
+];
 ---
-<PageLayout title="Retreats & Events" eyebrow="Time set apart" intro="Quiet days, weekend retreats and evenings of prayer, in person and online.">
-  <RetreatList />
+<PageLayout
+  title="Retreats & Events"
+  eyebrow="Time set apart"
+  intro="Quiet days, weekend retreats and evenings of prayer, in person and online. Come as you are: no experience of retreats is needed."
+>
+  <section aria-labelledby="upcoming">
+    <h2 id="upcoming" class="text-4xl text-midnight">Coming up</h2>
+    <div class="mt-8"><RetreatList /></div>
+  </section>
+
+  <section class="mt-24" aria-labelledby="kinds">
+    <h2 id="kinds" class="text-4xl text-midnight">Ways to take part</h2>
+    <ul class="mt-10 grid gap-x-12 gap-y-10 md:grid-cols-2">
+      {kinds.map((k) => (
+        <li class="border-t border-midnight/20 pt-6">
+          <h3 class="text-2xl text-midnight">{k.title}</h3>
+          <p class="mt-2 text-ink-soft">{k.text}</p>
+        </li>
+      ))}
+    </ul>
+    <Placeholder class="mt-10" label="To confirm with Iva">Which of these formats she currently offers, and any recurring retreats to describe.</Placeholder>
+  </section>
+
+  <section class="mt-24 grid gap-10 rounded-3xl bg-parchment p-8 md:grid-cols-[1.4fr_1fr] md:p-14" aria-labelledby="expect">
+    <div>
+      <h2 id="expect" class="text-4xl text-midnight">What to expect</h2>
+      <div class="prose-page mt-5">
+        <p>Most retreats combine a short talk, a time of guided prayer, and plenty of space for silence and rest. You will never be asked to share anything you would rather keep to yourself.</p>
+        <p>Retreats offer spiritual and pastoral support. They are not a substitute for medical or psychological care. If you are going through a difficult time, please also speak to your GP or a qualified counsellor.</p>
+      </div>
+    </div>
+    <div class="self-end">
+      <p class="font-display text-2xl leading-snug text-midnight">Would you like a retreat for your parish or group?</p>
+      <a href="/contact/" class="btn btn-primary mt-6">Ask about a retreat</a>
+    </div>
+  </section>
 </PageLayout>

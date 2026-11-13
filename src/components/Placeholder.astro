@@ -10,6 +10,6 @@ const { label = 'To confirm', class: className = '' } = Astro.props;
 ---
 {site.showPlaceholders && (
   <div class:list={['placeholder', className]} data-placeholder>
-    <strong class="font-semibold">{label}:</strong> <slot />
+    <strong class="font-medium">{label}:</strong> <slot />
   </div>
 )}

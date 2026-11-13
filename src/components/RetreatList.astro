@@ -36,7 +36,7 @@ const formatLabel = { 'in-person': 'In person', online: 'Online', hybrid: 'In pe
           </p>
         </div>
         <div class="flex flex-col items-start gap-2 md:items-end">
-          <span class="text-sm font-semibold text-sage">{statusLabel[data.status]}</span>
+          <span class="text-sm font-medium text-sage">{statusLabel[data.status]}</span>
           {data.registrationUrl && data.status !== 'closed' && data.status !== 'full' && (
             <a href={data.registrationUrl} class="btn btn-ghost">Register<span class="sr-only"> for {data.title}</span></a>
           )}
@@ -50,6 +50,6 @@ const formatLabel = { 'in-person': 'In person', online: 'Online', hybrid: 'In pe
     <p class="mx-auto mt-3 max-w-md text-ink-soft">
       New dates are announced to the mailing list first. You are also welcome to get in touch about hosting a retreat or quiet day for your parish or group.
     </p>
-    <a href="/contact/" class="link mt-5 inline-block font-semibold">Ask about a retreat</a>
+    <a href="/contact/" class="link mt-5 inline-block font-medium">Ask about a retreat</a>
   </div>
 )}

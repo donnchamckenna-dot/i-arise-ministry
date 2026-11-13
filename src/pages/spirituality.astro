@@ -2,15 +2,64 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import Placeholder from '../components/Placeholder.astro';
 import { spiritualityThemes } from '../config/site';
+
+/** Short introductions. Each will grow into its own article in a later phase. */
+const body: Record<string, string[]> = {
+  'healing-of-memories': [
+    'Healing of memories is a way of praying with our past. We bring a painful memory before God, slowly and honestly, and ask Christ to meet us there: to show us where he was, to speak truth where we believed lies, and to give the grace to forgive or to be forgiven.',
+    'It is not forgetting, and it is not therapy. It sits within the Church’s ministry of prayer and the sacraments, and it works best alongside good human support. Memories that involve trauma deserve professional care as well as prayer.',
+  ],
+  'st-john-of-the-cross': [
+    'St John of the Cross (1542 to 1591) was a Spanish Carmelite friar, poet and mystic, and with St Teresa of Ávila a reformer of the Carmelite order. He is a Doctor of the Church. His poems and commentaries, including The Dark Night, The Spiritual Canticle and The Living Flame of Love, describe the soul’s journey into union with God.',
+    'He is often remembered for “the dark night”. For John, that darkness is not punishment. It is God drawing close in a way our senses cannot yet grasp, purifying our desires so that we can receive a greater love. His writing has been a lifeline for many people walking through loss and spiritual dryness.',
+  ],
+  'st-john-henry-newman': [
+    'St John Henry Newman (1801 to 1890) was an English priest, theologian and writer who became a Catholic in 1845 and was later made a cardinal. He was canonised in 2019. He also has a strong link with Ireland: he was the founding rector of the Catholic University of Ireland in Dublin.',
+    'Newman wrote with great depth about conscience, which he called the voice of God within us, and about faith as something lived and grown into over a lifetime. His prayers and sermons speak to anyone trying to follow God faithfully without seeing the whole road ahead.',
+  ],
+  'carmelite-spirituality': [
+    'The Carmelite tradition takes its name from Mount Carmel, where hermits gathered in the twelfth century, inspired by the prophet Elijah. Its great teachers include St Teresa of Ávila, St John of the Cross, St Thérèse of Lisieux, St Elizabeth of the Trinity and St Teresa Benedicta of the Cross (Edith Stein).',
+    'At its heart is prayer as friendship with God. Carmel teaches us to make room for silence, to pay attention to the presence of God within us, and to let that love reshape the whole of life. Dublin has a long Carmelite presence, including St Teresa’s Church on Clarendon Street.',
+  ],
+  'prayer-and-contemplation': [
+    'Contemplation is less about doing and more about receiving. It begins with simple practices: stillness, attention to the breath and to the present moment, a word of Scripture repeated slowly, or Lectio Divina, the ancient practice of prayerful reading.',
+    'Many people think contemplative prayer is only for monks and nuns. It is not. It is for anyone who wants to be with God and not only talk to him. Our retreats and quiet days often include guided times of prayer for exactly this.',
+  ],
+  'forgiveness-and-reconciliation': [
+    'Forgiveness is one of the hardest things Christ asks of us, and one of the most freeing. It does not mean saying that what happened was acceptable, or returning to a situation that is unsafe. It means, with God’s help, releasing our claim on the debt and refusing to let the hurt define us.',
+    'Reconciliation goes further: the restoring of a relationship, which needs both parties. Sometimes it is possible, sometimes not yet. Christian reconciliation also has a wider horizon, between families, communities and traditions, and Iva’s work in Northern Ireland has given her a particular care for it.',
+  ],
+  'restoration-and-hope': [
+    'Christian hope is not optimism. It is trust that God keeps his promises, even when we cannot see how. It is the virtue that keeps us walking, and it is often given most clearly to those who have known darkness.',
+    'Restoration is what hope looks like over time: a life slowly rebuilt, relationships mended, gifts rediscovered. This is the “arising” in our name. It is never only for ourselves. Restored people become places where others can find hope too.',
+  ],
+};
 ---
-<PageLayout title="Healing & Spirituality" eyebrow="Pathways for the journey" intro="Short, readable introductions to the teachers and practices that shape this ministry.">
-  <ul class="grid gap-10 md:grid-cols-2">
-    {spiritualityThemes.map((t) => (
-      <li id={t.slug} class="scroll-mt-24 border-t border-midnight/15 pt-6">
-        <h2 class="text-3xl text-midnight">{t.title}</h2>
-        <p class="mt-2 text-ink-soft">{t.line}</p>
-      </li>
-    ))}
-  </ul>
-  <Placeholder class="mt-12" label="Page in progress">Each theme becomes its own short article in Phase 5.</Placeholder>
+<PageLayout
+  title="Healing & Spirituality"
+  eyebrow="Pathways for the journey"
+  intro="Short introductions to the teachers and practices that shape this ministry. Theology for the heart, not only the head."
+>
+  <div class="grid gap-16 lg:grid-cols-[15rem_1fr]">
+    <nav aria-label="Themes on this page" class="hidden lg:block">
+      <ul class="sticky top-8 space-y-3 border-l border-gold-deep/40 pl-5">
+        {spiritualityThemes.map((t) => (
+          <li><a href={`#${t.slug}`} class="block text-ink-soft no-underline hover:text-restoration-deep hover:underline">{t.title}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="measure space-y-16">
+      {spiritualityThemes.map((t, i) => (
+        <section id={t.slug} class="scroll-mt-8" aria-labelledby={`${t.slug}-h`}>
+          <p class="font-display text-4xl italic text-restoration" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+          <h2 id={`${t.slug}-h`} class="mt-2 text-4xl text-midnight">{t.title}</h2>
+          <p class="mt-2 font-display text-xl italic text-ink-soft">{t.line}</p>
+          <div class="prose-page mt-6">
+            {body[t.slug]?.map((p) => <p>{p}</p>)}
+          </div>
+        </section>
+      ))}
+      <Placeholder label="For Iva to review">These introductions are drafts for Iva to check for theological accuracy and voice. Each will become a fuller article, with recommended reading.</Placeholder>
+    </div>
+  </div>
 </PageLayout>

@@ -1,16 +1,60 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
-const books = (await getCollection('books')).sort((a, b) => a.data.order - b.data.order);
+import KeyMotif from '../components/KeyMotif.astro';
+import Placeholder from '../components/Placeholder.astro';
+
+const all = (await getCollection('books')).sort((a, b) => a.data.order - b.data.order);
+const groups = [
+  { kind: 'children', title: 'For children', intro: 'Illustrated stories full of wonder, written for young readers.' },
+  { kind: 'spirituality', title: 'Spirituality', intro: '' },
+  { kind: 'academic', title: 'Research', intro: 'Iva’s academic work on memory, hope and restoration.' },
+  { kind: 'poetry', title: 'Poetry', intro: 'Anthologies that include Iva’s poems.' },
+  { kind: 'article', title: 'Articles', intro: '' },
+] as const;
 ---
-<PageLayout title="Books & Writings" eyebrow="Stories, poems and reflections">
-  <ul class="divide-y divide-midnight/15 border-y border-midnight/15">
-    {books.map(({ data }) => (
-      <li class="py-6">
-        <h2 class="text-2xl text-midnight">{data.title}</h2>
-        <p class="text-ink-soft">{[data.publisher, data.year].filter(Boolean).join(', ')}</p>
-        {data.blurb && <p class="mt-1 text-ink-soft">{data.blurb}</p>}
-      </li>
-    ))}
-  </ul>
+<PageLayout
+  title="Books & Writings"
+  eyebrow="Stories, poems and reflections"
+  intro="Children’s stories, poetry, reflections and research. Iva writes for many kinds of readers, and for the child in all of us."
+>
+  {groups.map((g) => {
+    const items = all.filter((b) => b.data.kind === g.kind);
+    if (items.length === 0) return null;
+    return (
+      <section class="mb-24" aria-labelledby={`g-${g.kind}`}>
+        <h2 id={`g-${g.kind}`} class="text-4xl text-midnight">{g.title}</h2>
+        {g.intro && <p class="mt-2 text-lg text-ink-soft">{g.intro}</p>}
+        <ul class="mt-10 grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map(({ data }) => (
+            <li>
+              {data.cover ? (
+                <Image src={data.cover} alt={data.coverAlt ?? `Cover of ${data.title}`} widths={[300, 450, 600]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw" class="aspect-[2/3] w-full rounded-md object-cover shadow-xl shadow-midnight/20" />
+              ) : (
+                <div class:list={['flex aspect-[2/3] w-full flex-col justify-between rounded-md p-8 text-ivory shadow-xl shadow-midnight/20 on-dark', g.kind === 'poetry' ? 'bg-sage' : g.kind === 'academic' ? 'bg-midnight' : 'bg-contemplative']}>
+                  <KeyMotif class="text-gold" size={64} />
+                  <p class="font-display text-3xl leading-tight">{data.title}</p>
+                  <p class="text-sm text-ivory/75">{data.publisher ?? 'Cover to come'}</p>
+                </div>
+              )}
+              <h3 class="mt-6 text-2xl text-midnight">{data.title}</h3>
+              <p class="text-ink-soft">{[data.publisher, data.year].filter(Boolean).join(', ')}</p>
+              {data.blurb && <p class="mt-2 text-ink-soft">{data.blurb}</p>}
+              {data.buyUrl && <a href={data.buyUrl} class="link mt-3 inline-block font-medium">Find the book<span class="sr-only">: {data.title}</span></a>}
+              {!data.verified && <Placeholder class="mt-4" label="Details">Description, publisher and buying link still needed.</Placeholder>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  })}
+
+  <section class="rounded-3xl bg-parchment p-8 md:p-14" aria-labelledby="more">
+    <h2 id="more" class="text-4xl text-midnight">Articles and radio</h2>
+    <p class="measure mt-4 text-lg text-ink-soft">
+      Iva has written more than fifteen articles, for publications including <em>Teresianum</em>, <em>Spirituality</em> and <em>L’Osservatore Romano</em>, and has contributed reflections to RTÉ Radio 1’s <em>A Living Word</em>.
+    </p>
+    <Placeholder class="mt-6" label="To add">Titles and links for articles, reflections and recordings that can be shared, plus Iva’s YouTube channel if she would like it linked.</Placeholder>
+  </section>
 </PageLayout>

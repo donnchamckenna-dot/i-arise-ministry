@@ -1,7 +1,40 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import Placeholder from '../components/Placeholder.astro';
+
+const reasons = [
+  { title: 'Retreat enquiries', text: 'Questions about an upcoming retreat, or booking a quiet day or retreat for your parish or group.' },
+  { title: 'Speaking invitations', text: 'Talks for parishes, prayer groups, schools, universities, conferences and radio.' },
+  { title: 'Ministry collaboration', text: 'Working together on prayer, healing or reconciliation, across parishes and Christian traditions.' },
+  { title: 'Spiritual direction', text: 'Asking about one-to-one spiritual accompaniment.' },
+  { title: 'Anything else', text: 'A question, a prayer request, or simply to say hello.' },
+];
 ---
-<PageLayout title="Contact" eyebrow="Write to us" intro="For retreat enquiries, speaking invitations, ministry collaboration or simply to say hello.">
-  <Placeholder label="Contact form">A spam-protected form (Cloudflare Turnstile) will be added once Iva confirms which email address enquiries should go to. No private contact details from the CV will be published.</Placeholder>
+<PageLayout
+  title="Contact"
+  eyebrow="Write to us"
+  intro="Whatever brings you here, you are welcome to get in touch. Every message is read personally."
+>
+  <div class="grid gap-16 lg:grid-cols-[1fr_1fr]">
+    <section aria-labelledby="reasons">
+      <h2 id="reasons" class="text-3xl text-midnight">How we can help</h2>
+      <ul class="mt-6 divide-y divide-midnight/15 border-y border-midnight/15">
+        {reasons.map((r) => (
+          <li class="py-5">
+            <h3 class="text-2xl text-midnight">{r.title}</h3>
+            <p class="mt-1 text-ink-soft">{r.text}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="send" class="rounded-3xl bg-midnight p-8 text-ivory on-dark md:p-12">
+      <h2 id="send" class="text-3xl">Send a message</h2>
+      <p class="mt-3 text-ivory/80">A short form will go here, protected from spam, so you can write without opening your email.</p>
+      <Placeholder class="mt-6" label="Before this goes live">Iva to confirm the email address that should receive enquiries. Then we add the form (Cloudflare Turnstile spam protection, no cookies) and a privacy note. Personal phone and email from the CV will not be published.</Placeholder>
+      <p class="mt-8 text-sm text-ivory/70">
+        If you are in crisis or worried about your safety, please contact your GP, call 112 or 999, or call Samaritans free on 116 123.
+      </p>
+    </section>
+  </div>
 </PageLayout>

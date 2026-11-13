@@ -69,9 +69,11 @@ The site should let all four show. It should lead with warmth, with credentials 
   - A fine, line-drawn key marks section openings, the footer and the 404 page ("This door seems to be locked").
   - It is never used as an icon grid.
 - **Type.**
-  - Headings: Cormorant Garamond. It is elegant and contemplative, with a beautiful italic.
-  - Body text: Source Sans 3. It is very legible on phones.
-  - Both are open-source and self-hosted, so there are no Google Fonts requests and nothing to declare under GDPR.
+  - Headings: Alegreya. It is a calligraphic book face designed for literature, with a hand-drawn warmth that suits a storyteller and fits the illustrated books.
+  - Body text: Alegreya Sans, its companion. It is very legible on phones.
+  - Small labels above headings are set in italic serif rather than spaced-out capitals.
+  - Both fonts are open-source and self-hosted, so there are no Google Fonts requests and nothing to declare under GDPR.
+  - Changed from Cormorant Garamond and Source Sans 3 after feedback that the first draft felt generic.
 - **Supporting colours:**
   - Ivory `#F8F1E8`: page background
   - Parchment `#EFE4D4`: alternate sections
