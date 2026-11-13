@@ -14,18 +14,18 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
     dark ? 'absolute inset-x-0 top-0 text-ivory on-dark' : 'relative bg-ivory text-midnight border-b border-midnight/10',
   ]}
 >
-  <div class="container-page flex items-center justify-between gap-6 py-4 md:py-6">
-    <a href="/" class="flex items-center gap-3 no-underline" aria-label={`${site.name}, home`}>
+  <div class="container-page flex items-center justify-between gap-6 py-4 md:py-6 xl:grid xl:grid-cols-[1fr_auto_1fr]">
+    <a href="/" class="flex items-center gap-3 no-underline xl:order-2 xl:justify-self-center" aria-label={`${site.name}, home`}>
       {/* Cropped from the supplied 1080px logo. TODO-CONTENT: swap for the original file (transparent PNG or SVG) when available. */}
       <Image src={shamrock} alt="" width={48} height={48} densities={[1, 2]} class="h-12 w-12 shrink-0 rounded-full" loading="eager" />
-      <span class="font-display text-[1.6rem] leading-none tracking-tight">
-        I Arise <span class="italic">Ministry</span>
+      <span class="whitespace-nowrap font-display text-[1.4rem] leading-none tracking-tight sm:text-[1.6rem]">
+        I Arise <span class="mx-1 hidden font-sans text-[1.2rem] opacity-50 sm:inline" aria-hidden="true">|</span> <span class="italic">Ministry</span>
       </span>
     </a>
 
     <!-- Desktop menu -->
-    <nav aria-label="Main" class="hidden lg:block">
-      <ul class="flex items-center gap-8 text-[1.05rem]">
+    <nav aria-label="Main" class="hidden xl:order-1 xl:block">
+      <ul class="flex items-center gap-7 whitespace-nowrap text-[1.02rem]">
         {mainNav.map((item) => (
           <li class="relative">
             {item.children ? (
@@ -66,8 +66,17 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
       </ul>
     </nav>
 
+    <!-- Desktop call to action -->
+    <a
+      href="#contact"
+      class:list={[
+        'hidden xl:order-3 xl:inline-flex xl:justify-self-end items-center rounded-sm border px-5 py-2.5 text-[0.8rem] font-medium uppercase tracking-[0.18em] no-underline transition-colors',
+        dark ? 'border-ivory/60 hover:bg-ivory hover:text-midnight' : 'border-midnight/40 hover:bg-midnight hover:text-ivory',
+      ]}
+    >Contact me</a>
+
     <!-- Mobile menu: works without JavaScript -->
-    <details class="group lg:hidden">
+    <details class="group xl:hidden">
       <summary
         class:list={[
           'flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border px-4 text-sm font-medium [&::-webkit-details-marker]:hidden',

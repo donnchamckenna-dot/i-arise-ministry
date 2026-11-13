@@ -4,69 +4,105 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import DoorCard from '../components/DoorCard.astro';
 import HeartKey from '../components/HeartKey.astro';
 import KeyMotif from '../components/KeyMotif.astro';
+import Placeholder from '../components/Placeholder.astro';
 import { journeyWays } from '../config/site';
 import shamrock from '../assets/brand/shamrock-badge.png';
 import ivaPortrait from '../assets/people/iva-portrait.jpg';
 import veronicaCover from '../assets/books/veronicas-bookstore-cover.jpg';
+
+// DRAFT for Iva to approve: values spelling ARISE, drawn from her own words.
+const arise = [
+  { letter: 'A', word: 'Accompaniment', line: 'You don’t walk alone.' },
+  { letter: 'R', word: 'Restoration', line: 'Becoming who you were created to be.' },
+  { letter: 'I', word: 'Image of God', line: 'Every person is created in God’s image.' },
+  { letter: 'S', word: 'Soul', line: 'Like a diamond within you, declaring your dignity.' },
+  { letter: 'E', word: 'Encounter', line: 'Meeting God’s love afresh.' },
+];
 ---
 <BaseLayout headerTone="dark">
-  <!-- 1. THE DOOR: from night towards light -->
+  <!-- 1. THE DOOR: a painterly night, light breaking through -->
   <section class="relative isolate overflow-hidden bg-midnight text-ivory on-dark" aria-labelledby="hero-title">
+    <div class="absolute inset-0 -z-20 bg-cover bg-center opacity-40 mix-blend-luminosity" style="background-image:url('/textures/red-watercolour.jpg')" aria-hidden="true"></div>
     <div
       class="absolute inset-0 -z-10"
       style="background:
-        radial-gradient(ellipse 70% 45% at 50% 108%, rgb(225 128 111 / .5), transparent 70%),
-        radial-gradient(ellipse 45% 30% at 50% 100%, rgb(217 173 101 / .4), transparent 70%),
-        linear-gradient(180deg, #1a2338 0%, #202b44 40%, #2c4681 100%);"
+        radial-gradient(ellipse 60% 40% at 50% 38%, rgb(217 173 101 / .22), transparent 70%),
+        radial-gradient(ellipse 70% 45% at 50% 110%, rgb(203 91 89 / .45), transparent 70%),
+        linear-gradient(180deg, rgb(20 27 45 / .92) 0%, rgb(32 43 68 / .78) 55%, rgb(44 70 129 / .7) 100%);"
       aria-hidden="true"
     ></div>
-    <div class="container-page flex min-h-[94svh] flex-col items-center justify-center pt-32 pb-20 text-center md:pt-36">
+    <div class="container-page flex min-h-[100svh] flex-col items-center justify-center pt-32 pb-16 text-center md:pt-36">
       <!-- A doorway of light, slightly open -->
-      <div class="relative h-48 w-36 md:h-60 md:w-44" aria-hidden="true">
+      <div class="relative h-40 w-30 md:h-48 md:w-36" aria-hidden="true">
         <div class="absolute -inset-10 rounded-full bg-gold/25 blur-3xl"></div>
         <div class="absolute inset-0 rounded-t-full border border-gold/60 bg-gradient-to-b from-[#f3dcae] via-[#e9b77c] to-[#e1806f] shadow-[0_0_80px_rgba(217,173,101,.45)]"></div>
         <div class="absolute inset-y-0 left-0 w-[46%] origin-left rounded-tl-full border border-gold/50 bg-midnight/85 [transform:perspective(500px)_rotateY(-28deg)]"></div>
-        <Image src={shamrock} alt="" width={84} height={84} densities={[1, 2]} class="absolute left-1/2 top-[38%] h-16 w-16 -translate-x-[15%] rounded-full md:h-20 md:w-20" loading="eager" />
+        <Image src={shamrock} alt="" width={72} height={72} densities={[1, 2]} class="absolute left-1/2 top-[38%] h-14 w-14 -translate-x-[15%] rounded-full md:h-16 md:w-16" loading="eager" />
       </div>
-      <p class="eyebrow mt-10 text-gold">Welcome to I Arise Ministry</p>
-      <h1 id="hero-title" class="mt-4 max-w-4xl text-[2.2rem] leading-[1.1] sm:text-6xl md:text-7xl lg:text-[5.25rem]">
+      <h1 id="hero-title" class="mt-10 max-w-5xl text-[2.2rem] leading-[1.12] sm:text-6xl md:text-7xl lg:text-[5.25rem]">
         <span class="whitespace-nowrap">Underneath all pain,</span><br />
         <span class="italic text-ivory/95">joy is hidden.</span>
       </h1>
-      <p class="mt-7 max-w-lg text-lg text-ivory/85 md:text-xl">
-        Step through the door. Discover beauty, hope and God along the way.
-      </p>
-      <a href="#welcome" class="btn btn-light mt-10">Step inside</a>
+      <ul class="mt-12 grid w-full max-w-3xl gap-3 sm:grid-cols-3 sm:gap-5">
+        {journeyWays.map((w) => (
+          <li><a href={w.href} class="btn-caps w-full">{w.title}</a></li>
+        ))}
+      </ul>
+      <a href="#welcome" class="mt-14 flex flex-col items-center gap-2 text-sm text-ivory/75 no-underline hover:text-ivory">
+        <span class="font-display text-lg italic">Step inside</span>
+        <svg class="h-5 w-5 animate-bounce motion-reduce:animate-none" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8l5 5 5-5" /></svg>
+      </a>
     </div>
   </section>
 
-  <!-- 2. WELCOME + SHORT WHY -->
+  <!-- 2. WELCOME (editorial: large word beside the text) -->
   <section id="welcome" class="scroll-mt-4 py-24 md:py-32" aria-labelledby="welcome-title">
-    <div class="container-page grid items-center gap-14 md:grid-cols-[5fr_7fr] md:gap-20">
-      <figure class="relative mx-auto w-full max-w-xs md:max-w-sm" data-reveal>
-        <div class="absolute -right-4 -bottom-4 h-full w-full rounded-t-full bg-coral/35" aria-hidden="true"></div>
-        <Image src={ivaPortrait} alt="Dr Iva Beranek, smiling, with long auburn hair." widths={[360, 540, 720]} sizes="(min-width: 768px) 34vw, 80vw" class="relative aspect-[4/5] w-full rounded-t-full object-cover object-top" />
-      </figure>
+    <div class="container-page grid gap-12 md:grid-cols-[5fr_7fr] md:gap-20">
       <div data-reveal>
-        <p class="eyebrow text-restoration-deep">Welcome</p>
-        <h2 id="welcome-title" class="mt-3 text-4xl text-midnight md:text-5xl">I’m so glad you’re here.</h2>
+        <h2 id="welcome-title" class="font-display text-6xl italic text-restoration-deep md:text-7xl">Welcome</h2>
+        <figure class="relative mt-10 w-full max-w-xs">
+          <div class="absolute -right-4 -bottom-4 h-full w-full rounded-t-full bg-coral/35" aria-hidden="true"></div>
+          <Image src={ivaPortrait} alt="Dr Iva Beranek, smiling, with long auburn hair." widths={[320, 480, 640]} sizes="(min-width: 768px) 20rem, 80vw" class="relative aspect-[4/5] w-full rounded-t-full object-cover object-top" />
+        </figure>
+      </div>
+      <div class="md:pt-4" data-reveal>
+        <p class="font-display text-3xl leading-snug text-midnight md:text-4xl">I’m so glad you’re here.</p>
         <div class="mt-6 space-y-4 text-lg text-ink-soft">
           <p>Like you, I’ve known deep pain, loss and healing. And I’ve discovered something that changed my life: pain doesn’t have to be the end of the story. With God, it can become the beginning of something new.</p>
           <p>That’s why my ministry is called I Arise, inspired by St Patrick, whose life was transformed from slavery into becoming Ireland’s patron saint.</p>
         </div>
         <p class="mt-6 font-display text-3xl italic text-midnight">Iva</p>
-        <a href="/about/" class="link mt-4 inline-block font-medium">Read my story</a>
+        <a href="/about/" class="btn-caps mt-8 text-midnight">More about me</a>
       </div>
     </div>
   </section>
 
-  <!-- 3. JOURNEY WITH ME -->
-  <section class="bg-white/50 py-24 md:py-32" aria-labelledby="journey-title">
+  <!-- 3. ARISE values -->
+  <section class="bg-parchment py-24 md:py-32" aria-labelledby="arise-title">
     <div class="container-page">
       <div class="mx-auto max-w-2xl text-center" data-reveal>
-        <p class="eyebrow text-restoration-deep">Journey with me</p>
-        <h2 id="journey-title" class="mt-3 text-4xl text-midnight md:text-5xl">Where would you like to begin?</h2>
-        <p class="mt-4 text-lg text-ink-soft">Spaces to encounter God’s love afresh, rediscover your dignity and grow in prayer.</p>
+        <h2 id="arise-title" class="font-display text-5xl italic text-restoration-deep md:text-6xl">What I believe</h2>
+        <p class="mt-6 text-lg text-ink-soft">Life’s wounds can make us forget who we are. Healing is possible, and we can arise into the fullness of who we were created to be.</p>
+      </div>
+      <ol class="mt-16 grid gap-10 text-center sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+        {arise.map((v) => (
+          <li data-reveal>
+            <span class="block font-display text-7xl leading-none text-restoration" aria-hidden="true">{v.letter}</span>
+            <h3 class="mt-4 text-2xl text-midnight">{v.word}</h3>
+            <p class="mx-auto mt-2 max-w-[14rem] text-ink-soft">{v.line}</p>
+          </li>
+        ))}
+      </ol>
+      <Placeholder class="mx-auto mt-14 max-w-xl" label="Draft for Iva">The five words spelling ARISE are a suggestion, drawn from your own words. Change any of them.</Placeholder>
+    </div>
+  </section>
+
+  <!-- 4. JOURNEY WITH ME -->
+  <section class="py-24 md:py-32" aria-labelledby="journey-title">
+    <div class="container-page">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <h2 id="journey-title" class="font-display text-5xl italic text-restoration-deep md:text-6xl">Journey with me</h2>
+        <p class="mt-6 text-lg text-ink-soft">Spaces to encounter God’s love afresh, rediscover your dignity and grow in prayer.</p>
       </div>
       <ul class="mt-16 grid gap-8 md:grid-cols-3">
         {journeyWays.map((w, i) => (
@@ -80,12 +116,23 @@ import veronicaCover from '../assets/books/veronicas-bookstore-cover.jpg';
     </div>
   </section>
 
-  <!-- 4. EXPLORE FURTHER -->
+  <!-- 5. QUOTE: the prayer behind the name -->
+  <section class="relative isolate overflow-hidden bg-midnight py-24 text-center text-ivory on-dark md:py-32" aria-label="A prayer of St Patrick">
+    <div class="absolute inset-0 -z-10 bg-cover bg-center opacity-25 mix-blend-luminosity" style="background-image:url('/textures/red-watercolour.jpg')" aria-hidden="true"></div>
+    <figure class="container-page" data-reveal>
+      <KeyMotif class="mx-auto text-gold" size={90} />
+      <blockquote class="mx-auto mt-8 max-w-3xl font-display text-4xl italic leading-snug md:text-5xl">
+        “I arise today through a mighty strength.”
+      </blockquote>
+      <figcaption class="mt-6 text-sm uppercase tracking-[0.2em] text-ivory/75">St Patrick’s Breastplate</figcaption>
+    </figure>
+  </section>
+
+  <!-- 6. EXPLORE FURTHER -->
   <section class="py-24 md:py-32" aria-labelledby="explore-title">
     <div class="container-page">
       <div class="mx-auto max-w-2xl text-center" data-reveal>
-        <p class="eyebrow text-restoration-deep">Wander a little further</p>
-        <h2 id="explore-title" class="mt-3 text-4xl text-midnight md:text-5xl">There is more to discover</h2>
+        <h2 id="explore-title" class="font-display text-5xl italic text-restoration-deep md:text-6xl">Wander a little further</h2>
       </div>
       <div class="mt-16 grid gap-8 md:grid-cols-2">
         <DoorCard href="/treasures/" title="Treasures" tone="midnight" cta="Open the treasures">
@@ -100,7 +147,7 @@ import veronicaCover from '../assets/books/veronicas-bookstore-cover.jpg';
     </div>
   </section>
 
-  <!-- 5. INVITATION -->
+  <!-- 7. INVITATION -->
   <section class="bg-parchment py-24 text-center md:py-32" aria-labelledby="close-title">
     <div class="container-page" data-reveal>
       <HeartKey />
