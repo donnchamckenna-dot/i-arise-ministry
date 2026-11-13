@@ -5,6 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import KeyMotif from '../components/KeyMotif.astro';
 import Placeholder from '../components/Placeholder.astro';
 import RetreatList from '../components/RetreatList.astro';
+import HeartKey from '../components/HeartKey.astro';
 import { spiritualityThemes } from '../config/site';
 import shamrock from '../assets/brand/shamrock-badge.png';
 import ivaPortrait from '../assets/people/iva-portrait.jpg';
@@ -235,8 +236,8 @@ const movements = [
   <!-- 10. CLOSING -->
   <section class="py-24 text-center md:py-32" aria-labelledby="close-title">
     <div class="container-page">
-      <KeyMotif class="mx-auto text-gold-deep" size={96} />
-      <h2 id="close-title" class="mx-auto mt-8 max-w-2xl text-4xl text-midnight md:text-6xl">Come and rest a while.</h2>
+      <HeartKey />
+      <h2 id="close-title" class="mx-auto mt-10 max-w-2xl text-4xl text-midnight md:text-6xl">Come and rest a while.</h2>
       <p class="mx-auto mt-6 max-w-xl text-lg text-ink-soft">
         You don’t need the right words. Just come.
       </p>
