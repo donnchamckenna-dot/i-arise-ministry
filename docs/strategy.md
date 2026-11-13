@@ -1,8 +1,10 @@
 # I Arise Ministry: Phase 1 strategy brief
 
-Draft, 13 November 2026. For review by Donncha and Iva.
+Updated 13 November 2026, 13:50. For review by Donncha and Iva.
 
-Sources: master project prompt; Iva's CV (2021); Iva's cover letter (undated, around 2021); ministry logo image; *Veronica's Bookstore* promotional images (December 2021).
+Live site: https://i-arise-ministry.donnchamckenna.workers.dev
+
+Sources: master project prompt; Iva's CV (2021); Iva's cover letter (undated, around 2021); ministry logo image; *Veronica's Bookstore* promotional images (December 2021); Iva's own statement on why she started the ministry (13 November 2026).
 
 Labels used below:
 - **Confirmed**: stated in the supplied documents.
@@ -26,6 +28,14 @@ Labels used below:
 - Talks include "Restoring our Inner Goodness: Healing of Memories" (Carmelites, Oxford, 2021), "Love your enemies" (Avila Carmelite Centre, 2019) and "St Patrick, a Mirror of God's Love" (2014). Also talks at universities across Ireland, and in Washington and Rome.
 - *Veronica's Bookstore*: children's book, on Amazon Kindle in December 2021, with a book signing at St Teresa's, Clarendon Street.
 
+### Confirmed by Iva (13 November 2026)
+
+- **The name "I Arise"** is inspired by St Patrick, whose life was transformed from slavery into becoming Ireland's patron saint.
+- **The heart of her ministry,** in her words: "Underneath all pain, joy is hidden."
+- **Her motivation is personal.** She has known deep pain, loss and healing, and believes pain doesn't have to be the end of the story.
+- **Her core beliefs:** every person is created in God's image, and the soul is "like a diamond within you, declaring your dignity". Healing means letting God meet us within our pain, not escaping it. As we heal, buried gifts, dreams and callings come back to life.
+- Her full statement is published on the About page, under "Why I started I Arise Ministry".
+
 ### To verify with Iva
 
 - **Current roles.** In 2021 she was Ministry Facilitator with The Church's Ministry of Healing, Ireland (since 2013) and a freelance spiritual director (since 2018). Is either still current? Should the Church's Ministry of Healing be named at all?
@@ -33,7 +43,6 @@ Labels used below:
 - ***The Year of Celebrations*.** No source material yet: cover, description, age range, publisher, year.
 - ***Veronica's Bookstore*.** Is it the 8 to 12 book mentioned in the CV? Publisher? Is it still for sale, and where?
 - **Portrait.** Is she happy with the 2021 photo? A higher-resolution portrait is needed.
-- **The name "I Arise".** Is there a particular Scripture verse or story behind it? Do not assume one.
 - **Website email.** Which address should enquiries go to? Her personal mobile and email from the CV will not be published.
 
 ### What is distinctive (Recommendation)
@@ -61,13 +70,16 @@ The site should let all four show. It should lead with warmth, with credentials 
 
 - **Story of the page: night to dawn.** The homepage opens in midnight and blue, with a warm coral and gold glow rising at the foot of the hero. Then it moves into ivory and parchment, which feels like opening a book.
 - **The red watercolour is used once, at full strength.** It appears as a single band carrying the line "Renewal begins in the human heart. It does not have to end there." Used sparingly, it keeps its force.
+- **Iva's sentence is the headline.** "Underneath all pain, joy is hidden." replaced the working theme "Healing the heart. Renewing the nation."
 - **Shamrock.**
   - The original artwork is used as a circular badge in the header, the favicon and the hero.
   - It was cropped from the 1080px square image.
   - We need the original file, ideally a transparent PNG or SVG, for crisp use at large sizes.
 - **Key.**
   - A fine, line-drawn key marks section openings, the footer and the 404 page ("This door seems to be locked").
+  - A large golden key with a heart-shaped bow, and a red heart inside, closes the homepage. Its meaning is "unlocking the heart".
   - It is never used as an icon grid.
+- **Writing style.** Text is kept short and simple after feedback that the first drafts had too many words.
 - **Type.**
   - Headings: Alegreya. It is a calligraphic book face designed for literature, with a hand-drawn warmth that suits a storyteller and fits the illustrated books.
   - Body text: Alegreya Sans, its companion. It is very legible on phones.
@@ -113,18 +125,18 @@ The site should let all four show. It should lead with warmth, with credentials 
 
 | Section | Content |
 |---|---|
-| Hero | Shamrock, "Healing the heart. Renewing the nation.", calls to action: Explore Retreats, Discover Our Vision |
-| Invitation | Memories that still ache; who the ministry draws on; a welcome to every tradition |
+| Hero | Shamrock, "Underneath all pain, joy is hidden.", calls to action: Explore Retreats, Discover Our Vision |
+| Invitation | "Every life carries memories. Some are gifts. Some still ache." Everyone welcome |
 | The journey | Remembering, Healing, Arising (I, II, III) |
-| Heart to nation | Red watercolour band; communities carry memories too; link to Iva's Northern Ireland research and St Patrick |
-| Founder | Portrait and short personal biography |
+| Heart to nation | Red watercolour band; communities carry wounds too; link to Our Vision |
+| Founder | Portrait, Iva's quote "Pain doesn't have to be the end of the story...", link to her story |
 | Retreats | Live from content files, with an empty state (currently showing) |
 | Pathways | The seven spirituality themes |
 | Books | *Veronica's Bookstore*, *The Year of Celebrations*, *Belfast, a City with a Wounded Heart* |
 | Mailing list | Placeholder until a provider is chosen |
-| Closing | "Come and rest a while." |
+| Closing | Large heart key, "Come and rest a while." |
 
-The headline is the working theme from the brief. It is not yet an approved slogan.
+The headline is Iva's own sentence, chosen on 13 November 2026.
 
 ---
 
@@ -140,7 +152,7 @@ The headline is the working theme from the brief. It is not yet an approved slog
   - `src/config/site.ts`: site settings, navigation and themes
   - `src/styles/global.css`: brand tokens
 - **Images:** optimised to WebP at build time with responsive sizes.
-- **Hosting:** Cloudflare Workers with static assets. GitHub `main` publishes production, and other branches publish preview versions.
+- **Hosting:** Cloudflare Workers with static assets. Every push to GitHub `main` publishes to the live link within a minute or two. Branch previews need Preview URLs switched on in Cloudflare.
 - **Search engines:**
   - Canonical URLs, a sitemap and Open Graph tags are in place.
   - Indexing is switched off until launch.
@@ -160,9 +172,9 @@ The headline is the working theme from the brief. It is not yet an approved slog
 | Phase | Status | Output |
 |---|---|---|
 | 1. Discovery and strategy | Done (this brief) | Facts and gaps identified |
-| 2. Design system | Done in code, for review | Tokens, type, components, logo treatment |
-| 3. Architecture and content | Next | Vision and About pages written; Iva reviews tone and facts |
-| 4. Homepage | First draft live on a preview link | Refine after feedback |
+| 2. Design system | Done | Alegreya type, colours, shamrock badge, heart key |
+| 3. Architecture and content | Drafted; with Iva for review | All pages written; Iva's own words added; review document sent |
+| 4. Homepage | Live, being refined | Iva's headline and quote in place |
 | 5. Full build | | Spirituality articles, books, retreat pages, contact form, mailing list |
 | 6. Quality checks | | Accessibility, mobile, Lighthouse, links, forms |
 | 7. Launch | Needs the domain and Iva's approval | Custom domain, indexing on, placeholders off |
@@ -170,8 +182,9 @@ The headline is the working theme from the brief. It is not yet an approved slog
 
 ## What I need from you
 
-1. Original logo files, ideally a transparent PNG or SVG, plus any other brand artwork, including the golden key.
-2. Cover and details for *The Year of Celebrations*.
-3. A recent, high-resolution portrait of Iva, approved by her.
-4. Answers to the "To verify" list above.
-5. The domain, and the email address the website should use.
+1. Iva's completed review document (I-Arise-Ministry-Website-Review.docx).
+2. Original logo files, ideally a transparent PNG or SVG, plus any other brand artwork, including the golden key.
+3. Cover and details for *The Year of Celebrations*.
+4. A recent, high-resolution portrait of Iva, approved by her.
+5. Answers to the "To verify" list above.
+6. The domain, and the email address the website should use.
