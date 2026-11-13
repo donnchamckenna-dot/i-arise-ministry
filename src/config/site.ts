@@ -34,11 +34,11 @@ export const footerNav: NavItem[] = [
 
 /** Themes for the Healing & Spirituality area. Order here = order on the site. */
 export const spiritualityThemes = [
-  { slug: 'healing-of-memories', title: 'Healing of Memories', line: 'Bringing what still hurts into the light of God’s mercy.' },
-  { slug: 'st-john-of-the-cross', title: 'St John of the Cross', line: 'The dark night, and the love that leads through it.' },
-  { slug: 'st-john-henry-newman', title: 'St John Henry Newman', line: 'Conscience, faith and the hidden life of the soul.' },
-  { slug: 'carmelite-spirituality', title: 'Carmelite Spirituality', line: 'A tradition of prayer, silence and friendship with God.' },
-  { slug: 'prayer-and-contemplation', title: 'Prayer and Contemplation', line: 'Learning to be still and to listen.' },
-  { slug: 'forgiveness-and-reconciliation', title: 'Forgiveness and Reconciliation', line: 'The slow, grace-filled work of making peace.' },
-  { slug: 'restoration-and-hope', title: 'Spiritual Restoration and Hope', line: 'What God begins in us, he carries on.' },
+  { slug: 'healing-of-memories', title: 'Healing of Memories', line: 'Bringing old hurts to God.' },
+  { slug: 'st-john-of-the-cross', title: 'St John of the Cross', line: 'Finding God in the dark.' },
+  { slug: 'st-john-henry-newman', title: 'St John Henry Newman', line: 'Faith, conscience and the inner life.' },
+  { slug: 'carmelite-spirituality', title: 'Carmelite Spirituality', line: 'Prayer as friendship with God.' },
+  { slug: 'prayer-and-contemplation', title: 'Prayer and Contemplation', line: 'Learning to be still.' },
+  { slug: 'forgiveness-and-reconciliation', title: 'Forgiveness and Reconciliation', line: 'Making peace, slowly.' },
+  { slug: 'restoration-and-hope', title: 'Spiritual Restoration and Hope', line: 'What God starts, he finishes.' },
 ] as const;

@@ -6,30 +6,20 @@ import Placeholder from '../components/Placeholder.astro';
 import ivaPortrait from '../assets/people/iva-portrait.jpg';
 
 const education = [
-  { years: '2007 to 2013', title: 'PhD in Christian Spirituality', place: 'Milltown Institute, Dublin', note: 'Memory, Hope and Transformation in Restoration Ministries: a dialogue between a classical and a contemporary Christian spiritual tradition through a case study in Northern Ireland.' },
-  { years: '2005 to 2007', title: 'MA in Classical Christian Spirituality', place: 'Milltown Institute, Dublin', note: 'Belfast, a City with a Wounded Heart: Hope of Redemption. Later published (LAP, 2010).' },
-  { years: '2016 to 2018', title: 'Diploma in Spiritual Direction', place: 'Manresa Jesuit Retreat House, accredited by NUI Maynooth' },
-  { years: '1997 to 2003', title: 'BA in Philosophy and Religious Culture', place: 'Jesuit Philosophical Faculty, Zagreb' },
-];
-
-const talks = [
-  'Restoring our Inner Goodness: Healing of Memories (Carmelites, Oxford, 2021)',
-  'Love Your Enemies (Avila Carmelite Centre, Dublin, 2019)',
-  'Alleluia in Lent: Why We Don’t Sing It, and the Healing That Comes From It (Avila Carmelite Centre, 2018)',
-  'Workshop on Prayer and Poetry (Taizé event, Archdiocese of Dublin, 2017)',
-  'St Patrick, a Mirror of God’s Love (St Patrick’s Day Mass, Marianella, Dublin, 2014)',
+  { title: 'PhD in Christian Spirituality', place: 'Milltown Institute, Dublin' },
+  { title: 'MA in Classical Christian Spirituality', place: 'Milltown Institute, Dublin' },
+  { title: 'Diploma in Spiritual Direction', place: 'Manresa Jesuit Retreat House' },
+  { title: 'BA in Philosophy and Religious Culture', place: 'Jesuit Faculty, Zagreb' },
 ];
 ---
-<BaseLayout title="About Iva" description="Dr Iva Beranek: spiritual director, retreat leader, writer and teacher of Christian spirituality, and founder of I Arise Ministry.">
+<BaseLayout title="About Iva" description="Dr Iva Beranek: spiritual director, retreat leader and writer, founder of I Arise Ministry.">
   <section class="bg-parchment">
     <div class="container-page grid items-center gap-12 py-16 md:grid-cols-[7fr_5fr] md:gap-20 md:py-24">
       <div>
         <KeyMotif class="text-gold-deep" size={72} />
-        <p class="eyebrow mt-6 text-restoration-deep">Founder of I Arise Ministry</p>
+        <p class="eyebrow mt-6 text-restoration-deep">Founder</p>
         <h1 class="mt-3 text-5xl text-midnight md:text-7xl">Dr Iva Beranek</h1>
-        <p class="measure mt-6 text-xl text-ink-soft">
-          Spiritual director, retreat leader, writer and teacher of Christian spirituality. A scholar of the healing of memories who would much rather pray with you than lecture you.
-        </p>
+        <p class="measure mt-6 text-xl text-ink-soft">Retreat leader, spiritual director and writer.</p>
       </div>
       <figure class="relative mx-auto w-full max-w-sm">
         <div class="absolute -right-4 -bottom-4 h-full w-full rounded-t-full bg-coral/35" aria-hidden="true"></div>
@@ -40,59 +30,34 @@ const talks = [
 
   <div class="container-page grid gap-16 py-16 md:py-24 lg:grid-cols-[1fr_20rem]">
     <article class="prose-page measure">
-      <h2 class="!mt-0">A life shaped by faith</h2>
-      <p>
-        Iva grew up in Croatia and studied philosophy and religious culture with the Jesuits in Zagreb. As a young adult she was already deeply involved in the life of the Church, coordinating student faith groups across the country, writing a weekly column called <em>Seeing with the Heart</em>, and working alongside Christians of other traditions. Ecumenism has been part of her journey from the start.
-      </p>
-      <p>
-        In 2005 she came to Dublin to study at the Milltown Institute, and Ireland became home. Her master’s dissertation looked at Belfast as “a city with a wounded heart”. Her doctorate went further, exploring how memory, hope and transformation meet in Christian ministries of restoration, in dialogue with the classical spiritual tradition.
-      </p>
+      <h2 class="!mt-0">Her story</h2>
+      <p>Iva grew up in Croatia and came to Dublin in 2005 to study. Ireland became home. Her PhD explored how people and communities heal from painful memories, with a focus on Northern Ireland.</p>
 
-      <h2>Ministry</h2>
-      <p>
-        For many years Iva has led retreats and quiet days, prayer ministry and talks in parishes across Ireland, on themes such as compassion, gratitude, the life of St Patrick and our inner goodness as people made in God’s image. She has spoken at universities in Ireland, and in Washington and Rome, and has led guided prayer online for people who could not gather in person.
-      </p>
-      <p>
-        She trained as a spiritual director with the Jesuits at Manresa and accompanies people one to one. Her approach is gentle and unhurried. She takes people’s stories seriously, and she trusts God with them.
-      </p>
-      <Placeholder label="To confirm with Iva">The CV supplied is from 2021. Which roles are current? (Ministry Facilitator with The Church’s Ministry of Healing, Ireland, since 2013; freelance spiritual director since 2018; Living Water prayer ministry team.) Should any organisation be named?</Placeholder>
+      <h2>Her ministry</h2>
+      <p>Iva leads retreats, prayer days and talks in parishes and universities across Ireland and abroad. She is a trained spiritual director.</p>
+      <Placeholder label="To confirm with Iva">Which of her 2021 roles are still current?</Placeholder>
 
-      <h2>Writing and broadcasting</h2>
-      <p>
-        Iva’s reflections have been heard on RTÉ Radio 1’s <em>A Living Word</em>, and she read her own short story on <em>Sunday Miscellany</em>. She has written more than fifteen articles for publications including <em>Teresianum</em>, <em>Spirituality</em> and <em>L’Osservatore Romano</em>, and her poems appear in the anthologies <em>Learning to Love</em> and <em>Reaching for Mercy</em>.
-      </p>
-      <p>
-        She also writes for children. <em>Veronica’s Bookstore</em> is a story full of wonder and a little magic. <a href="/books/">See her books and writings</a>.
-      </p>
+      <h2>Writing and radio</h2>
+      <p>Her reflections have been heard on RTÉ Radio 1. She writes articles, poems and children’s books, including <a href="/books/">Veronica’s Bookstore</a>.</p>
 
-      <h2>Away from the desk</h2>
-      <p>
-        Iva loves nature and wildlife, and is a keen photographer, especially of Dublin’s urban foxes. She has a particular affection for the saints and what they teach us, St Joseph, St Padre Pio, St Martin de Porres and St Rita among them.
-      </p>
-
-      <h2>Selected talks</h2>
-      <ul>
-        {talks.map((t) => <li>{t}</li>)}
-      </ul>
+      <h2>Beyond work</h2>
+      <p>She loves nature, and photographing Dublin’s urban foxes.</p>
     </article>
 
     <aside class="space-y-10">
       <section aria-labelledby="edu-title">
         <h2 id="edu-title" class="text-3xl text-midnight">Study</h2>
-        <ol class="mt-6 space-y-6 border-l border-gold-deep/40 pl-5">
+        <ul class="mt-6 space-y-5 border-l border-gold-deep/40 pl-5">
           {education.map((e) => (
             <li>
-              <p class="text-sm text-ink-soft">{e.years}</p>
               <p class="font-display text-xl leading-snug text-midnight">{e.title}</p>
               <p class="text-ink-soft">{e.place}</p>
-              {e.note && <p class="mt-1 text-[0.95rem] italic text-ink-soft">{e.note}</p>}
             </li>
           ))}
-        </ol>
+        </ul>
       </section>
       <div class="rounded-2xl bg-midnight p-7 text-ivory on-dark">
         <p class="font-display text-2xl leading-snug">Invite Iva to speak</p>
-        <p class="mt-3 text-ivory/80">For parishes, prayer groups, schools, universities and conferences.</p>
         <a href="/contact/" class="btn btn-light mt-6 w-full">Get in touch</a>
       </div>
     </aside>

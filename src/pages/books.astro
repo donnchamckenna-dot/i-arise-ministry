@@ -7,17 +7,17 @@ import Placeholder from '../components/Placeholder.astro';
 
 const all = (await getCollection('books')).sort((a, b) => a.data.order - b.data.order);
 const groups = [
-  { kind: 'children', title: 'For children', intro: 'Illustrated stories full of wonder, written for young readers.' },
+  { kind: 'children', title: 'For children', intro: 'Stories full of wonder.' },
   { kind: 'spirituality', title: 'Spirituality', intro: '' },
-  { kind: 'academic', title: 'Research', intro: 'Iva’s academic work on memory, hope and restoration.' },
-  { kind: 'poetry', title: 'Poetry', intro: 'Anthologies that include Iva’s poems.' },
+  { kind: 'academic', title: 'Research', intro: '' },
+  { kind: 'poetry', title: 'Poetry', intro: '' },
   { kind: 'article', title: 'Articles', intro: '' },
 ] as const;
 ---
 <PageLayout
   title="Books & Writings"
   eyebrow="Stories, poems and reflections"
-  intro="Children’s stories, poetry, reflections and research. Iva writes for many kinds of readers, and for the child in all of us."
+  intro="Stories, poems and research by Iva."
 >
   {groups.map((g) => {
     const items = all.filter((b) => b.data.kind === g.kind);
@@ -42,7 +42,7 @@ const groups = [
               <p class="text-ink-soft">{[data.publisher, data.year].filter(Boolean).join(', ')}</p>
               {data.blurb && <p class="mt-2 text-ink-soft">{data.blurb}</p>}
               {data.buyUrl && <a href={data.buyUrl} class="link mt-3 inline-block font-medium">Find the book<span class="sr-only">: {data.title}</span></a>}
-              {!data.verified && <Placeholder class="mt-4" label="Details">Description, publisher and buying link still needed.</Placeholder>}
+              {!data.verified && <Placeholder class="mt-4" label="Needed">Description and where to buy.</Placeholder>}
             </li>
           ))}
         </ul>
@@ -52,9 +52,7 @@ const groups = [
 
   <section class="rounded-3xl bg-parchment p-8 md:p-14" aria-labelledby="more">
     <h2 id="more" class="text-4xl text-midnight">Articles and radio</h2>
-    <p class="measure mt-4 text-lg text-ink-soft">
-      Iva has written more than fifteen articles, for publications including <em>Teresianum</em>, <em>Spirituality</em> and <em>L’Osservatore Romano</em>, and has contributed reflections to RTÉ Radio 1’s <em>A Living Word</em>.
-    </p>
-    <Placeholder class="mt-6" label="To add">Titles and links for articles, reflections and recordings that can be shared, plus Iva’s YouTube channel if she would like it linked.</Placeholder>
+    <p class="measure mt-4 text-lg text-ink-soft">Over fifteen articles, and reflections on RTÉ Radio 1.</p>
+    <Placeholder class="mt-6" label="To add">Links to articles and recordings.</Placeholder>
   </section>
 </PageLayout>
