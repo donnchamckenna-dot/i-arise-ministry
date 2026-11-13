@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import KeyMotif from '../components/KeyMotif.astro';
+---
+<BaseLayout title="Page not found">
+  <section class="container-page py-28 text-center md:py-40">
+    <KeyMotif class="mx-auto text-gold-deep" size={96} />
+    <h1 class="mt-8 text-5xl text-midnight md:text-6xl">This door seems to be locked.</h1>
+    <p class="mx-auto mt-5 max-w-md text-lg text-ink-soft">The page you were looking for isn’t here. It may have moved, or the link may be mistyped.</p>
+    <a href="/" class="btn btn-primary mt-10">Return home</a>
+  </section>
+</BaseLayout>

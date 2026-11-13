@@ -1,0 +1,16 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { spiritualityThemes } from '../config/site';
+---
+<PageLayout title="Healing & Spirituality" eyebrow="Pathways for the journey" intro="Short, readable introductions to the teachers and practices that shape this ministry.">
+  <ul class="grid gap-10 md:grid-cols-2">
+    {spiritualityThemes.map((t) => (
+      <li id={t.slug} class="scroll-mt-24 border-t border-midnight/15 pt-6">
+        <h2 class="text-3xl text-midnight">{t.title}</h2>
+        <p class="mt-2 text-ink-soft">{t.line}</p>
+      </li>
+    ))}
+  </ul>
+  <Placeholder class="mt-12" label="Page in progress">Each theme becomes its own short article in Phase 5.</Placeholder>
+</PageLayout>

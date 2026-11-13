@@ -1,0 +1,15 @@
+---
+/**
+ * Marks content that still needs to be supplied or confirmed.
+ * Search the codebase for "TODO-CONTENT" or <Placeholder to find them all.
+ * Hidden entirely when site.showPlaceholders is false.
+ */
+import { site } from '../config/site';
+interface Props { label?: string; class?: string; }
+const { label = 'To confirm', class: className = '' } = Astro.props;
+---
+{site.showPlaceholders && (
+  <div class:list={['placeholder', className]} data-placeholder>
+    <strong class="font-semibold">{label}:</strong> <slot />
+  </div>
+)}

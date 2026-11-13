@@ -1,0 +1,31 @@
+---
+/**
+ * The golden key: a small line-drawn ornament used sparingly as a section
+ * marker. Decorative only, so it is hidden from screen readers.
+ */
+interface Props { class?: string; size?: number; }
+const { class: className = '', size = 72 } = Astro.props;
+---
+<svg
+  class={className}
+  width={size}
+  height={size * 0.34}
+  viewBox="0 0 120 40"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  <!-- bow -->
+  <circle cx="18" cy="20" r="11" />
+  <circle cx="18" cy="20" r="4.5" />
+  <!-- collar -->
+  <path d="M29 20h6M35 16.5v7M39 17.5v5" />
+  <!-- shaft -->
+  <path d="M39 20h62" />
+  <!-- bit -->
+  <path d="M86 20v8h5v-5h4v7h6V20" />
+</svg>

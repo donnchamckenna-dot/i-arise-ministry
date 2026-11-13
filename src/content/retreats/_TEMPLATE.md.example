@@ -1,0 +1,18 @@
+---
+# Copy this file, rename it (e.g. 2027-03-lenten-retreat.md) and fill it in.
+# Only add events that Iva has confirmed.
+title: "Lenten Retreat: Where Memory Meets Hope"
+summary: "One or two sentences that invite people in."
+start: 2027-03-12T16:00:00
+end: 2027-03-14T14:00:00
+timeNote: "Arrive from 4pm Friday. Ends after lunch on Sunday."
+format: in-person          # in-person | online | hybrid
+location: "Retreat house name, County"
+leader: "Dr Iva Beranek"
+audience: "Open to all. No experience of retreats needed."
+status: open               # open | few-places | full | waiting-list | closed
+cost: "€000, including meals and accommodation"
+registrationUrl: "https://..."
+draft: false
+---
+Programme overview goes here. Write it like a letter of invitation.

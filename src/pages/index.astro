@@ -1,0 +1,257 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import KeyMotif from '../components/KeyMotif.astro';
+import Placeholder from '../components/Placeholder.astro';
+import RetreatList from '../components/RetreatList.astro';
+import { spiritualityThemes } from '../config/site';
+import shamrock from '../assets/brand/shamrock-badge.png';
+import ivaPortrait from '../assets/people/iva-portrait.jpg';
+
+const featuredBooks = (await getCollection('books', ({ data }) => data.featured)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const kindLabel = { children: 'For children', spirituality: 'Spirituality', academic: 'Research', poetry: 'Poetry', article: 'Article' };
+
+const movements = [
+  {
+    n: 'I',
+    title: 'Remembering',
+    text: 'We begin with honesty. The memories we carry, the hurts we have hidden and the stories of our families and communities are not obstacles to God. They are where he meets us.',
+  },
+  {
+    n: 'II',
+    title: 'Healing',
+    text: 'In prayer, silence and the sacraments, we bring what still hurts into the light of God’s mercy. Healing is rarely sudden. It is a slow, gentle work of grace, and it is not ours alone.',
+  },
+  {
+    n: 'III',
+    title: 'Arising',
+    text: 'Hope returns. We find freedom to forgive, courage to be reconciled and a renewed sense of purpose. What begins in one heart can spill over into a family, a parish and a people.',
+  },
+];
+---
+<BaseLayout headerTone="dark">
+  <!-- 1. HERO: from night towards dawn -->
+  <section class="relative isolate overflow-hidden bg-midnight text-ivory on-dark" aria-labelledby="hero-title">
+    <div
+      class="absolute inset-0 -z-10"
+      style="background:
+        radial-gradient(ellipse 70% 45% at 50% 108%, rgb(225 128 111 / .55), transparent 70%),
+        radial-gradient(ellipse 45% 30% at 50% 100%, rgb(217 173 101 / .45), transparent 70%),
+        linear-gradient(180deg, #1a2338 0%, #202b44 40%, #2c4681 100%);"
+      aria-hidden="true"
+    ></div>
+    <div class="container-page flex min-h-[92svh] flex-col items-center justify-center pt-32 pb-24 text-center md:pt-36">
+      <div class="relative">
+        <div class="absolute inset-0 -z-10 scale-150 rounded-full bg-gold/25 blur-3xl" aria-hidden="true"></div>
+        <Image src={shamrock} alt="The I Arise Ministry shamrock" width={132} height={132} densities={[1, 2]} class="h-28 w-28 rounded-full md:h-33 md:w-33" loading="eager" />
+      </div>
+      <p class="eyebrow mt-8 text-gold">I Arise Ministry</p>
+      <h1 id="hero-title" class="mt-5 max-w-4xl text-[2.9rem] sm:text-6xl md:text-7xl lg:text-[5.25rem]">
+        Healing the heart.<br />
+        <span class="italic text-ivory/95">Renewing the nation.</span>
+      </h1>
+      <p class="mt-7 max-w-xl text-lg text-ivory/85 md:text-xl">
+        A Catholic ministry of prayer, healing of memories and restoration, rooted in the contemplative tradition and the Christian heritage of Ireland.
+      </p>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <a href="/retreats/" class="btn btn-light">Explore Retreats</a>
+        <a href="/vision/" class="btn btn-ghost-light">Discover Our Vision</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. INVITATION -->
+  <section class="py-24 md:py-32" aria-labelledby="invite-title">
+    <div class="container-page grid gap-10 md:grid-cols-[1fr_2fr] md:gap-16">
+      <div>
+        <KeyMotif class="text-gold-deep" size={88} />
+        <h2 id="invite-title" class="eyebrow mt-6 font-sans text-restoration-deep">An invitation</h2>
+      </div>
+      <div>
+        <p class="font-display text-3xl leading-snug text-midnight md:text-[2.6rem] md:leading-[1.2]">
+          Every life carries memories. Some are gifts. Some still ache. Many of us have learned to live around them, quietly, for years.
+        </p>
+        <p class="measure mt-8 text-lg text-ink-soft">
+          I Arise Ministry offers a place to stop and bring all of it to God: through retreats, prayer, teaching and spiritual accompaniment. We draw on the wisdom of St John of the Cross, the Carmelite tradition and St John Henry Newman, and on the long Christian story of this island. Whatever tradition you come from, and wherever you are on the road of faith, you are welcome.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. THREE MOVEMENTS -->
+  <section class="bg-parchment py-24 md:py-32" aria-labelledby="movements-title">
+    <div class="container-page">
+      <div class="max-w-2xl">
+        <p class="eyebrow text-restoration-deep">The journey</p>
+        <h2 id="movements-title" class="mt-4 text-4xl text-midnight md:text-5xl">From woundedness to restoration</h2>
+      </div>
+      <ol class="mt-16 grid gap-14 md:grid-cols-3 md:gap-10">
+        {movements.map((m) => (
+          <li class="border-t border-midnight/20 pt-8">
+            <span class="font-display text-6xl italic text-restoration" aria-hidden="true">{m.n}</span>
+            <h3 class="mt-4 text-3xl text-midnight">{m.title}</h3>
+            <p class="mt-4 text-ink-soft">{m.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. HEART TO NATION -->
+  <section aria-labelledby="nation-title">
+    <div class="bg-restoration bg-cover bg-center text-white" style="background-image:url('/textures/red-watercolour.jpg')">
+      <div class="container-page py-24 text-center md:py-32">
+        <h2 id="nation-title" class="mx-auto max-w-3xl text-4xl md:text-6xl">
+          Renewal begins in the human heart. <span class="italic">It does not have to end there.</span>
+        </h2>
+      </div>
+    </div>
+    <div class="container-page grid gap-10 py-20 md:grid-cols-2 md:gap-16 md:py-24">
+      <p class="text-lg text-ink-soft">
+        Communities carry memories too. Families, parishes, towns and whole peoples can hold old wounds that shape how they see one another. Iva’s doctoral research explored exactly this: how memory, hope and transformation meet in ministries of restoration, through a case study in Northern Ireland.
+      </p>
+      <div>
+        <p class="text-lg text-ink-soft">
+          Our hope is simple and old. When people are healed and reconciled, they become a source of healing for others. Ireland’s Christian story, from St Patrick onwards, is full of that kind of quiet renewal, and we believe it is not finished.
+        </p>
+        <a href="/vision/" class="link mt-6 inline-block font-semibold">Read our vision</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ABOUT IVA -->
+  <section class="bg-white/60 py-24 md:py-32" aria-labelledby="iva-title">
+    <div class="container-page grid items-center gap-12 md:grid-cols-[5fr_7fr] md:gap-20">
+      <figure class="relative mx-auto w-full max-w-sm md:max-w-none">
+        <div class="absolute -right-4 -bottom-4 -z-0 h-full w-full rounded-t-full bg-coral/35" aria-hidden="true"></div>
+        <Image
+          src={ivaPortrait}
+          alt="Dr Iva Beranek, smiling, with long auburn hair."
+          widths={[360, 540, 720]}
+          sizes="(min-width: 768px) 38vw, 90vw"
+          class="relative aspect-[4/5] w-full rounded-t-full object-cover object-top"
+        />
+        <Placeholder class="relative mt-6" label="Photo">Cropped from a 2021 promotional image. Please confirm Iva is happy with it and send a higher-resolution portrait.</Placeholder>
+      </figure>
+      <div>
+        <p class="eyebrow text-restoration-deep">Founder</p>
+        <h2 id="iva-title" class="mt-4 text-4xl text-midnight md:text-5xl">Dr Iva Beranek</h2>
+        <p class="mt-6 text-lg text-ink-soft">
+          Iva came to Dublin from Croatia in 2005 to study Christian spirituality and has made Ireland her home. She holds a PhD in Christian Spirituality from the Milltown Institute, where her research focused on the healing of memories, and a Diploma in Spiritual Direction from Manresa Jesuit Retreat House.
+        </p>
+        <p class="mt-5 text-lg text-ink-soft">
+          For many years she has led retreats, prayer ministry and talks in parishes and universities across Ireland and beyond, and offered spiritual direction. Her reflections have been heard on RTÉ Radio 1. She also writes poetry and stories for children, and loves nature and wildlife, especially Dublin’s urban foxes.
+        </p>
+        <a href="/about/" class="btn btn-ghost mt-8">More about Iva</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. RETREATS -->
+  <section class="py-24 md:py-32" aria-labelledby="retreats-title">
+    <div class="container-page">
+      <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div>
+          <p class="eyebrow text-restoration-deep">Retreats &amp; events</p>
+          <h2 id="retreats-title" class="mt-4 text-4xl text-midnight md:text-5xl">Time set apart</h2>
+          <p class="measure mt-4 text-lg text-ink-soft">Quiet days, weekend retreats and evenings of prayer, in person and online.</p>
+        </div>
+        <a href="/retreats/" class="link font-semibold">All retreats and events</a>
+      </div>
+      <div class="mt-12"><RetreatList limit={3} /></div>
+    </div>
+  </section>
+
+  <!-- 7. PATHWAYS -->
+  <section class="bg-sage py-24 text-ivory on-dark md:py-32" aria-labelledby="paths-title">
+    <div class="container-page grid gap-12 md:grid-cols-[1fr_1.4fr] md:gap-20">
+      <div>
+        <p class="eyebrow text-gold">Healing &amp; spirituality</p>
+        <h2 id="paths-title" class="mt-4 text-4xl md:text-5xl">Pathways for the journey</h2>
+        <p class="mt-5 text-lg text-ivory/85">
+          Short, readable introductions to the teachers and practices that shape this ministry. Theology for the heart, not just the head.
+        </p>
+      </div>
+      <ul class="divide-y divide-ivory/20 border-y border-ivory/20">
+        {spiritualityThemes.map((t) => (
+          <li>
+            <a href={`/spirituality/#${t.slug}`} class="group flex items-baseline justify-between gap-6 py-5 no-underline">
+              <span>
+                <span class="block font-display text-2xl group-hover:underline">{t.title}</span>
+                <span class="mt-1 block text-ivory/80">{t.line}</span>
+              </span>
+              <span class="text-gold transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 8. BOOKS -->
+  <section class="py-24 md:py-32" aria-labelledby="books-title">
+    <div class="container-page">
+      <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div>
+          <p class="eyebrow text-restoration-deep">Books &amp; writings</p>
+          <h2 id="books-title" class="mt-4 text-4xl text-midnight md:text-5xl">Stories, poems and reflections</h2>
+        </div>
+        <a href="/books/" class="link font-semibold">All books and writings</a>
+      </div>
+      <ul class="mt-14 grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredBooks.map(({ data }) => (
+          <li>
+            {data.cover ? (
+              <Image src={data.cover} alt={data.coverAlt ?? `Cover of ${data.title}`} widths={[300, 450, 600]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw" class="aspect-[2/3] w-full rounded-md object-cover shadow-xl shadow-midnight/20" />
+            ) : (
+              <div class="flex aspect-[2/3] w-full flex-col justify-between rounded-md bg-contemplative p-8 text-ivory shadow-xl shadow-midnight/20 on-dark">
+                <KeyMotif class="text-gold" size={64} />
+                <p class="font-display text-3xl leading-tight">{data.title}</p>
+                <p class="text-sm text-ivory/75">{data.publisher ?? 'Cover to come'}</p>
+              </div>
+            )}
+            <p class="eyebrow mt-6 text-sage">{kindLabel[data.kind]}{data.year && ` · ${data.year}`}</p>
+            <h3 class="mt-2 text-2xl text-midnight">{data.title}</h3>
+            {data.blurb && <p class="mt-2 text-ink-soft">{data.blurb}</p>}
+            {!data.verified && <Placeholder class="mt-4" label="Details">Description, publisher and buying link still needed.</Placeholder>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9. MAILING LIST -->
+  <section class="bg-midnight py-20 text-ivory on-dark md:py-24" aria-labelledby="news-title">
+    <div class="container-page grid items-center gap-10 md:grid-cols-[1.2fr_1fr]">
+      <div>
+        <KeyMotif class="text-gold" size={72} />
+        <h2 id="news-title" class="mt-5 text-4xl md:text-5xl">Stay close</h2>
+        <p class="mt-4 max-w-lg text-lg text-ivory/85">
+          Occasional letters with new retreat dates, reflections and prayer. No more than once a month, and you can leave at any time.
+        </p>
+      </div>
+      <div>
+        <Placeholder label="Mailing list">Choose a provider (for example MailerLite or Buttondown) before the sign-up form goes live. The form, consent wording and privacy notice will be added then.</Placeholder>
+        <a href="/contact/" class="btn btn-light mt-5">Get in touch meanwhile</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. CLOSING -->
+  <section class="py-24 text-center md:py-32" aria-labelledby="close-title">
+    <div class="container-page">
+      <KeyMotif class="mx-auto text-gold-deep" size={96} />
+      <h2 id="close-title" class="mx-auto mt-8 max-w-2xl text-4xl text-midnight md:text-6xl">Come and rest a while.</h2>
+      <p class="mx-auto mt-6 max-w-xl text-lg text-ink-soft">
+        You don’t need to have the words, or to know where to begin. Come to a retreat, ask about spiritual direction, or simply write and tell us what is on your heart.
+      </p>
+      <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+        <a href="/retreats/" class="btn btn-primary">Explore Retreats</a>
+        <a href="/contact/" class="btn btn-ghost">Write to us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

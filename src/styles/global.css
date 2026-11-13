@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/cormorant-garamond';
+@import '@fontsource-variable/cormorant-garamond/wght-italic.css';
+@import '@fontsource-variable/source-sans-3';
+
+/*
+ * Brand tokens. The single place to change colours and fonts.
+ *
+ * Contrast notes (checked against WCAG 2.2 AA):
+ *  - restoration (#CB5B59) is 3.6:1 on ivory. Use it for large display type,
+ *    rules and illustration only. For text and buttons use restoration-deep.
+ *  - coral (#E1806F) is decorative only on light backgrounds.
+ *  - gold (#D9AD65) is fine as text on midnight (6.8:1), not on ivory.
+ */
+@theme {
+  /* Confirmed palette */
+  --color-restoration: #cb5b59;
+  --color-coral: #e1806f;
+  --color-contemplative: #2c4681;
+
+  /* Supporting palette (proposed) */
+  --color-ivory: #f8f1e8;
+  --color-gold: #d9ad65;
+  --color-sage: #426668;
+  --color-midnight: #202b44;
+
+  /* Accessible working shades derived from the palette */
+  --color-restoration-deep: #a8403f; /* 5.4:1 on ivory, 6.0:1 under white text */
+  --color-gold-deep: #8a6420; /* 4.8:1 on ivory */
+  --color-ink: #2a2522; /* body text, 13.5:1 on ivory */
+  --color-ink-soft: #5b524c;
+  --color-parchment: #efe4d4;
+
+  --font-display: 'Cormorant Garamond Variable', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-gold); color: var(--color-midnight); }
+
+  :focus-visible {
+    outline: 3px solid var(--color-gold-deep);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .on-dark :focus-visible { outline-color: var(--color-gold); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page { width: 100%; max-width: 72rem; margin-inline: auto; padding-inline: 1.25rem; }
+  @media (min-width: 768px) { .container-page { padding-inline: 2rem; } }
+  .measure { max-width: 38rem; }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 3rem; padding: 0.75rem 1.5rem;
+    font-weight: 600; font-size: 1rem; letter-spacing: 0.01em;
+    border-radius: 999px; border: 1.5px solid transparent;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--color-restoration-deep); color: #fff; }
+  .btn-primary:hover { background: #8f3534; }
+  .btn-light { background: var(--color-ivory); color: var(--color-midnight); }
+  .btn-light:hover { background: #fff; }
+  .btn-ghost-light { border-color: rgb(248 241 232 / .55); color: var(--color-ivory); }
+  .btn-ghost-light:hover { border-color: var(--color-ivory); background: rgb(248 241 232 / .08); }
+  .btn-ghost { border-color: var(--color-contemplative); color: var(--color-contemplative); }
+  .btn-ghost:hover { background: var(--color-contemplative); color: #fff; }
+
+  .link {
+    color: var(--color-restoration-deep);
+    text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
+  }
+  .link:hover { text-decoration-thickness: 2px; }
+
+  /* Visible only while site.showPlaceholders is true */
+  .placeholder {
+    border: 1.5px dashed var(--color-gold-deep);
+    background: rgb(217 173 101 / .12);
+    color: var(--color-ink);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .on-dark .placeholder { color: var(--color-ivory); border-color: var(--color-gold); background: rgb(217 173 101 / .14); }
+}

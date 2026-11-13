@@ -1,0 +1,20 @@
+---
+/** Simple inner-page layout: title band, then content. */
+import BaseLayout from './BaseLayout.astro';
+import KeyMotif from '../components/KeyMotif.astro';
+interface Props { title: string; eyebrow?: string; intro?: string; description?: string; }
+const { title, eyebrow, intro, description } = Astro.props;
+---
+<BaseLayout title={title} description={description ?? intro}>
+  <section class="border-b border-midnight/10 bg-parchment">
+    <div class="container-page py-16 md:py-24">
+      <KeyMotif class="text-gold-deep" size={72} />
+      {eyebrow && <p class="eyebrow mt-6 text-restoration-deep">{eyebrow}</p>}
+      <h1 class="mt-3 text-5xl text-midnight md:text-6xl">{title}</h1>
+      {intro && <p class="measure mt-5 text-lg text-ink-soft">{intro}</p>}
+    </div>
+  </section>
+  <div class="container-page py-16 md:py-20">
+    <slot />
+  </div>
+</BaseLayout>

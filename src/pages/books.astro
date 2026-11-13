@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+const books = (await getCollection('books')).sort((a, b) => a.data.order - b.data.order);
+---
+<PageLayout title="Books & Writings" eyebrow="Stories, poems and reflections">
+  <ul class="divide-y divide-midnight/15 border-y border-midnight/15">
+    {books.map(({ data }) => (
+      <li class="py-6">
+        <h2 class="text-2xl text-midnight">{data.title}</h2>
+        <p class="text-ink-soft">{[data.publisher, data.year].filter(Boolean).join(', ')}</p>
+        {data.blurb && <p class="mt-1 text-ink-soft">{data.blurb}</p>}
+      </li>
+    ))}
+  </ul>
+</PageLayout>
