@@ -1,0 +1,39 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Placeholder from '../../components/Placeholder.astro';
+import { contact } from '../../config/site';
+---
+<PageLayout
+  title="Spiritual Direction"
+  eyebrow="Journey with me"
+  intro="A space to slow down and notice where God is at work in your life, with someone to walk beside you."
+>
+  <div class="grid gap-16 lg:grid-cols-[1fr_20rem]">
+    <article class="prose-page measure">
+      <h2 class="!mt-0">What it is</h2>
+      <p>Spiritual direction is a gentle, prayerful conversation. You bring your life as it is: your joys, your questions, your pain. Together we listen for God in it.</p>
+      <p>It is not about me telling you what to do. The real director is the Holy Spirit. My role is to listen, to ask, and to help you notice.</p>
+
+      <h2>Is it for me?</h2>
+      <ul>
+        <li>You long to grow closer to God, or to pray more deeply.</li>
+        <li>You are carrying something painful and want to bring it to God.</li>
+        <li>You are facing a decision or a new season of life.</li>
+        <li>You sense there is more God has for you.</li>
+      </ul>
+      <p>Spiritual direction is not counselling or therapy. If you need that kind of support, I will gladly encourage you to seek it alongside.</p>
+
+      <h2>My training</h2>
+      <p>I trained in spiritual direction with the Jesuits at Manresa Jesuit Retreat House in Dublin, and my PhD is in Christian Spirituality.</p>
+
+      <Placeholder class="mt-10" label="To confirm with Iva">How sessions work: how often, how long, in person or online, where, and the cost.</Placeholder>
+    </article>
+    <aside class="lg:sticky lg:top-8 lg:self-start">
+      <div class="rounded-t-[999px] rounded-b-2xl bg-midnight px-8 pt-16 pb-8 text-center text-ivory on-dark">
+        <p class="font-display text-2xl leading-snug">Would you like to begin?</p>
+        <p class="mt-3 text-ivory/80">Write to me and we can arrange a first conversation.</p>
+        <a href={`mailto:${contact.email}?subject=Spiritual%20direction`} class="btn btn-light mt-6 w-full">Email me</a>
+      </div>
+    </aside>
+  </div>
+</PageLayout>

@@ -133,6 +133,13 @@
   }
   .prose-page strong { color: var(--color-ink); font-weight: 500; }
 
+  /* Gentle reveal on scroll. Content is always visible without JavaScript
+     or when the visitor prefers reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html.js [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .9s ease, transform .9s ease; }
+    html.js [data-reveal].is-visible { opacity: 1; transform: none; }
+  }
+
   /* Visible only while site.showPlaceholders is true */
   .placeholder {
     border: 1.5px dashed var(--color-gold-deep);

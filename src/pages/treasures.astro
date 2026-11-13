@@ -1,0 +1,44 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Placeholder from '../components/Placeholder.astro';
+import KeyMotif from '../components/KeyMotif.astro';
+
+/**
+ * Treasures: the building blocks of Iva's life and work.
+ * Not a blog. Add, remove or reorder entries here.
+ */
+type Treasure = { slug: string; kind: string; title: string; dates?: string; line: string; tone: string };
+const treasures: Treasure[] = [
+  { slug: 'beauty', kind: 'What I treasure', title: 'Beauty', line: 'In nature, in art, in people. Beauty can open a closed heart to God.', tone: 'bg-parchment text-midnight' },
+  { slug: 'healing', kind: 'What I treasure', title: 'Healing', line: 'The heart of my ministry. Underneath all pain, joy is hidden.', tone: 'bg-restoration-deep text-white on-dark' },
+  { slug: 'oxford', kind: 'A place I love', title: 'Oxford', line: 'A city of learning, prayer and old stone.', tone: 'bg-contemplative text-ivory on-dark' },
+  { slug: 'st-patrick', kind: 'Someone who inspires me', title: 'St Patrick', dates: '5th century', line: 'Taken to Ireland as a slave, he came back to bring the Gospel. The inspiration for I Arise.', tone: 'bg-sage text-ivory on-dark' },
+  { slug: 'st-john-of-the-cross', kind: 'Someone who inspires me', title: 'St John of the Cross', dates: '1542 to 1591', line: 'Carmelite poet and mystic, who found God close in the dark night.', tone: 'bg-midnight text-ivory on-dark' },
+  { slug: 'st-philip-neri', kind: 'Someone who inspires me', title: 'St Philip Neri', dates: '1515 to 1595', line: 'The joyful saint of Rome, loved for his humour and kindness.', tone: 'bg-parchment text-midnight' },
+  { slug: 'jane-austen', kind: 'Someone who inspires me', title: 'Jane Austen', dates: '1775 to 1817', line: 'Wit, warmth and the quiet drama of ordinary lives.', tone: 'bg-ivory text-midnight border border-midnight/15' },
+  { slug: 'cs-lewis', kind: 'Someone who inspires me', title: 'C. S. Lewis', dates: '1898 to 1963', line: 'Born in Belfast, a scholar at Oxford, and a storyteller who opened doors into other worlds.', tone: 'bg-contemplative text-ivory on-dark' },
+];
+---
+<PageLayout
+  title="Treasures"
+  eyebrow="Building blocks of my life and work"
+  intro="These are the things I treasure. They shape my work and my life, what drives me, and what inspires my retreats, talks and journey with God."
+>
+  <Placeholder class="mb-12" label="For Iva">Your own opening paragraph, and a line or two on what each treasure means to you. The short lines below are placeholders to show the layout.</Placeholder>
+
+  <ul class="columns-1 gap-8 md:columns-2 lg:columns-3 [&>li]:mb-8 [&>li]:break-inside-avoid">
+    {treasures.map((t, i) => (
+      <li id={t.slug} class:list={['scroll-mt-8 rounded-2xl p-8 shadow-lg shadow-midnight/10', t.tone, i % 3 === 1 && 'md:rounded-t-[999px] md:pt-16']} data-reveal>
+        <KeyMotif class="opacity-70" size={56} />
+        <p class="eyebrow mt-4 opacity-80">{t.kind}</p>
+        <h2 class="mt-1 text-4xl">{t.title}</h2>
+        {t.dates && <p class="mt-1 text-sm opacity-75">{t.dates}</p>}
+        <p class="mt-4 text-lg opacity-90">{t.line}</p>
+      </li>
+    ))}
+  </ul>
+
+  <p class="mx-auto mt-16 max-w-xl text-center font-display text-2xl italic text-midnight">
+    More treasures will be added from time to time.
+  </p>
+</PageLayout>

@@ -1,0 +1,46 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import RetreatList from '../../components/RetreatList.astro';
+import Placeholder from '../../components/Placeholder.astro';
+import { contact } from '../../config/site';
+
+const talks = [
+  'Restoring our Inner Goodness: Healing of Memories',
+  'Love Your Enemies',
+  'St Patrick, a Mirror of God’s Love',
+  'Alleluia in Lent',
+  'Prayer and Poetry',
+];
+---
+<PageLayout
+  title="Retreats & Speaking"
+  eyebrow="Journey with me"
+  intro="Time set apart to rest, pray and listen. Come as you are."
+>
+  <section aria-labelledby="upcoming">
+    <h2 id="upcoming" class="text-4xl text-midnight">Upcoming retreats</h2>
+    <div class="mt-8"><RetreatList /></div>
+  </section>
+
+  <section class="mt-20 grid gap-12 md:grid-cols-2" aria-label="Retreats and talks">
+    <div class="prose-page">
+      <h2 class="!mt-0">Retreats</h2>
+      <p>Quiet days, weekend retreats and evenings of prayer. Each one has space for silence, a short talk and guided prayer. You never have to share anything you’d rather keep to yourself.</p>
+      <p>I can also lead a retreat for your parish, prayer group or community.</p>
+    </div>
+    <div class="prose-page">
+      <h2 class="!mt-0">Speaking</h2>
+      <p>I speak at parishes, universities and conferences in Ireland and abroad. Talks I have given include:</p>
+      <ul>
+        {talks.map((t) => <li>{t}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <Placeholder class="mt-12" label="To confirm with Iva">Which retreat formats she offers now, and any talk topics to add.</Placeholder>
+
+  <section class="mt-16 flex flex-col items-start justify-between gap-6 rounded-3xl bg-parchment p-8 md:flex-row md:items-center md:p-12">
+    <p class="font-display text-3xl text-midnight">Invite me to lead a retreat or speak</p>
+    <a href={`mailto:${contact.email}?subject=Retreat%20or%20talk%20enquiry`} class="btn btn-primary">Email me</a>
+  </section>
+</PageLayout>

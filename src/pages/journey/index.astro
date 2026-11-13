@@ -1,0 +1,20 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import DoorCard from '../../components/DoorCard.astro';
+import { journeyWays } from '../../config/site';
+---
+<PageLayout
+  title="Journey with me"
+  eyebrow="Ways to walk together"
+  intro="My desire is to create spaces where people can encounter God’s love afresh, rediscover their dignity and grow in prayer. Here are the ways we can journey together."
+>
+  <ul class="grid gap-8 md:grid-cols-3">
+    {journeyWays.map((w, i) => (
+      <li>
+        <DoorCard href={w.href} title={w.title} tone={(['parchment', 'contemplative', 'sage'] as const)[i]}>
+          <p>{w.line}</p>
+        </DoorCard>
+      </li>
+    ))}
+  </ul>
+</PageLayout>

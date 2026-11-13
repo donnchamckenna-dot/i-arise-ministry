@@ -1,0 +1,26 @@
+---
+/**
+ * An arched "door" card: the site's way of inviting people further in.
+ * The whole card is one link.
+ */
+interface Props { href: string; title: string; tone?: 'parchment' | 'midnight' | 'sage' | 'contemplative'; cta?: string; }
+const { href, title, tone = 'parchment', cta = 'Step inside' } = Astro.props;
+const dark = tone !== 'parchment';
+const bg = { parchment: 'bg-parchment text-midnight', midnight: 'bg-midnight text-ivory', sage: 'bg-sage text-ivory', contemplative: 'bg-contemplative text-ivory' }[tone];
+---
+<a
+  href={href}
+  class:list={[
+    'group relative flex h-full flex-col overflow-hidden rounded-t-[999px] rounded-b-2xl px-8 pt-20 pb-9 no-underline shadow-lg shadow-midnight/10 transition-transform duration-300 hover:-translate-y-1',
+    bg,
+    dark && 'on-dark',
+  ]}
+  data-reveal
+>
+  <span class="pointer-events-none absolute inset-x-6 top-6 bottom-0 rounded-t-[999px] border border-current opacity-20" aria-hidden="true"></span>
+  <span class="pointer-events-none absolute left-1/2 top-10 h-24 w-24 -translate-x-1/2 rounded-full bg-gold/40 blur-2xl transition-opacity group-hover:opacity-100 opacity-60" aria-hidden="true"></span>
+  <slot name="top" />
+  <h3 class="relative text-center text-3xl leading-tight">{title}</h3>
+  <div class:list={['relative mt-3 flex-1 text-center', dark ? 'text-ivory/85' : 'text-ink-soft']}><slot /></div>
+  <span class:list={['relative mt-6 text-center font-medium underline-offset-4 group-hover:underline', dark ? 'text-gold' : 'text-restoration-deep']}>{cta} <span aria-hidden="true">→</span></span>
+</a>

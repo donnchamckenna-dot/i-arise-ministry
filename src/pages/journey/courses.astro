@@ -1,0 +1,19 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Placeholder from '../../components/Placeholder.astro';
+import HeartKey from '../../components/HeartKey.astro';
+import { contact } from '../../config/site';
+---
+<PageLayout
+  title="Courses"
+  eyebrow="Journey with me"
+  intro="Deeper learning on prayer, healing and the spiritual life, at your own pace."
+>
+  <div class="mx-auto max-w-2xl text-center">
+    <HeartKey />
+    <h2 class="mt-10 text-4xl text-midnight">Courses are on their way</h2>
+    <p class="mt-4 text-lg text-ink-soft">I’m preparing courses to help you go deeper. If you’d like to hear when the first one opens, write to me.</p>
+    <a href={`mailto:${contact.email}?subject=Courses`} class="btn btn-primary mt-8">Let me know</a>
+    <Placeholder class="mt-12 text-left" label="To confirm with Iva">Course titles, short descriptions, format (online or in person), dates and cost.</Placeholder>
+  </div>
+</PageLayout>

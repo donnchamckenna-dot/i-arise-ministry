@@ -6,7 +6,7 @@ interface Props { tone?: 'light' | 'dark'; }
 const { tone = 'light' } = Astro.props;
 const dark = tone === 'dark';
 const path = Astro.url.pathname;
-const isCurrent = (href: string) => path === href || path.startsWith(href);
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 <header
   class:list={[
@@ -18,24 +18,49 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     <a href="/" class="flex items-center gap-3 no-underline" aria-label={`${site.name}, home`}>
       {/* Cropped from the supplied 1080px logo. TODO-CONTENT: swap for the original file (transparent PNG or SVG) when available. */}
       <Image src={shamrock} alt="" width={48} height={48} densities={[1, 2]} class="h-12 w-12 shrink-0 rounded-full" loading="eager" />
-
       <span class="font-display text-[1.6rem] leading-none tracking-tight">
         I Arise <span class="italic">Ministry</span>
       </span>
     </a>
 
+    <!-- Desktop menu -->
     <nav aria-label="Main" class="hidden lg:block">
-      <ul class="flex items-center gap-7 text-[0.95rem]">
+      <ul class="flex items-center gap-8 text-[1.05rem]">
         {mainNav.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              aria-current={isCurrent(item.href) ? 'page' : undefined}
-              class:list={[
-                'py-2 no-underline underline-offset-[0.35em] decoration-1 hover:underline',
-                isCurrent(item.href) && 'underline',
-              ]}
-            >{item.label}</a>
+          <li class="relative">
+            {item.children ? (
+              <details class="group/dd" data-dropdown>
+                <summary
+                  class:list={[
+                    'flex cursor-pointer list-none items-center gap-1.5 py-2 underline-offset-[0.35em] decoration-1 hover:underline [&::-webkit-details-marker]:hidden',
+                    isCurrent(item.href) && 'underline',
+                  ]}
+                >
+                  {item.label}
+                  <svg class="h-3 w-3 transition-transform group-open/dd:rotate-180" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 4l4 4 4-4" /></svg>
+                </summary>
+                <ul class="absolute left-1/2 top-full mt-2 w-64 -translate-x-1/2 rounded-2xl bg-midnight p-2 text-ivory shadow-2xl on-dark">
+                  {item.children.map((c) => (
+                    <li>
+                      <a
+                        href={c.href}
+                        aria-current={isCurrent(c.href) ? 'page' : undefined}
+                        class="block rounded-xl px-4 py-3 font-display text-xl no-underline hover:bg-ivory/10"
+                      >{c.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ) : (
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+                class:list={[
+                  'py-2 no-underline underline-offset-[0.35em] decoration-1 hover:underline',
+                  isCurrent(item.href) && 'underline',
+                ]}
+              >{item.label}</a>
+            )}
           </li>
         ))}
       </ul>
@@ -61,9 +86,18 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
             <li>
               <a
                 href={item.href}
-                aria-current={isCurrent(item.href) ? 'page' : undefined}
+                aria-current={path === item.href ? 'page' : undefined}
                 class="block rounded-xl px-4 py-3 font-display text-2xl no-underline hover:bg-ivory/10"
               >{item.label}</a>
+              {item.children && (
+                <ul class="mb-2 ml-4 border-l border-gold/40 pl-2">
+                  {item.children.map((c) => (
+                    <li>
+                      <a href={c.href} aria-current={isCurrent(c.href) ? 'page' : undefined} class="block rounded-xl px-4 py-2 text-lg text-ivory/85 no-underline hover:bg-ivory/10">{c.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ul>
@@ -71,3 +105,16 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     </details>
   </div>
 </header>
+
+<script>
+  // Close the desktop dropdown when clicking elsewhere or pressing Escape.
+  const dropdowns = document.querySelectorAll<HTMLDetailsElement>('details[data-dropdown]');
+  document.addEventListener('click', (e) => {
+    dropdowns.forEach((d) => { if (!d.contains(e.target as Node)) d.open = false; });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') dropdowns.forEach((d) => {
+      if (d.open) { d.open = false; d.querySelector('summary')?.focus(); }
+    });
+  });
+</script>

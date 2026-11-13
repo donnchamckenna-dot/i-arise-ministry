@@ -15,9 +15,9 @@ const groups = [
 ] as const;
 ---
 <PageLayout
-  title="Books & Writings"
-  eyebrow="Stories, poems and reflections"
-  intro="Stories, poems and research by Iva."
+  title="My books"
+  eyebrow="Books"
+  intro="Links to my books: stories for children, poems and research."
 >
   {groups.map((g) => {
     const items = all.filter((b) => b.data.kind === g.kind);

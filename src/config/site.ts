@@ -7,7 +7,7 @@ export const site = {
   // TODO-CONTENT: replace with the real domain once it is connected.
   url: 'https://i-arise-ministry.example',
   description:
-    'A Catholic ministry of prayer, healing of memories and restoration, rooted in the contemplative tradition and the Christian heritage of Ireland.',
+    'I Arise Ministry with Dr Iva Beranek: spiritual direction, retreats, talks and courses. Underneath all pain, joy is hidden.',
   locale: 'en-IE',
   // Keep false until the site is approved for launch. When false, every page
   // carries a noindex tag and robots.txt asks search engines to stay away.
@@ -16,29 +16,44 @@ export const site = {
   showPlaceholders: true,
 } as const;
 
-export type NavItem = { label: string; href: string };
+/** Contact details shown at the bottom of every page. Leave a link empty to hide it. */
+export const contact = {
+  email: 'iarise.ministry@gmail.com',
+  instagram: '', // TODO-CONTENT: full Instagram profile URL
+  linkedin: '', // TODO-CONTENT: full LinkedIn profile URL
+};
+
+export type NavItem = { label: string; href: string; children?: NavItem[] };
+
+export const journeyNav: NavItem[] = [
+  { label: 'Spiritual Direction', href: '/journey/spiritual-direction/' },
+  { label: 'Retreats & Speaking', href: '/journey/retreats-speaking/' },
+  { label: 'Courses', href: '/journey/courses/' },
+];
 
 export const mainNav: NavItem[] = [
-  { label: 'Our Vision', href: '/vision/' },
-  { label: 'Retreats & Events', href: '/retreats/' },
-  { label: 'Healing & Spirituality', href: '/spirituality/' },
-  { label: 'Books & Writings', href: '/books/' },
-  { label: 'About Iva', href: '/about/' },
-  { label: 'Contact', href: '/contact/' },
+  { label: 'Home', href: '/' },
+  { label: 'Journey with me', href: '/journey/', children: journeyNav },
+  { label: 'Books', href: '/books/' },
+  { label: 'Treasures', href: '/treasures/' },
+  { label: 'About', href: '/about/' },
 ];
 
-export const footerNav: NavItem[] = [
-  ...mainNav,
-  { label: 'Privacy', href: '/privacy/' },
+/** The three ways to journey with Iva, used on Home and the Journey page. */
+export const journeyWays = [
+  {
+    title: 'Spiritual Direction',
+    href: '/journey/spiritual-direction/',
+    line: 'One to one, at your own pace, listening together for where God is at work in your life.',
+  },
+  {
+    title: 'Retreats & Speaking',
+    href: '/journey/retreats-speaking/',
+    line: 'Quiet days, retreats and talks for parishes, groups and conferences.',
+  },
+  {
+    title: 'Courses',
+    href: '/journey/courses/',
+    line: 'Deeper learning on prayer, healing and the spiritual life.',
+  },
 ];
-
-/** Themes for the Healing & Spirituality area. Order here = order on the site. */
-export const spiritualityThemes = [
-  { slug: 'healing-of-memories', title: 'Healing of Memories', line: 'Bringing old hurts to God.' },
-  { slug: 'st-john-of-the-cross', title: 'St John of the Cross', line: 'Finding God in the dark.' },
-  { slug: 'st-john-henry-newman', title: 'St John Henry Newman', line: 'Faith, conscience and the inner life.' },
-  { slug: 'carmelite-spirituality', title: 'Carmelite Spirituality', line: 'Prayer as friendship with God.' },
-  { slug: 'prayer-and-contemplation', title: 'Prayer and Contemplation', line: 'Learning to be still.' },
-  { slug: 'forgiveness-and-reconciliation', title: 'Forgiveness and Reconciliation', line: 'Making peace, slowly.' },
-  { slug: 'restoration-and-hope', title: 'Spiritual Restoration and Hope', line: 'What God starts, he finishes.' },
-] as const;

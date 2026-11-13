@@ -35,6 +35,7 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="en_IE" />
     <!-- TODO-CONTENT: add og:image once the logo and photography are supplied. -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body class="min-h-screen flex flex-col">
     <a
@@ -46,5 +47,16 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
       <slot />
     </main>
     <Footer />
+    <script>
+      const els = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
   </body>
 </html>
