@@ -6,6 +6,7 @@ import DoorCard from '../components/DoorCard.astro';
 import HeartKey from '../components/HeartKey.astro';
 import { journeyWays } from '../config/site';
 import shamrock from '../assets/brand/shamrock-badge.png';
+import doorLeaf from '../assets/story/door-leaf.png';
 import ivaPortrait from '../assets/people/iva-portrait.jpg';
 
 // Helper: a value that runs from 0 to 1 between two points of the chapter's progress.
@@ -44,18 +45,22 @@ const companions = [
           <span class="whitespace-nowrap">Underneath all pain,</span><br /><span class="italic">joy is hidden.</span>
         </h1>
       </div>
-      <!-- the door -->
-      <div class="relative mt-10 h-56 w-40 md:h-72 md:w-52" style={`transform: scale(calc(1 + ${seg(0.55, 1)} * ${seg(0.55, 1)} * 7)); transform-origin: 50% 55%`} aria-hidden="true">
-        <div class="absolute -inset-12 rounded-full bg-gold/30 blur-3xl anim-glow"></div>
+      <!-- the door: Iva's illustrated door, swinging open on its right-hand hinge as you scroll -->
+      <div class="relative mt-10 h-[17rem] w-[8.84rem] md:h-[20rem] md:w-[10.4rem]" style={`transform: scale(calc(1 + ${seg(0.55, 1)} * ${seg(0.55, 1)} * 7)); transform-origin: 50% 55%`} aria-hidden="true">
+        <div class="absolute -inset-14 rounded-full bg-gold/30 blur-3xl anim-glow"></div>
+        <!-- stone arch, as in the illustration -->
+        <div class="absolute -inset-x-[0.8rem] -top-[0.8rem] bottom-0 rounded-t-full border-2 border-[#9a5446]/70 bg-gradient-to-b from-[#fcefe2] via-[#f6dcc8] to-[#eebda8] shadow-2xl"></div>
+        <!-- light on the other side -->
         <div class="absolute inset-0 rounded-t-full bg-gradient-to-b from-[#fff3d6] via-[#f0c98a] to-[#e1806f]"></div>
         <Image src={shamrock} alt="" width={64} height={64} densities={[1, 2]} class="absolute left-1/2 top-[34%] h-14 w-14 -translate-x-1/2 rounded-full" loading="eager" />
         <div class="absolute inset-0 [perspective:900px]">
-          <div class="absolute inset-0 origin-left rounded-t-full border-2 border-gold/70 bg-gradient-to-b from-[#2b3656] to-[#1a2236] shadow-2xl" style={`transform: rotateY(calc(${seg(0.05, 0.5)} * -100deg))`}>
-            <span class="absolute right-4 top-1/2 h-3 w-3 rounded-full bg-gold"></span>
-            <span class="absolute inset-3 rounded-t-full border border-gold/30"></span>
+          <div class="absolute inset-0 origin-right [transform-style:preserve-3d]" style={`transform: rotateY(calc(${seg(0.05, 0.5)} * 100deg))`}>
+            <Image src={doorLeaf} alt="" widths={[300, 520]} sizes="(min-width: 768px) 10.4rem, 8.84rem" class="absolute inset-0 h-full w-full" loading="eager" />
+            <!-- the door's thickness, seen as it swings -->
+            <span class="absolute left-0 top-[26%] bottom-0 w-[0.55rem] origin-left bg-gradient-to-r from-[#f2cbbd] to-[#d99a88]" style="transform: rotateY(90deg)"></span>
           </div>
         </div>
-        <div class="absolute -inset-1 rounded-t-full border-[6px] border-[#3b2f2a]"></div>
+        <div class="pointer-events-none absolute inset-0 rounded-t-full border-2 border-[#7a3f33]/60"></div>
       </div>
       <div class="mt-10" style={`opacity:calc(1 - ${seg(0.05, 0.25)})`}>
         <p class="font-display text-xl italic text-ivory/80">Scroll to step through the door</p>
