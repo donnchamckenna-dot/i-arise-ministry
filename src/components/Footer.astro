@@ -3,7 +3,7 @@ import { site, mainNav, journeyNav, contact } from '../config/site';
 import KeyMotif from './KeyMotif.astro';
 import Placeholder from './Placeholder.astro';
 const year = new Date().getFullYear();
-const links = [...mainNav.filter((n) => !n.children), ...journeyNav, { label: 'Privacy', href: '/privacy/' }];
+const links = [...mainNav.filter((n) => !n.children), { label: 'Vision', href: '/vision/' }, ...journeyNav, { label: 'Privacy', href: '/privacy/' }];
 ---
 <footer id="contact" class="scroll-mt-4 bg-midnight text-ivory on-dark">
   <div class="container-page grid gap-14 py-16 md:grid-cols-[1.4fr_1fr] md:py-20">

@@ -11,6 +11,13 @@ import ivaPortrait from '../assets/people/iva-portrait.jpg';
 // Helper: a value that runs from 0 to 1 between two points of the chapter's progress.
 const seg = (a: number, b: number) => `clamp(0, calc((var(--p) - ${a}) / ${b - a}), 1)`;
 
+const explore = [
+  { title: 'Treasures', href: '/treasures/', line: 'The things I treasure, and the people who inspire my life and work.' },
+  { title: 'Books', href: '/books/', line: 'My books, and where to find them.' },
+  { title: 'About', href: '/about/', line: 'My story, and how I came to this work.' },
+  { title: 'The vision', href: '/vision/', line: 'The fuller story behind I Arise.' },
+];
+
 const companions = [
   { name: 'St Philip Neri', symbol: 'fire' },
   { name: 'St Thérèse of Lisieux', symbol: 'heart' },
@@ -50,7 +57,10 @@ const companions = [
         </div>
         <div class="absolute -inset-1 rounded-t-full border-[6px] border-[#3b2f2a]"></div>
       </div>
-      <p class="mt-10 font-display text-xl italic text-ivory/80" style={`opacity:calc(1 - ${seg(0.05, 0.25)})`}>Scroll to step through the door</p>
+      <div class="mt-10" style={`opacity:calc(1 - ${seg(0.05, 0.25)})`}>
+        <p class="font-display text-xl italic text-ivory/80">Scroll to step through the door</p>
+        <a href="#welcome" class="mt-3 inline-block text-sm text-ivory/65 underline-offset-4 hover:text-ivory hover:underline">or go straight to the welcome</a>
+      </div>
       <!-- light flooding in -->
       <div class="pointer-events-none absolute inset-0 bg-[#fdf6e7]" style={`opacity:${seg(0.78, 1)}`}></div>
     </div>
@@ -283,6 +293,27 @@ const companions = [
             <DoorCard href={w.href} title={w.title} tone={(['parchment', 'contemplative', 'sage'] as const)[i]}>
               <p>{w.line}</p>
             </DoorCard>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ EXPLORE ============ -->
+  <section class="pb-24 md:pb-32" aria-labelledby="explore-title">
+    <div class="container-page">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <h2 id="explore-title" class="font-display text-4xl italic text-restoration-deep md:text-5xl">Take your time</h2>
+        <p class="mt-6 text-lg text-ink-soft">There is more to discover here. Wander a little further, at your own pace.</p>
+      </div>
+      <ul class="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {explore.map((e) => (
+          <li data-reveal>
+            <a href={e.href} class="group flex h-full flex-col rounded-2xl border border-gold/40 bg-ivory px-6 py-7 no-underline transition-transform duration-300 hover:-translate-y-1">
+              <span class="block font-display text-2xl text-midnight">{e.title}</span>
+              <span class="mt-2 block text-ink-soft">{e.line}</span>
+              <span class="mt-auto block pt-4 font-medium text-restoration-deep underline-offset-4 group-hover:underline">Explore <span aria-hidden="true">→</span></span>
+            </a>
           </li>
         ))}
       </ul>

@@ -33,7 +33,6 @@ export const journeyNav: NavItem[] = [
 
 export const mainNav: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Vision', href: '/vision/' },
   { label: 'Journey with me', href: '/journey/', children: journeyNav },
   { label: 'Books', href: '/books/' },
   { label: 'Treasures', href: '/treasures/' },
