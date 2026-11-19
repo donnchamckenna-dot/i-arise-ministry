@@ -32,7 +32,7 @@ const treasures: Treasure[] = [
   <ul class="columns-1 gap-8 md:columns-2 lg:columns-3 [&>li]:mb-8 [&>li]:break-inside-avoid">
     {treasures.map((t, i) => (
       <li id={t.slug} class:list={['scroll-mt-8 rounded-2xl p-8 shadow-lg shadow-midnight/10', t.tone, i % 3 === 1 && 'md:rounded-t-[999px] md:pt-16']} data-reveal>
-        <KeyMotif class="opacity-70" size={56} />
+        <KeyMotif size={64} name={t.slug === 'golden-shamrock' || t.slug === 'st-patrick' ? 'shamrock' : 'key'} />
         <p class="eyebrow mt-4 opacity-80">{t.kind}</p>
         <h2 class="mt-1 text-4xl">{t.title}</h2>
         {t.dates && <p class="mt-1 text-sm opacity-75">{t.dates}</p>}

@@ -4,8 +4,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import StoryChapter from '../components/story/StoryChapter.astro';
 import DoorCard from '../components/DoorCard.astro';
 import HeartKey from '../components/HeartKey.astro';
+import Emblem3D from '../components/Emblem3D.astro';
 import { journeyWays } from '../config/site';
-import shamrock from '../assets/brand/shamrock-badge.png';
 import doorLeaf from '../assets/story/door-leaf.png';
 import ivaPortrait from '../assets/people/iva-portrait.jpg';
 
@@ -46,18 +46,18 @@ const companions = [
         </h1>
       </div>
       <!-- the door: Iva's illustrated door, swinging open on its right-hand hinge as you scroll -->
-      <div class="relative mt-10 h-[17rem] w-[8.84rem] md:h-[20rem] md:w-[10.4rem]" style={`transform: scale(calc(1 + ${seg(0.55, 1)} * ${seg(0.55, 1)} * 7)); transform-origin: 50% 55%`} aria-hidden="true">
+      <div class="relative mt-10 h-[17rem] w-[10.3rem] md:h-[20rem] md:w-[12.1rem]" style={`transform: scale(calc(1 + ${seg(0.55, 1)} * ${seg(0.55, 1)} * 7)); transform-origin: 50% 55%`} aria-hidden="true">
         <div class="absolute -inset-14 rounded-full bg-gold/30 blur-3xl anim-glow"></div>
         <!-- stone arch, as in the illustration -->
         <div class="absolute -inset-x-[0.8rem] -top-[0.8rem] bottom-0 rounded-t-full border-2 border-[#9a5446]/70 bg-gradient-to-b from-[#fcefe2] via-[#f6dcc8] to-[#eebda8] shadow-2xl"></div>
         <!-- light on the other side -->
         <div class="absolute inset-0 rounded-t-full bg-gradient-to-b from-[#fff3d6] via-[#f0c98a] to-[#e1806f]"></div>
-        <Image src={shamrock} alt="" width={64} height={64} densities={[1, 2]} class="absolute left-1/2 top-[34%] h-14 w-14 -translate-x-1/2 rounded-full" loading="eager" />
+        <Emblem3D name="shamrock" size="5.5rem" sparkles={false} shadow={false} class="absolute left-1/2 top-[22%] -translate-x-1/2" />
         <div class="absolute inset-0 [perspective:900px]">
           <div class="absolute inset-0 origin-right [transform-style:preserve-3d]" style={`transform: rotateY(calc(${seg(0.05, 0.5)} * 100deg))`}>
-            <Image src={doorLeaf} alt="" widths={[300, 520]} sizes="(min-width: 768px) 10.4rem, 8.84rem" class="absolute inset-0 h-full w-full" loading="eager" />
+            <Image src={doorLeaf} alt="" widths={[300, 600]} sizes="(min-width: 768px) 12.1rem, 10.3rem" class="absolute inset-0 h-full w-full" loading="eager" />
             <!-- the door's thickness, seen as it swings -->
-            <span class="absolute left-0 top-[26%] bottom-0 w-[0.55rem] origin-left bg-gradient-to-r from-[#f2cbbd] to-[#d99a88]" style="transform: rotateY(90deg)"></span>
+            <span class="absolute left-0 top-[25%] bottom-0 w-[0.55rem] origin-left bg-gradient-to-r from-[#f2cbbd] to-[#d99a88]" style="transform: rotateY(90deg)"></span>
           </div>
         </div>
         <div class="pointer-events-none absolute inset-0 rounded-t-full border-2 border-[#7a3f33]/60"></div>
@@ -104,24 +104,8 @@ const companions = [
 
     <!-- ============ 3. THE GOLDEN SHAMROCK ============ -->
     <StoryChapter id="gold" bg="#1b2440" tone="dark" side="right" number="II" eyebrow="The golden thread" title="Ireland is covered in gold">
-      <div slot="scene" class="h-full w-full">
-        <svg viewBox="0 0 400 400" class="h-full w-full">
-          <defs>
-            <radialGradient id="sh-glow"><stop offset="0" stop-color="#f3d79c" stop-opacity=".9" /><stop offset="1" stop-color="#d9ad65" stop-opacity="0" /></radialGradient>
-            <linearGradient id="sh-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6dfa6" /><stop offset=".5" stop-color="#d9ad65" /><stop offset="1" stop-color="#a87a2c" /></linearGradient>
-            <path id="leaf" d="M0 0 C-30 -18 -46 -58 -24 -78 C-10 -90 0 -80 0 -66 C0 -80 10 -90 24 -78 C46 -58 30 -18 0 0Z" />
-          </defs>
-          <circle cx="200" cy="180" r="160" fill="url(#sh-glow)" class="anim-glow" style={`opacity:${seg(0, 0.4)}`} />
-          <g transform="translate(200 185)" style={`transform: translate(200px,185px) scale(calc(.6 + ${seg(0, 0.45)} * .4)); opacity:${seg(0, 0.3)}`}>
-            <use href="#leaf" fill="url(#sh-gold)" />
-            <use href="#leaf" fill="url(#sh-gold)" transform="rotate(118)" />
-            <use href="#leaf" fill="url(#sh-gold)" transform="rotate(-118)" />
-            <path d="M0 0 C6 40 4 80 -6 120" stroke="url(#sh-gold)" stroke-width="7" fill="none" stroke-linecap="round" />
-          </g>
-          {[[90, 80], [320, 110], [110, 300], [300, 290], [200, 40]].map(([x, y], i) => (
-            <path d={`M${x} ${y - 8}V${y + 8}M${x - 8} ${y}H${x + 8}`} stroke="#f3d79c" stroke-width="2" class="anim-twinkle" style={`animation-delay:${i * 0.5}s`} />
-          ))}
-        </svg>
+      <div slot="scene" class="flex h-full w-full items-center justify-center" style={`opacity:${seg(0, 0.35)}; transform: scale(calc(.8 + ${seg(0, 0.45)} * .2))`}>
+        <Emblem3D name="shamrock" size="auto" style="height:100%;max-width:100%" />
       </div>
       <p>Gold is His presence, and so few of us notice it. The shamrock speaks of the Trinity, and with it St Patrick brought baptism to a nation.</p>
       <p>There is a golden thread running through your life. Pull on it, and follow where it leads.</p>
@@ -205,19 +189,8 @@ const companions = [
 
     <!-- ============ 8. THE KEY ============ -->
     <StoryChapter id="key" bg="#2c4681" tone="dark" side="left" number="VII" eyebrow="The key" title="The key of forgotten dreams">
-      <div slot="scene" class="h-full w-full">
-        <svg viewBox="0 0 400 400" class="h-full w-full">
-          <defs><linearGradient id="kg" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="400" y2="0"><stop offset="0" stop-color="#f6dfa6" /><stop offset="1" stop-color="#b8873a" /></linearGradient></defs>
-          <circle cx="140" cy="200" r="110" fill="#f3d79c" style={`opacity:calc(${seg(0.7, 1)} * .5); filter: blur(30px)`} />
-          <rect x="80" y="110" width="120" height="180" rx="20" fill="#202b44" stroke="#d9ad65" stroke-width="3" />
-          <circle cx="140" cy="185" r="16" fill="#0d1222" /><path d="M132 195 L148 195 L144 235 L136 235Z" fill="#0d1222" />
-          <g style={`transform: translateX(calc((1 - ${seg(0.1, 0.6)}) * 150px)) rotate(calc(${seg(0.65, 0.9)} * 90deg)); transform-origin: 140px 205px`}>
-            <path d="M140 205 H330" stroke="url(#kg)" stroke-width="9" stroke-linecap="round" />
-            <path d="M330 205 m-28 0 a28 28 0 1 0 56 0 a28 28 0 1 0 -56 0" fill="none" stroke="url(#kg)" stroke-width="9" />
-            <path d="M330 222 C318 205 318 196 330 192 C342 196 342 205 330 222Z" fill="#cb5b59" />
-            <path d="M160 205 v18 h10 v-10 h10 v14" fill="none" stroke="url(#kg)" stroke-width="8" stroke-linejoin="round" />
-          </g>
-        </svg>
+      <div slot="scene" class="flex h-full w-full items-center justify-center" style={`opacity:${seg(0, 0.35)}; transform: translateX(calc((1 - ${seg(0, 0.5)}) * 60px)) scale(calc(.8 + ${seg(0, 0.45)} * .2))`}>
+        <Emblem3D name="key" size="auto" style="height:100%;max-width:100%" />
       </div>
       <p>Life can bring so many disappointments. Keep hope. Uncovering the deep things can be painful, but it is worth it.</p>
       <p>Perhaps there is a dream you were too afraid to pursue, or a new calling waiting to be found.</p>
@@ -228,19 +201,19 @@ const companions = [
       <div slot="scene" class="grid h-full w-full grid-cols-2 place-items-center gap-4">
         {companions.map((c, i) => (
           <div class="flex flex-col items-center gap-2 text-center" style={`opacity:${seg(0.05 + i * 0.12, 0.25 + i * 0.12)}; transform: translateY(calc((1 - ${seg(0.05 + i * 0.12, 0.25 + i * 0.12)}) * 20px))`}>
-            <div class="grid h-20 w-20 place-items-center rounded-full bg-midnight shadow-xl md:h-28 md:w-28">
-              <svg viewBox="0 0 60 60" class="h-11 w-11 md:h-14 md:w-14">
-                {c.symbol === 'fire' && <path class="anim-flicker" d="M30 54 C16 54 12 42 16 33 C19 27 24 25 23 16 C30 20 34 26 33 33 C36 30 37 26 36 22 C44 29 46 37 44 43 C42 50 37 54 30 54Z" fill="#e1806f" />}
-                {c.symbol === 'heart' && <path class="anim-beat" d="M30 50 C18 42 10 34 12 25 C14 17 24 15 30 23 C36 15 46 17 48 25 C50 34 42 42 30 50Z" fill="#cb5b59" />}
-                {c.symbol === 'cross' && <path d="M27 8 H33 V22 H46 V28 H33 V54 H27 V28 H14 V22 H27Z" fill="#d9ad65" />}
-                {c.symbol === 'shamrock' && (
-                  <g fill="#d9ad65" transform="translate(30 30)">
-                    {[0, 120, 240].map((r) => <path transform={`rotate(${r}) translate(0 -2)`} d="M0 0 C-9 -5 -14 -17 -7 -23 C-3 -26 0 -24 0 -20 C0 -24 3 -26 7 -23 C14 -17 9 -5 0 0Z" />)}
-                    <path d="M0 0 C2 10 1 18 -3 24" stroke="#d9ad65" stroke-width="3" fill="none" />
-                  </g>
-                )}
-              </svg>
-            </div>
+            {c.symbol === 'shamrock' ? (
+              <div class="grid h-20 w-20 place-items-center rounded-full bg-midnight shadow-xl md:h-28 md:w-28">
+                <Emblem3D name="shamrock" size="100%" sparkles={false} shadow={false} />
+              </div>
+            ) : (
+              <div class="grid h-20 w-20 place-items-center rounded-full bg-midnight shadow-xl md:h-28 md:w-28">
+                <svg viewBox="0 0 60 60" class="h-11 w-11 md:h-14 md:w-14">
+                  {c.symbol === 'fire' && <path class="anim-flicker" d="M30 54 C16 54 12 42 16 33 C19 27 24 25 23 16 C30 20 34 26 33 33 C36 30 37 26 36 22 C44 29 46 37 44 43 C42 50 37 54 30 54Z" fill="#e1806f" />}
+                  {c.symbol === 'heart' && <path class="anim-beat" d="M30 50 C18 42 10 34 12 25 C14 17 24 15 30 23 C36 15 46 17 48 25 C50 34 42 42 30 50Z" fill="#cb5b59" />}
+                  {c.symbol === 'cross' && <path d="M27 8 H33 V22 H46 V28 H33 V54 H27 V28 H14 V22 H27Z" fill="#d9ad65" />}
+                </svg>
+              </div>
+            )}
             <span class="font-display text-base leading-tight text-midnight md:text-lg">{c.name}</span>
           </div>
         ))}
