@@ -1,0 +1,37 @@
+---
+/**
+ * Gently drifting snow and/or rose petals, drawn in CSS. Decorative.
+ * Positions are fixed numbers (not random) so the page renders the same every time.
+ * With reduced motion they stay still.
+ */
+interface Props { mode: 'snow' | 'petals' | 'both'; count?: number; }
+const { mode, count = 26 } = Astro.props;
+const items = Array.from({ length: count }, (_, i) => {
+  const left = (i * 37 + 11) % 100;
+  const delay = -((i * 1.7) % 14);
+  const dur = 11 + ((i * 5) % 9);
+  const size = 4 + ((i * 7) % 7);
+  const sway = 18 + ((i * 13) % 40);
+  const kind = mode === 'both' ? (left < 50 ? 'snow' : 'petal') : mode === 'snow' ? 'snow' : 'petal';
+  return { left, delay, dur, size, sway, kind };
+});
+---
+<div class="drift pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+  {items.map((d) => (
+    <span class:list={['drift-item', d.kind]} style={`left:${d.left}%;--s:${d.size}px;--sway:${d.sway}px;animation-duration:${d.dur}s;animation-delay:${d.delay}s`}></span>
+  ))}
+</div>
+<style>
+  .drift-item { position: absolute; top: -5%; width: var(--s); height: var(--s); animation: fall linear infinite; }
+  .drift-item.snow { border-radius: 50%; background: rgb(255 255 255 / .85); box-shadow: 0 0 6px rgb(255 255 255 / .6); }
+  .drift-item.petal { width: calc(var(--s) * 1.6); border-radius: 80% 0 80% 0; background: linear-gradient(135deg, #e99a9a, #c9545b); opacity: .8; }
+  @keyframes fall {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(var(--sway), 55vh) rotate(160deg); }
+    100% { transform: translate(0, 110vh) rotate(320deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .drift-item { animation: none; top: auto; }
+    .drift-item:nth-child(3n) { top: 20%; } .drift-item:nth-child(3n+1) { top: 55%; } .drift-item:nth-child(3n+2) { top: 80%; }
+  }
+</style>

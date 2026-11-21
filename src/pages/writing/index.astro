@@ -1,0 +1,36 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Flourish from '../../components/writing/Flourish.astro';
+import Drift from '../../components/writing/Drift.astro';
+import { articles } from '../../data/articles';
+---
+<PageLayout
+  title="Writing"
+  eyebrow="Articles and reflections"
+  intro="A few pieces I have written about the friends who walk with me on the way: C. S. Lewis, Jane Austen, and the places where their stories meet mine."
+>
+  <ul class="grid gap-8 lg:grid-cols-3">
+    {articles.map((a) => (
+      <li>
+        <a href={`/writing/${a.slug}/`} class:list={['card group relative flex h-full flex-col overflow-hidden rounded-t-[999px] rounded-b-[2rem] px-8 pb-9 pt-24 no-underline shadow-xl shadow-midnight/10 transition-transform duration-300 hover:-translate-y-1.5', `card-${a.theme}`]}>
+          <Drift mode={a.theme === 'narnia' ? 'snow' : a.theme === 'austen' ? 'petals' : 'both'} count={12} />
+          <span class="relative eyebrow opacity-80">{a.kicker}</span>
+          <span class="relative mt-2 block font-display text-3xl leading-tight md:text-4xl">{a.title}</span>
+          {a.subtitle && <span class="relative mt-1 block font-display text-lg italic opacity-85">{a.subtitle}</span>}
+          <Flourish center={a.theme === 'narnia' ? 'snow' : a.theme === 'austen' ? 'rose' : 'both'} class="relative my-5 scale-75" tone="card-ink" />
+          <span class="relative flex-1 opacity-90">{a.teaser}</span>
+          <span class="relative mt-6 font-medium underline-offset-4 group-hover:underline">Read the article <span aria-hidden="true">→</span></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p class="mx-auto mt-16 max-w-xl text-center font-display text-2xl italic text-midnight">I also give reflections on RTÉ Radio 1.</p>
+</PageLayout>
+<style>
+  .card-narnia { background: radial-gradient(ellipse at 50% 110%, #4a6795, #22345c 50%, #121a30); color: #f8f1e8; }
+  .card-austen { background: radial-gradient(ellipse at 50% 20%, #fbf1e6, #f0d3c7 60%, #e3b7aa); color: #4a1f2a; }
+  .card-friendship { background: linear-gradient(115deg, #18243f, #2f4774 40%, #b98a86 65%, #f3dcd0); color: #f8f1e8; }
+  .card :global(.card-ink) { color: #e9c785; }
+  .card-narnia :global(.text-contemplative), .card-friendship :global(.text-contemplative) { color: #f8f1e8; }
+  .card-austen :global(.card-ink) { color: #a8403f; }
+</style>

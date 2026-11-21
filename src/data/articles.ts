@@ -1,0 +1,123 @@
+/**
+ * Iva's published articles, in her own words.
+ * Paragraph strings may contain <em>, <sup> and <a>. Types:
+ *   p: paragraph · quote: block quotation · break: ornamental pause
+ */
+export type Block =
+  | { p: string }
+  | { quote: string[]; by?: string }
+  | { break: true };
+
+export type Article = {
+  slug: string;
+  theme: 'narnia' | 'austen' | 'friendship';
+  title: string;
+  subtitle?: string;
+  kicker: string;
+  teaser: string;
+  published: string;
+  blocks: Block[];
+  notes?: string[];
+  notesTitle?: string;
+};
+
+export const articles: Article[] = [
+  {
+    slug: 'my-literary-friendship',
+    theme: 'friendship',
+    kicker: 'An essay',
+    title: 'My literary friendship',
+    subtitle: 'with Jane Austen and C. S. Lewis',
+    teaser: 'Some friendships grow over time; others begin with a chance encounter. On befriending two authors long after they have gone, and the pilgrimages that followed.',
+    published: 'First published in Issue 4, Autumn 2025, of the Carmelite magazine (carmelite.uk.net), marking 250 years since Jane Austen’s birth.',
+    blocks: [
+      { p: 'Some friendships grow over time, like a flower that we water and nurture through a variety of seasons. Other friendships develop much quicker, and yet it was a chance encounter that led us into an alley where we met this new accidental friend. Here, I am not talking about real-time friends, those we meet in person. There is another kind of friendship that I have come to value – literary friendship, especially as I found it in C. S. Lewis and Jane Austen. Literary friendships are usually considered between characters in books, but as you will see, I am going to use the term in a different context.' },
+      { p: 'A unique friendship can be formed with our favourite authors even after they’ve passed away. These friendships are of a different quality than when we befriend saints in Heaven, but there are commonalities. My own such friendship is with C. S. Lewis. I can’t recall if it was <em>The Chronicles of Narnia</em> or <em>Surprised by Joy</em> that began our acquaintance, but it led me to research his life while studying for my MA in 2007. That same year, I first visited Oxford. I saw the Eagle and Child pub where his literary group, the Inklings, used to meet, and it was easy to imagine him there. I also visited his grave at Holy Trinity Church in Headington, near The Kilns, where he lived for much of his life. Ever since that first visit, I’ve felt a special atmosphere in Oxford – a remnant of the story of Jack, as his friends called him, that still lingers in the city.' },
+      { break: true },
+      { p: 'My admiration for Jane Austen began with films, not books. I have a cherished photo of myself at 18 in a dress that makes me resemble Elizabeth Bennet, a dress I still own. However, my true friendship with her is very recent, kindled unexpectedly less than two years ago. While in London for a talk, I took a friend’s advice and walked through Richmond Park. That Sunday morning walk was pivotal. The landscape reminded me of a scene from the film adaptation of <em>Sense and Sensibility</em>. With dew still glistening on the grass, my long-held dream to walk across an English field was fulfilled.' },
+      { p: 'That moment ignited a deep curiosity. When I returned home, I began my “season of Jane Austen.” On a friend’s recommendation, I started with <em>Pride and Prejudice</em> and proceeded to read all of her novels, some twice. This new passion motivated my travels, leading me to visit places where she lived and to pay homage at her grave in Winchester Cathedral. My research into her life deepened my reflections and inspired my own work. Her influence has now found its way into my children’s books, joining the inspiration I already drew from C. S. Lewis. This journey, sparked by a simple walk, has blossomed into an ever-growing friendship with one of literature’s greatest novelists.' },
+      { p: 'Friendship with a saint is usually deepened by making a pilgrimage to places where they spent time on earth, by reading about their life, and by praying to them. While I do not pray to my literary friends, I have made several literary pilgrimages to places associated with them.' },
+      { p: 'Traditionally, pilgrimage is regarded as a religious practice. The Oxford English Dictionary states that pilgrimage is “a journey made to some sacred place, as an act of religious devotion”. And yet, any time I visit houses where C. S. Lewis or Jane Austen lived and wrote, or places they were impacted by, I am enriched by values that direct my earthly pilgrimage Heavenward. It could be because both were Christian.' },
+      { break: true },
+      { p: 'Jane Austen was the daughter of a Church of England rector, and her religious background is implicit in her writing. Austen had an astute perception of character. The characters in her novels vary in their range of virtue and emotional maturity. Some are examples of what not to imitate, whereas others are worthy to follow if one wishes to grow in virtue. If I manage to learn a lesson that Jane Austen’s novels have been teaching me, I will become much holier than I am now. A contemplative outlook is a quality of living where we stop striving, and our dignity gets a chance to shine without us having to prove anything. Some of the main characters in Austen’s novels certainly seem to have grown in their understanding of their dignity, which is reflected in how they treated others. Creatively, Austen shows us what St Teresa of Avila taught, that truly “patience obtains all things”.' },
+      { p: 'C. S. Lewis, on the other hand, initially deserted the Christian faith of his childhood and returned to it as a young adult after two profound conversions. His work is permeated with Christian themes. <em>The Chronicles of Narnia</em> demonstrate that he possessed a consecrated imagination – an imagination that revealed profound truths about life and God. One time, I found a beautiful prayer in the Holy Trinity, Headington, next to C. S. Lewis’s window. It went like this:' },
+      { quote: [
+        'O God of searing truth and surpassing beauty, we give you thanks for C. S. Lewis, whose sanctified imagination lights fires of faith in young and old alike.',
+        'Surprise us also with your joy and draw us into that new and abundant life which is ours in Christ Jesus, who lives and reigns with you and the Holy Spirit, one God, now and forever. Amen.',
+      ], by: 'A prayer at Holy Trinity, Headington' },
+      { p: 'Close friends wish the best for us. Similarly, C. S. Lewis and Jane Austen inspire me to grow as a writer and as a person. When Jane Austen was dying prematurely at the age of 41, after being in Winchester for health reasons for less than two months, she uttered these words, “God grant me patience, Pray for me, Oh pray for me”. I honoured her wish; I have prayed for her. Somehow, I think she knows it. As for C. S. Lewis, he honoured my wish. I had an unusual desire to talk to him about what was burdening me in life. One time at his grave, interiorly in the silence of my heart, I said what I would have said if I could have spoken to him. I was saying it to him and to God. What then happened within me, also in the silence of my heart, blessed me enormously.' },
+      { p: 'One might say that my literary friendships with Jane Austen and C. S. Lewis are one-sided, though I don’t think they are. However, I will never know for sure until I join them on the other side of eternity, where the hills are always green, and where we will be surprised by joy for the rest of our lives.' },
+    ],
+    notesTitle: 'References',
+    notes: [
+      '“Pilgrimage.” In <em>The Oxford Dictionary of Phrase and Fable</em>. Oxford: Oxford University Press, 2025. Accessed on 10 September 2025.',
+      'Worsley, L., <em>Jane Austen at Home</em>, London: Hodder &amp; Stoughton Ltd, 2017.',
+    ],
+  },
+  {
+    slug: 'when-oxford-turns-into-narnia',
+    theme: 'narnia',
+    kicker: 'A reflection',
+    title: 'When Oxford turns into Narnia',
+    teaser: 'Walking in the footsteps of C. S. Lewis: Magdalen at Evensong, the reluctant convert, a quiet grave in Headington, and a young stag in the churchyard.',
+    published: 'Written for the Messenger.',
+    blocks: [
+      { p: 'There are a few cities that have attracted me with their stories, because something in their story wants to illuminate mine. In recent times Oxford has been alluring me like a stranger that wishes to become an old friend. The fact that one of my favourite writers lived there, and that on every corner you find beauty and history adds to its appeal.' },
+      { p: 'C. S. Lewis, a native of Belfast, spent more than 30 years of his life living in Oxford.' },
+      { p: 'I have visited Oxford a number of times in the last few years and every time I trace some of C. S. Lewis’ footsteps. Each of those times it is as if a wardrobe door opens and I end up in Narnia.' },
+      { p: 'I am writing this from Oxford, where I came for a short sabbatical to rest and write after a few busy years. Seventeen years ago when I first set my feet on these old stony streets, the Eagle and Child was still an active pub, its walls proudly showing photos of C. S. Lewis, Tolkien and other Inklings who used to meet there. Now after the pandemic, the pub has been closed with spiderwebs showing the passage of time. And yet, regularly you see people peek through its window hoping they might see some of its history lurking around.' },
+      { break: true },
+      { p: 'In May 2024 I met an Irish man who moved to Oxford in the early 1960s. I exclaimed, “Wow! You were here while C. S. Lewis was still alive”. Had my time on earth somehow overlapped with C. S. Lewis, I wish that by some great providence I could have met him for a stroll around Magdalen College meadows, where he was a Fellow while teaching in Oxford. I imagine a long conversation about life, his and mine; about suffering, about God, and about Ireland. I am sure we would have spoken about Ireland. He never forgot his Irish roots. While this is a mere fantasy, something of God’s grace lingers when you enter Magdalen College grounds.' },
+      { p: 'In the College chapel you can see a plaque where C. S. Lewis used to sit during worship. More importantly, if you come in the evening to listen to the sung Evensong, Heaven will open up its blessings for you. This time of prayer truly is like being brought into God’s presence by listening to the angels sing. And you might get a taste of what C. S. Lewis experienced while living here. Namely, from an atheist he became one of the most famous Christian apologists.' },
+      { p: 'On the other side of the College stands a building that housed C. S. Lewis. You can see the windows of the rooms he used as his study. He would often have long intellectual conversations with his friends, late at night. In one of those conversations J. R. R. Tolkien, a devout Catholic, challenged him to rethink his view of Jesus and Christianity. Tolkien’s influence was instrumental for C. S. Lewis to accept that Christ is who He says He is. C. S. Lewis’ conversion, however, was gradual and he did not approach it with utmost enthusiasm, but reluctantly. He first became a theist, before becoming a Christian. In <em>Surprised by Joy</em> he tells us,' },
+      { quote: ['You must picture me alone in that room in Magdalen, night after night, feeling, whenever my mind lifted even for a second from my work, the steady unrelenting approach of Him whom I so earnestly desired not to meet. That which I greatly feared had at last come upon me. In Trinity Term of 1929 I gave in and admitted that God was God, and knelt and prayed: perhaps that night, the most dejected and reluctant convert in all of England.'], by: 'C. S. Lewis, Surprised by Joy' },
+      { p: 'How often we, too, are led reluctantly into the beauty and adventure of life. There is something really moving in the life story of C. S. Lewis, especially as his relationship with Joy Davidman unfolds. She would later become his wife. They say that the longest journey we make is from our intellect into our heart. C. S. Lewis braved that journey, albeit also reluctantly. His story shows me that life does not have to be perfectly lived in order to be beautiful, and in order to glorify God.' },
+      { break: true },
+      { p: 'On one of the Oxford hills is the Holy Trinity Church in Headington, a ten-minute walk from C. S. Lewis’ house. When you enter this quaint building you can find a pew where C. S. Lewis sat and prayed for over 30 years. Outside the church is his grave, unassuming and simple. Last time I was there I felt moved with admiration and gratitude at this man whose books have coloured my world and whose story is an inspiration. As I turned around to leave, I saw a young stag running out of the churchyard. A glimpse of Narnia, of beauty that comes when we notice everyday gifts that come from God.' },
+    ],
+  },
+  {
+    slug: 'jane-austen-250-years',
+    theme: 'austen',
+    kicker: 'Meeting place',
+    title: 'Jane Austen',
+    subtitle: '250 years since the birth of the literary giant',
+    teaser: 'From a wintry rectory in Steventon to her humble writing desk at Chawton and her grave in Winchester Cathedral: a flower that blossomed out of snow-covered earth.',
+    published: 'First published in Conversations magazine, 2025.',
+    blocks: [
+      { p: 'It was 16 December 1775, a wintry cold day in the small village of Steventon, Hampshire, in rural England. In the rectory of Steventon, a girl was born that evening, the second youngest child of Revd George Austen and his wife Cassandra, <em>née</em> Leigh. Among the eight children there were only two girls, Cassandra and Jane, who would become the closest friends for the rest of Jane’s life. No one could have anticipated the path Jane would take, nor that from this little girl something mighty would come, delivered by an unusual means for a woman of that time – a pen.' },
+      { p: 'The year 2025 marked 250 years since that wintry December when Jane Austen was born. She reminds me of a flower that blossomed out of snow-covered earth, in conditions that weren’t perfect. The struggles she went through, financial and otherwise, shaped her character and her literary brilliance. She did not have an easy life, and yet a life of ease never would have created the magnanimous person that she was.' },
+      { p: 'Her father studied at St John’s College in Oxford, where he was ordained in 1755. Two of her brothers, James and Henry, also studied there. Their house in Steventon had a substantial library, and Jane was mostly educated at home. Her favourite brother was Henry, who would later become her literary agent and help her get published.' },
+      { p: 'As a teenager I was fascinated by the film adaptations of her books, but only in recent years was my admiration pointed in the right direction, towards Jane as the author and the person of impact. It was unusual for a woman of her time to invest energy into talents not directly linked with domestic duties. She would have been expected to marry, not out of love or suitability but to secure her future; marriage would provide a home and financial security. However, circumstances of her life collided in such a way that she never married.' },
+      { break: true },
+      { p: 'When she was 21, she met Thomas Langlois Lefroy, a lawyer from Limerick who was studying in London. He came for a brief holiday to Hampshire and stayed with his uncle and aunt, Mr and Madam Lefroy in Ashe Rectory, very near Steventon. Jane and Tom met and danced over a couple of weeks, but nothing came out of their supposed romance. Jane revealed in her letter to Cassandra, ‘I rather expect to receive an offer from my friend in the course of the evening’.<sup>1</sup> And yet, she didn’t receive a proposal. Tom had to go back to London to study. He was expected to return to Ireland to look after his ten siblings and get married to someone with more financial security. Lucy Worsley in her book <em>Jane Austen at Home</em> concludes that Tom was ‘a rather dull law student who made a prudent marriage under family pressure’,<sup>2</sup> and who was not much in favour of ‘earthly affections’.<sup>3</sup> Jane might have dodged a bullet, but the experience added to her wisdom about love and human character. Tom outlived Jane by 50 years. He lived through the Great Irish Famine, where he was oppressive towards the poor and acted against Catholic emancipation.<sup>4</sup> I am glad Jane was spared being acquainted with his cruelty. Private letters suggest he had remembered Jane ‘as the object of his youthful admiration’<sup>5</sup> and mentioned her before he died. She had made an impression.' },
+      { p: 'During her life Jane had to move several times. After her father retired, her time in her childhood home came to an end because the family had to move from Steventon rectory. They found a home in Bath in 1801. This also meant leaving behind a much beloved library. I visited the Jane Austen Centre in Bath which gives visitors a taste of life during the Regency period. One can try writing with ink, as Jane would have done. Writing was a messy business at the time! Bath inspired <em>Persuasion</em> and <em>Northanger Abbey</em>, both published posthumously, and yet her first impression of Bath was ‘all vapour, shadow, smoke, and confusion’.<sup>6</sup> Bath provided material for her books, but she didn’t write much while living there. This was a time of personal hardship. Somewhere around this time Jane met a young gentleman whose name is unknown, but he is considered to have been a clergyman. They met in Sidmouth, Devon, where Jane went for a seaside holiday. We know he was ‘handsome, intelligent and possessed of unusual charm’,<sup>7</sup> but before the expected engagement to Jane could be formalised, he died unexpectedly. More than a year later she briefly got engaged to a family friend, while she and Cassandra were visiting their brother James, who was then the rector of Steventon. But she broke off the engagement the day after.<sup>8</sup> The fact Jane remained single doesn’t mean she didn’t desire marriage. Life doesn’t always turn out the way we envisage it. However, nothing is wasted in an author’s life experience.' },
+      { p: 'Jane understood love to a degree that many still don’t, as we can read in her books. Remaining single due to circumstances rather than as a personal choice, brings challenges that are not solely financial. But perhaps it also brings advantages. As a woman who has felt a call to write and whose longing for marriage hasn’t yet borne any lasting fruit, I find the story of her life profoundly edifying. The hardship in her life tilled the soil that helped her grow in wisdom.' },
+      { p: 'In 1805 when Jane was 29, she lost her beloved father, Revd George Austen, who died suddenly. In a letter to her brother Frank she said, ‘we have lost an excellent Father’.<sup>9</sup> She was closer to her father than to her mother. He had encouraged her to write and wanted her to get published. From then on Jane’s brothers would support her, Cassandra and their mother. After Bath, they lived in Southampton from 1806 for three years. Her nephew later wrote that in both of those places ‘she was only a sojourner in a strange land’ until she found ‘a real home among her own people’ in Chawton.<sup>10</sup>' },
+      { break: true },
+      { p: 'She was back in her native Hampshire and lived in Chawton Cottage from July 1809. The cottage belonged to her brother Henry, whose larger estate was only a ten-minute walk away. Chawton lies in the countryside, and Jane loved long walks in nature. She would have made the journey to Chawton House often, even though her brother stayed there only occasionally. The estate, surrounded by beautiful gardens, invites one to imagine Jane walking through the orchard or pausing to delight in the roses in bloom as she pondered the intricate characters of Elizabeth Bennet, Anne Elliot, or Emma. When I visited, it was the gardens that impressed me most. I could imagine Elizabeth arriving at Pemberley and being equally awed by its surroundings.' },
+      { p: 'It was in Chawton that Jane rewrote and completed her novels, and it was from here that she was first published. When you visit the Chawton Cottage – the smaller house where she lived, now known as Jane Austen House – you can see her writing desk. This small, round, dark-wood desk first held some of the greatest novels of all time. And yet it appears remarkably humble.' },
+      { p: '<em>Pride and Prejudice</em> was published on 28 January 1813, making it Jane Austen’s second published book. <em>Sense and Sensibility</em> was her first. Her brother Henry, acting as her literary agent, secured the publication with Thomas Egerton, publisher of military books. As a self-published author myself, I am intrigued that <em>Sense and Sensibility</em> was published on commission – a practice that today would be considered a form of self-publishing.' },
+      { p: 'Among her novels, <em>Pride and Prejudice</em> and <em>Mansfield Park</em> are my personal favourites. Even 213 years on, the appeal of <em>Pride and Prejudice</em> lingers like a fine old wine that gets better with time. I once spoke with someone who had read <em>Emma</em> as a child and associated Austen’s work solely with romance. However, ‘her works have a solid moral and spiritual foundation that make them as much about vice and virtue, character and conscience as about marriage and manners’.<sup>11</sup>' },
+      { p: 'Jane Austen lived her life with integrity, and she instilled the same in most of her heroines. In my own reading of Jane Austen’s works three female characters stood out in their growth in emotional strength, maturity, prudence and self-possession. Anne Elliot, Elizabeth Bennet, and Fanny Price exhibit growth and self-possession to a degree that would make them stand out if witnessed in real life. One word that I associate with them is ‘dignity’. Jane Austen helped them grow in understanding of their own dignity, and I find myself doing the same by reading her work. I am convinced she couldn’t have written about virtue, female dignity and growth in self-possession had she not experienced some of it herself.' },
+      { break: true },
+      { p: 'When she was 41, Jane Austen became seriously unwell with an illness that would, sadly, prove to be fatal. On 24 May 1817 she moved to neighbouring Winchester, where medical care was better. Her sister Cassandra accompanied her, and the two lodged at 8 College Street. This house is now known as her final home, for less than two months after moving there, on 18 July 1817, Jane Austen died in the arms of her sister and best friend.' },
+      { p: 'I have been to Winchester several times, most recently to mark the 250th anniversary of Jane Austen’s birth. During a commemorative service in Winchester Cathedral, where she is buried, I gave thanks for her impact on my life. The area around her grave feels like a true pilgrimage site. I found myself kneeling before the grave, placing my hand on the cold stone and saying a silent prayer. We often associate St Thérèse with the gift of roses, but I once received a rose from Jane Austen when I visited her grave – one precious memory in my ever-deepening friendship with her. In this majestic cathedral, the footsteps of a giant can be heard when you listen with your heart. Jane Austen is a gem in the literary world. As Chesterton wrote, she ‘was not inflamed or inspired to be a genius; she simply was a genius’.<sup>12</sup>' },
+    ],
+    notesTitle: 'Notes',
+    notes: [
+      'Worsley, L., <em>Jane Austen at Home, A Biography</em> (London: Hodder &amp; Stoughton Ltd, 2018) 145.',
+      'Ibid., 151.',
+      'Ibid., 150.',
+      'See <a href="https://limerickslife.com/jane-austen/">limerickslife.com/jane-austen</a>, accessed on 29 October 2025.',
+      'Worsley, L., <em>Jane Austen at Home</em>, 151.',
+      'Cecil, Lord D., <em>A Portrait of Jane Austen</em> (New York: Penguin Books Ltd, 1983) 91.',
+      'Ibid., 97.',
+      'See l.c.',
+      'Ibid., 108.',
+      'Worsley, L., <em>Jane Austen at Home</em>, 291.',
+      'Rattey, J., ‘The spiritual side of Jane Austen’s novels’ in <em>America</em> (New York, Vol. 209, Iss. 7, Sep 23, 2013) 29–30.',
+      'Chesterton, G. K., Preface to Austen, J., <em>Love and Friendship</em> (London: Renard Press, 1922, 2023) 14.',
+    ],
+  },
+];

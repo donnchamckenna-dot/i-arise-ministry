@@ -1,0 +1,12 @@
+---
+/** A Regency-style ink flourish with a motif at its heart. Decorative. */
+import Motif from './Motif.astro';
+interface Props { center?: 'snow' | 'rose' | 'both'; class?: string; tone?: string; }
+const { center = 'rose', class: cls = '', tone = 'text-gold-deep' } = Astro.props;
+const swirl = 'M4 22 C 30 22, 38 6, 58 10 C 74 13, 70 30, 56 28 C 46 26, 50 16, 60 18 M58 10 C 78 6, 96 20, 118 20';
+---
+<div class:list={['flex items-center justify-center gap-2', tone, cls]} aria-hidden="true">
+  <svg width="124" height="36" viewBox="0 0 124 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d={swirl} /><circle cx="4" cy="22" r="1.8" fill="currentColor" /></svg>
+  {center === 'both' ? (<><Motif kind="snow" size={22} class="text-contemplative" /><Motif kind="rose" size={26} /></>) : <Motif kind={center} size={center === 'snow' ? 24 : 28} class={center === 'snow' ? 'text-contemplative' : ''} />}
+  <svg width="124" height="36" viewBox="0 0 124 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="transform:scaleX(-1)"><path d={swirl} /><circle cx="4" cy="22" r="1.8" fill="currentColor" /></svg>
+</div>

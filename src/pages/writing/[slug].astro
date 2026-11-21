@@ -1,0 +1,178 @@
+---
+/**
+ * One of Iva's articles. Three moods:
+ *  narnia     – a snowy winter night over Oxford, gold stars
+ *  austen     – a Regency rose garden, a cameo frame, drifting petals
+ *  friendship – winter on one side, roses on the other, meeting in the middle
+ * Nothing here draws Narnia's own imagery (no lion, lamppost or wardrobe).
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Flourish from '../../components/writing/Flourish.astro';
+import Drift from '../../components/writing/Drift.astro';
+import Motif from '../../components/writing/Motif.astro';
+import { articles, type Article } from '../../data/articles';
+
+export function getStaticPaths() {
+  return articles.map((a) => ({ params: { slug: a.slug }, props: { article: a } }));
+}
+interface Props { article: Article; }
+const { article: a } = Astro.props;
+
+const words = a.blocks.reduce((n, b) => n + ('p' in b ? b.p.split(/\s+/).length : 'quote' in b ? b.quote.join(' ').split(/\s+/).length : 0), 0);
+const minutes = Math.max(1, Math.round(words / 220));
+const center = a.theme === 'narnia' ? 'snow' : a.theme === 'austen' ? 'rose' : 'both';
+const others = articles.filter((x) => x.slug !== a.slug);
+const firstP = a.blocks.findIndex((b) => 'p' in b);
+---
+<BaseLayout title={a.title} description={a.teaser} headerTone={a.theme === 'austen' ? 'light' : 'dark'}>
+  <article class:list={['article', `theme-${a.theme}`]}>
+    <!-- ============ HERO ============ -->
+    <header class="hero relative overflow-hidden text-center">
+      <Drift mode={a.theme === 'narnia' ? 'snow' : a.theme === 'austen' ? 'petals' : 'both'} />
+      {a.theme !== 'austen' && (
+        <svg class="stars pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
+          {Array.from({ length: 34 }).map((_, i) => (
+            <circle cx={`${(i * 29 + 7) % 100}%`} cy={`${(i * 41) % 55}%`} r={i % 6 === 0 ? 1.7 : 1} fill="#f8f1e8" class="anim-twinkle" style={`animation-delay:${(i % 7) * 0.45}s`} />
+          ))}
+        </svg>
+      )}
+      {a.theme !== 'austen' && (
+        <svg class="hills pointer-events-none absolute inset-x-0 bottom-0 w-full" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 110 C 180 60 320 90 480 75 S 820 40 1000 80 S 1150 70 1200 60 V160 H0Z" fill="#dfe7f0" opacity=".55" />
+          {[80, 140, 190, 980, 1040, 1110].map((x, i) => (
+            <path d={`M${x} ${118 - (i % 3) * 8} l-16 34 h10 l-12 22 h36 l-12 -22 h10 Z`} fill="#3a4a6b" opacity=".55" />
+          ))}
+          <path d="M0 135 C 240 105 420 140 640 120 S 980 100 1200 125 V160 H0Z" fill="#f4f7fb" />
+        </svg>
+      )}
+      <div class:list={["relative mx-auto max-w-3xl px-5 pb-28 md:pb-36", a.theme === "austen" ? "pt-16 md:pt-24" : "pt-36 md:pt-44"]}>
+        <div class="cameo mx-auto">
+          <p class="eyebrow hero-kicker">{a.kicker}</p>
+          <h1 class="hero-title mt-3 font-display text-5xl leading-[1.05] md:text-7xl">{a.title}</h1>
+          {a.subtitle && <p class="hero-sub mt-4 font-display text-xl italic md:text-2xl">{a.subtitle}</p>}
+          <Flourish center={center} class="mt-6" tone="hero-ink" />
+          <p class="hero-meta mt-4 text-sm tracking-[0.15em] uppercase">By Iva Beranek · {minutes} minute read</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ THE PAGE ============ -->
+    <div class="relative px-4 pb-24">
+      <div class="page relative mx-auto -mt-16 max-w-[46rem] px-6 py-12 md:px-16 md:py-20">
+        <span class="corner tl" aria-hidden="true"></span><span class="corner tr" aria-hidden="true"></span>
+        <span class="corner bl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
+        <div class="prose-article">
+          {a.blocks.map((b, i) =>
+            'p' in b ? (
+              <p class:list={[i === firstP && 'dropcap']} set:html={b.p} />
+            ) : 'quote' in b ? (
+              <figure class="letter my-10">
+                <Motif kind={a.theme === 'austen' ? 'rose' : 'star'} size={22} class="letter-mark" />
+                {b.quote.map((q) => <p set:html={q} />)}
+                {b.by && <figcaption>{b.by}</figcaption>}
+              </figure>
+            ) : (
+              <Flourish center={center} class="my-12" />
+            ),
+          )}
+          <p class="fin" aria-hidden="true">❦</p>
+        </div>
+
+        <p class="mt-10 border-t border-midnight/15 pt-6 text-center font-display italic text-ink-soft">{a.published}<br />© Iva Beranek</p>
+
+        {a.notes && (
+          <details class="notes mt-8">
+            <summary class="cursor-pointer font-display text-xl text-midnight">{a.notesTitle ?? 'Notes'}</summary>
+            <ol class="mt-4 list-decimal space-y-1.5 pl-6 text-sm text-ink-soft">
+              {a.notes.map((n) => <li set:html={n} />)}
+            </ol>
+          </details>
+        )}
+      </div>
+
+      <!-- more to read -->
+      <nav class="mx-auto mt-20 max-w-5xl" aria-label="More writing">
+        <p class="text-center eyebrow text-restoration-deep">Keep reading</p>
+        <ul class="mt-6 grid gap-6 md:grid-cols-2">
+          {others.map((o) => (
+            <li>
+              <a href={`/writing/${o.slug}/`} class:list={['mini group relative block h-full overflow-hidden rounded-[2rem] p-8 no-underline transition-transform duration-300 hover:-translate-y-1', `mini-${o.theme}`]}>
+                <span class="eyebrow opacity-80">{o.kicker}</span>
+                <span class="mt-2 block font-display text-3xl leading-tight">{o.title}</span>
+                {o.subtitle && <span class="mt-1 block font-display italic opacity-85">{o.subtitle}</span>}
+                <span class="mt-4 inline-block font-medium underline-offset-4 group-hover:underline">Read <span aria-hidden="true">→</span></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-8 text-center"><a href="/writing/" class="btn-caps text-midnight">All writing</a></p>
+      </nav>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  /* ---------- Hero moods ---------- */
+  .theme-narnia .hero { background: radial-gradient(ellipse at 50% 120%, #4a6795 0%, #22345c 45%, #121a30 100%); color: #f8f1e8; }
+  .theme-austen .hero { background: radial-gradient(ellipse at 50% 30%, #fbf1e6 0%, #f3dcd0 55%, #e8c2b6 100%); color: #3a2228; }
+  .theme-friendship .hero { background: linear-gradient(100deg, #18243f 0%, #2f4774 38%, #b98a86 62%, #f3dcd0 100%); color: #f8f1e8; }
+  .hero-kicker { color: #e9c785; }
+  .theme-austen .hero-kicker { color: #a8403f; }
+  .hero-meta { opacity: .8; }
+  .hero :global(.hero-ink) { color: #e9c785; }
+  .theme-austen .hero :global(.hero-ink) { color: #a8403f; }
+  .hero :global(.text-contemplative) { color: #f8f1e8; }
+  .theme-austen .hero { padding-top: 0; }
+  .hero-title { text-shadow: 0 2px 24px rgb(0 0 0 / .25); }
+  .theme-austen .hero-title { text-shadow: none; color: #4a1f2a; }
+
+  /* Regency cameo frame around the title on the Austen page */
+  .theme-austen .cameo {
+    max-width: 34rem; padding: 3rem 2.25rem 2.5rem; border-radius: 50% / 42%;
+    background: rgb(255 250 244 / .7); border: 2px solid #c98f7d;
+    box-shadow: 0 0 0 8px rgb(255 250 244 / .45), 0 0 0 9px #c98f7d, 0 20px 50px rgb(120 50 50 / .18);
+  }
+  .theme-friendship .cameo { max-width: 36rem; padding: 2.5rem 2rem; border-radius: 2rem; background: rgb(18 26 48 / .35); backdrop-filter: blur(2px); }
+
+  /* ---------- The paper ---------- */
+  .page {
+    background:
+      radial-gradient(circle at 20% 10%, rgb(255 255 255 / .6), transparent 40%),
+      radial-gradient(circle at 80% 90%, rgb(217 173 101 / .10), transparent 45%),
+      #fbf6ee;
+    border-radius: 6px;
+    box-shadow: 0 1px 0 #e6d8c3, 0 30px 70px rgb(32 43 68 / .14);
+    outline: 1px solid rgb(138 100 32 / .25); outline-offset: -14px;
+  }
+  .theme-austen .page { background-color: #fdf5ef; }
+  .corner { position: absolute; width: 38px; height: 38px; border: 2px solid rgb(138 100 32 / .45); }
+  .corner.tl { top: 22px; left: 22px; border-right: 0; border-bottom: 0; border-top-left-radius: 14px; }
+  .corner.tr { top: 22px; right: 22px; border-left: 0; border-bottom: 0; border-top-right-radius: 14px; }
+  .corner.bl { bottom: 22px; left: 22px; border-right: 0; border-top: 0; border-bottom-left-radius: 14px; }
+  .corner.br { bottom: 22px; right: 22px; border-left: 0; border-top: 0; border-bottom-right-radius: 14px; }
+
+  .prose-article :global(p) { font-family: var(--font-display); font-size: 1.22rem; line-height: 1.8; color: var(--color-ink); margin-top: 1.15em; }
+  @media (min-width: 768px) { .prose-article :global(p) { font-size: 1.3rem; } }
+  .prose-article :global(sup) { font-family: var(--font-sans); font-size: .65em; color: var(--color-restoration-deep); }
+  .prose-article :global(.dropcap::first-letter) {
+    float: left; font-family: var(--font-display); font-size: 4.6em; line-height: .82; padding: .08em .12em 0 0; margin-top: .05em;
+    color: var(--color-restoration-deep); text-shadow: 2px 2px 0 rgb(217 173 101 / .45);
+  }
+  .theme-narnia .prose-article :global(.dropcap::first-letter) { color: var(--color-contemplative); }
+
+  .letter { position: relative; padding: 1.75rem 1.75rem 1.5rem 2.25rem; background: rgb(239 228 212 / .6); border-left: 3px solid var(--color-gold); border-radius: 0 1rem 1rem 0; }
+  .letter :global(p) { font-style: italic; margin-top: .6em !important; }
+  .letter :global(p:first-of-type) { margin-top: 0 !important; }
+  .letter figcaption { margin-top: .9rem; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; color: var(--color-ink-soft); }
+  .letter :global(.letter-mark) { position: absolute; top: -11px; left: -12px; color: var(--color-gold-deep); }
+  .theme-narnia .letter { background: rgb(44 70 129 / .07); border-left-color: var(--color-contemplative); }
+
+  .fin { text-align: center; font-size: 1.8rem !important; color: var(--color-gold-deep) !important; margin-top: 2rem !important; }
+  .notes summary::marker { color: var(--color-gold-deep); }
+  .notes :global(a) { color: var(--color-restoration-deep); }
+
+  /* ---------- Keep reading cards ---------- */
+  .mini-narnia { background: linear-gradient(160deg, #22345c, #121a30); color: #f8f1e8; }
+  .mini-austen { background: linear-gradient(160deg, #fbf1e6, #ecc9bd); color: #4a1f2a; }
+  .mini-friendship { background: linear-gradient(110deg, #22345c, #9d7576 60%, #f0d6cb); color: #f8f1e8; }
+</style>
