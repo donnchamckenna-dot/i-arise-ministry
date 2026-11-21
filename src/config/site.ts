@@ -13,7 +13,7 @@ export const site = {
   // carries a noindex tag and robots.txt asks search engines to stay away.
   allowIndexing: false,
   // Shows the gold "to confirm" boxes. Set false before launch.
-  showPlaceholders: true,
+  showPlaceholders: false,
 } as const;
 
 /** Contact details shown at the bottom of every page. Leave a link empty to hide it. */
