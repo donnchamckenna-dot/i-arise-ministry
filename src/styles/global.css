@@ -173,7 +173,7 @@
   .anim-glow { animation: glow 4s ease-in-out infinite; }
   .anim-drift { animation: drift 5s ease-in-out infinite alternate; }
   @media (prefers-reduced-motion: reduce) {
-    html.js .chapter { --p: 1; }
+    [data-door-zoom] { transform: none !important; }
     .anim-flicker, .anim-beat, .anim-twinkle, .anim-glow, .anim-drift { animation: none; }
   }
 
