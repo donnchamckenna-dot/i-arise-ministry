@@ -5,14 +5,14 @@ import Drift from '../../components/writing/Drift.astro';
 import { articles } from '../../data/articles';
 ---
 <PageLayout
-  title="Writing"
+  title="Articles"
   eyebrow="Articles and reflections"
   intro="A few pieces I have written about the friends who walk with me on the way: C. S. Lewis, Jane Austen, and the places where their stories meet mine."
 >
   <ul class="grid gap-8 lg:grid-cols-3">
     {articles.map((a) => (
       <li>
-        <a href={`/writing/${a.slug}/`} class:list={['card group relative flex h-full flex-col overflow-hidden rounded-t-[999px] rounded-b-[2rem] px-8 pb-9 pt-24 no-underline shadow-xl shadow-midnight/10 transition-transform duration-300 hover:-translate-y-1.5', `card-${a.theme}`]}>
+        <a href={`/articles/${a.slug}/`} class:list={['card group relative flex h-full flex-col overflow-hidden rounded-t-[999px] rounded-b-[2rem] px-8 pb-9 pt-24 no-underline shadow-xl shadow-midnight/10 transition-transform duration-300 hover:-translate-y-1.5', `card-${a.theme}`]}>
           <Drift mode={a.theme === 'narnia' ? 'snow' : a.theme === 'austen' ? 'petals' : 'both'} count={12} />
           <span class="relative eyebrow opacity-80">{a.kicker}</span>
           <span class="relative mt-2 block font-display text-3xl leading-tight md:text-4xl">{a.title}</span>

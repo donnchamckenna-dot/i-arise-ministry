@@ -5,3 +5,8 @@
 /retreats/ /journey/retreats-speaking/ 301
 /contact / 301
 /contact/ / 301
+
+# Writing became Articles (21 Nov 2026)
+/writing /articles/ 301
+/writing/ /articles/ 301
+/writing/* /articles/:splat 301

@@ -91,12 +91,12 @@ const firstP = a.blocks.findIndex((b) => 'p' in b);
       </div>
 
       <!-- more to read -->
-      <nav class="mx-auto mt-20 max-w-5xl" aria-label="More writing">
+      <nav class="mx-auto mt-20 max-w-5xl" aria-label="More articles">
         <p class="text-center eyebrow text-restoration-deep">Keep reading</p>
         <ul class="mt-6 grid gap-6 md:grid-cols-2">
           {others.map((o) => (
             <li>
-              <a href={`/writing/${o.slug}/`} class:list={['mini group relative block h-full overflow-hidden rounded-[2rem] p-8 no-underline transition-transform duration-300 hover:-translate-y-1', `mini-${o.theme}`]}>
+              <a href={`/articles/${o.slug}/`} class:list={['mini group relative block h-full overflow-hidden rounded-[2rem] p-8 no-underline transition-transform duration-300 hover:-translate-y-1', `mini-${o.theme}`]}>
                 <span class="eyebrow opacity-80">{o.kicker}</span>
                 <span class="mt-2 block font-display text-3xl leading-tight">{o.title}</span>
                 {o.subtitle && <span class="mt-1 block font-display italic opacity-85">{o.subtitle}</span>}
@@ -105,7 +105,7 @@ const firstP = a.blocks.findIndex((b) => 'p' in b);
             </li>
           ))}
         </ul>
-        <p class="mt-8 text-center"><a href="/writing/" class="btn-caps text-midnight">All writing</a></p>
+        <p class="mt-8 text-center"><a href="/articles/" class="btn-caps text-midnight">All articles</a></p>
       </nav>
     </div>
   </article>
