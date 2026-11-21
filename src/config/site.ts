@@ -5,7 +5,7 @@ export const site = {
   name: 'I Arise Ministry',
   founder: 'Dr Iva Beranek',
   // TODO-CONTENT: replace with the real domain once it is connected.
-  url: 'https://i-arise-ministry.example',
+  url: 'https://iarise.ie',
   description:
     'I Arise Ministry with Dr Iva Beranek: spiritual direction, retreats, talks and courses. Underneath all pain, joy is hidden.',
   locale: 'en-IE',
