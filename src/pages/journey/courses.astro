@@ -1,19 +1,26 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import Placeholder from '../../components/Placeholder.astro';
-import HeartKey from '../../components/HeartKey.astro';
-import { contact } from '../../config/site';
+import OfferCard from '../../components/OfferCard.astro';
+import inPerson from '../../assets/posters/course-prayer-in-person.jpg';
+import zoom from '../../assets/posters/course-prayer-zoom.jpg';
 ---
 <PageLayout
   title="Courses"
   eyebrow="Journey with me"
-  intro="Deeper learning on prayer, healing and the spiritual life, at your own pace."
+  intro="Deeper learning on prayer, healing and the spiritual life."
 >
-  <div class="mx-auto max-w-2xl text-center">
-    <HeartKey />
-    <h2 class="mt-10 text-4xl text-midnight">Courses are on their way</h2>
-    <p class="mt-4 text-lg text-ink-soft">I’m preparing courses to help you go deeper. If you’d like to hear when the first one opens, write to me.</p>
-    <a href={`mailto:${contact.email}?subject=Courses`} class="btn btn-primary mt-8">Let me know</a>
-    <Placeholder class="mt-12 text-left" label="To confirm with Iva">Course titles, short descriptions, format (online or in person), dates and cost.</Placeholder>
-  </div>
+  <OfferCard
+    kind="A four-week course on prayer"
+    title="Love the Lord Your God"
+    format="In person or on Zoom"
+    posters={[
+      { src: inPerson, alt: 'Poster for Love the Lord Your God, a four-week course on prayer, in person at Clarendon Street Church' },
+      { src: zoom, alt: 'Poster for the online version of Love the Lord Your God on Zoom' },
+    ]}
+    topics={['Ignatian contemplation', 'Lectio Divina', 'Praying with the Psalms', 'Silence']}
+    subject="Love the Lord Your God: expressing interest"
+  >
+    <p>In order to grow closer to God, we need to grow in prayer. We will explore how to pray with our heart, mind, emotions and in silence.</p>
+    <p>When we show up, we create space to allow God to show up for us. Fr Mike Schmitz calls this a “near occasion of grace”.</p>
+  </OfferCard>
 </PageLayout>

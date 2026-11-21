@@ -1,0 +1,56 @@
+---
+/**
+ * Something Iva offers on request (a course or retreat), with its poster(s).
+ * Posters show past dates, so they are labelled as such. Tap a poster to see it full size.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { contact } from '../config/site';
+interface Props {
+  kind: string;
+  title: string;
+  subtitle?: string;
+  format: string;
+  posters: { src: ImageMetadata; alt: string }[];
+  topics?: string[];
+  quote?: { text: string; by: string };
+  note?: string;
+  subject: string;
+}
+const { kind, title, subtitle, format, posters, topics, quote, note, subject } = Astro.props;
+---
+<article class="grid gap-10 rounded-3xl bg-parchment p-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:p-10">
+  <div class:list={['grid gap-4', posters.length > 1 && 'grid-cols-2']}>
+    {posters.map((p) => (
+      <figure>
+        <a href={p.src.src} target="_blank" rel="noopener" class="block overflow-hidden rounded-xl shadow-xl transition-transform duration-300 hover:-translate-y-1">
+          <Image src={p.src} alt={p.alt} widths={[400, 800]} sizes="(min-width: 768px) 24rem, 90vw" class="h-auto w-full" />
+        </a>
+      </figure>
+    ))}
+    <p class:list={['text-sm text-ink-soft', posters.length > 1 && 'col-span-2']}>Poster from a past date. Tap to see it full size.</p>
+  </div>
+  <div class="flex flex-col">
+    <p class="eyebrow text-restoration-deep">{kind}</p>
+    <h3 class="mt-2 text-3xl leading-tight text-midnight md:text-4xl">{title}</h3>
+    {subtitle && <p class="mt-2 font-display text-xl italic text-midnight/80">{subtitle}</p>}
+    <p class="mt-4 inline-flex w-fit rounded-full border border-midnight/20 px-4 py-1 text-sm text-midnight">{format}</p>
+    {quote && (
+      <blockquote class="mt-6 border-l-2 border-restoration pl-4 font-display text-lg italic text-midnight">
+        “{quote.text}”<span class="mt-1 block font-sans text-sm not-italic text-ink-soft">{quote.by}</span>
+      </blockquote>
+    )}
+    <div class="mt-6 space-y-4 text-lg text-ink-soft"><slot /></div>
+    {topics && (
+      <ul class="mt-6 flex flex-wrap gap-2">
+        {topics.map((t) => <li class="rounded-full bg-ivory px-4 py-1.5 text-midnight">{t}</li>)}
+      </ul>
+    )}
+    {note && <p class="mt-6 text-ink-soft">{note}</p>}
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <a href={`mailto:${contact.email}?subject=${encodeURIComponent(subject)}`} class="btn btn-primary">Express your interest</a>
+      <span class="text-ink-soft">Available on request</span>
+    </div>
+    <p class="mt-3 text-sm text-ink-soft">Or write to {contact.email}</p>
+  </div>
+</article>

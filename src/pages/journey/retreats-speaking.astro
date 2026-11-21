@@ -3,6 +3,9 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import RetreatList from '../../components/RetreatList.astro';
 import Placeholder from '../../components/Placeholder.astro';
 import { contact } from '../../config/site';
+import OfferCard from '../../components/OfferCard.astro';
+import noLove from '../../assets/posters/retreat-no-love.jpg';
+import forgiveness from '../../assets/posters/retreat-forgiveness.jpg';
 
 const talks = [
   'Restoring our Inner Goodness: Healing of Memories',
@@ -20,6 +23,36 @@ const talks = [
   <section aria-labelledby="upcoming">
     <h2 id="upcoming" class="text-4xl text-midnight">Upcoming retreats</h2>
     <div class="mt-8"><RetreatList /></div>
+  </section>
+
+  <section class="mt-20" aria-labelledby="offer">
+    <h2 id="offer" class="text-4xl text-midnight">Retreats I offer</h2>
+    <p class="mt-4 max-w-2xl text-lg text-ink-soft">Two day retreats on healing past wounds. They form a two-part series, and each also works on its own.</p>
+    <div class="mt-10 space-y-10">
+      <OfferCard
+        kind="A day retreat · Part 1"
+        title="Where there is no love, put love"
+        subtitle="Healing past wounds through prayer"
+        format="An afternoon retreat"
+        posters={[{ src: noLove, alt: 'Poster for the day retreat Where there is no love, put love: healing past wounds through prayer' }]}
+        quote={{ text: 'Where there is no love, put love, and you will draw out love.', by: 'St John of the Cross' }}
+        subject="Retreat: Where there is no love, put love"
+      >
+        <p>In this retreat we explore ways of bringing healing to some of our painful memories, drawing particularly on the wisdom of St John of the Cross.</p>
+        <p>Step away from busyness into an afternoon of rest, reflection and inner healing.</p>
+      </OfferCard>
+      <OfferCard
+        kind="A day retreat · Part 2"
+        title="Healing past wounds"
+        subtitle="Forgiveness and writing a new story with your life"
+        format="An afternoon retreat"
+        posters={[{ src: forgiveness, alt: 'Poster for the day retreat Healing past wounds: forgiveness and writing a new story with your life' }]}
+        subject="Retreat: Forgiveness and writing a new story with your life"
+      >
+        <p>Forgiveness is not easy for any of us, but as we embark on a journey with it, a new spring may emerge in our own life, and a story, much bigger and more meaningful, opens up.</p>
+        <p>Join us, and give yourself a gift of inner healing.</p>
+      </OfferCard>
+    </div>
   </section>
 
   <section class="mt-20 grid gap-12 md:grid-cols-2" aria-label="Retreats and talks">
