@@ -8,11 +8,14 @@ import noLove from '../../assets/posters/retreat-no-love.jpg';
 import forgiveness from '../../assets/posters/retreat-forgiveness.jpg';
 
 const talks = [
-  'Restoring our Inner Goodness: Healing of Memories',
-  'Love Your Enemies',
-  'St Patrick, a Mirror of God’s Love',
-  'Alleluia in Lent',
-  'Prayer and Poetry',
+  { title: 'Spirituality of Memory. Created in the Image of God: Identity and Healing of Memories', where: 'On the teaching of St John of the Cross. Church of Ireland Theological Institute (CITI), Spirituality programme, January 2026' },
+  { title: 'Seeking a New Vision', where: 'Renewing Our Minds annual conference, a forum on leadership and reconciliation. Tuk, Croatia, August 2025' },
+  { title: 'Restoring our Inner Goodness: Healing of Memories and St John of the Cross', where: 'Given yearly for the Carmelites, at Boars Hill Carmelite Retreat House, Oxford' },
+  { title: 'St John of the Cross: Hope for the Hopeless Places. Healing of Memories and the Places of Conflict', where: 'Teresianum, Rome' },
+  { title: 'Alleluia in Lent. Why we don’t sing it, and the healing that comes from it' },
+  { title: 'Love Your Enemies' },
+  { title: 'St Patrick, a Mirror of God’s Love' },
+  { title: 'Prayer and Poetry' },
 ];
 ---
 <PageLayout
@@ -65,7 +68,12 @@ const talks = [
       <h2 class="!mt-0">Speaking</h2>
       <p>I speak at parishes, universities and conferences in Ireland and abroad. Talks I have given include:</p>
       <ul>
-        {talks.map((t) => <li>{t}</li>)}
+        {talks.map((t) => (
+          <li>
+            <span class="font-display text-lg text-midnight">{t.title}</span>
+            {t.where && <span class="mt-1 block text-base text-ink-soft">{t.where}</span>}
+          </li>
+        ))}
       </ul>
     </div>
   </section>
