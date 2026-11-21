@@ -11,7 +11,7 @@ export const site = {
   locale: 'en-IE',
   // Keep false until the site is approved for launch. When false, every page
   // carries a noindex tag and robots.txt asks search engines to stay away.
-  allowIndexing: false,
+  allowIndexing: true,
   // Shows the gold "to confirm" boxes. Set false before launch.
   showPlaceholders: false,
 } as const;
