@@ -19,7 +19,7 @@ export const site = {
 /** Contact details shown at the bottom of every page. Leave a link empty to hide it. */
 export const contact = {
   email: 'iarise.ministry@gmail.com',
-  instagram: '', // TODO-CONTENT: full Instagram profile URL
+  instagram: 'https://www.instagram.com/ivadublin/',
   linkedin: '', // TODO-CONTENT: full LinkedIn profile URL
 };
 
