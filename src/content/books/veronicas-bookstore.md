@@ -5,7 +5,7 @@ featured: true
 order: 1
 cover: ../../assets/books/veronicas-bookstore-cover.jpg
 coverAlt: "Cover of Veronica's Bookstore: a boy in a scarf carrying a lantern past a red bookshop front on a starry night."
-blurb: "An illustrated story for children, full of wonder and a little magic."
+blurb: "A children's fiction series for 8 to 12 year olds, and for adults “who are old enough to read the fairytales again”, as C. S. Lewis would say."
 verified: false
 ---
 Source: 2021 launch materials (Amazon Kindle; book signing at St Teresa's, Clarendon Street, December 2021).
