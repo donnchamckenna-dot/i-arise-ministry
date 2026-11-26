@@ -8,6 +8,7 @@ import Emblem3D from '../components/Emblem3D.astro';
 import { journeyWays } from '../config/site';
 import doorLeaf from '../assets/story/door-leaf.png';
 import thereseHeart from '../assets/story/therese-heart.png';
+import neriFlame from '../assets/story/neri-flame.png';
 import ivaPortrait from '../assets/people/iva-portrait.jpg';
 
 // Helper: a value that runs from 0 to 1 between two points of the chapter's progress.
@@ -123,11 +124,11 @@ const companions = [
         <svg viewBox="0 0 400 400" class="h-full w-full">
           <path d="M200 340 C110 280 50 220 60 150 C70 90 140 70 200 130 C260 70 330 90 340 150 C350 220 290 280 200 340Z" fill="#cb5b59" />
           <path d="M200 130 L185 175 L215 205 L180 245 L210 280 L200 340" fill="none" stroke="#7a2e2d" stroke-width="5" stroke-linejoin="round" style={`opacity:calc(1 - ${seg(0.3, 0.7)})`} />
-          <path d="M200 130 L185 175 L215 205 L180 245 L210 280 L200 340" fill="none" stroke="#e9c785" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1" style={`stroke-dashoffset:calc(1 - ${seg(0.2, 0.75)}); filter: drop-shadow(0 0 6px rgb(217 173 101 / .9))`} />
+          <path d="M200 130 L185 175 L215 205 L180 245 L210 280 L200 340" fill="none" stroke="#e9c785" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1" style={`stroke-dashoffset:calc((1 - ${seg(0.2, 0.75)}) * 1px); filter: drop-shadow(0 0 6px rgb(217 173 101 / .9))`} />
         </svg>
       </div>
       <p>In cities and families, in churches and workplaces. My research began in Belfast, “a city with a wounded heart”, and its hope of redemption.</p>
-      <p>Reconciliation is possible. Wounds can be filled with gold.</p>
+      <p>Reconciliation is possible, though it cannot be forced. Wounds can be filled with gold.</p>
     </StoryChapter>
 
     <!-- ============ 5. THE INNER DIAMOND ============ -->
@@ -149,7 +150,7 @@ const companions = [
         </svg>
       </div>
       <p>Everyone. St Teresa of Ávila pictured the soul as a castle made of a single diamond. Thomas Merton wrote of a hidden point in each of us that belongs to God alone.</p>
-      <p>Life can cover it over. Nothing can destroy it. Healing is the restoring of this image.</p>
+      <p>Life can cover it over. Nothing can destroy it. Healing is the restoration of this image.</p>
     </StoryChapter>
 
     <!-- ============ 6. THE DARK NIGHT ============ -->
@@ -167,7 +168,7 @@ const companions = [
           <path d="M0 330 C80 290 140 320 200 300 S320 280 400 320 V400 H0Z" fill="#1a2236" />
         </svg>
       </div>
-      <p>St John of the Cross teaches that the dark night of the soul draws us closer to God. First we grow in prayer, and then we can go deeper. Because growth in prayer is so important, I developed and teach “Love the Lord Your God”, a course on prayer.</p>
+      <p>St John of the Cross teaches that the dark night of the soul draws us closer to God. First we grow in prayer, and then we can go deeper. This deeper transformation is God’s purifying work in us, which can be deeply challenging and is not something we can orchestrate ourselves. Because growth in prayer is so important, I developed and teach “Love the Lord Your God”, a course on prayer.</p>
       <p>Often it is the night itself that restores the image of God in us.</p>
     </StoryChapter>
 
@@ -200,6 +201,7 @@ const companions = [
       </div>
       <p>Life can bring so many disappointments. Keep hope. Uncovering the deep things can be painful, but it is worth it.</p>
       <p>Perhaps there is a dream you were too afraid to pursue, or a new calling waiting to be found.</p>
+      <p>Through my healing retreats, we invite God’s love to bring healing to our wounds and uncover dreams we had buried deep within them.</p>
     </StoryChapter>
 
     <!-- ============ 9. COMPANIONS ============ -->
@@ -215,11 +217,14 @@ const companions = [
               <div class="grid h-16 w-16 place-items-center rounded-full bg-midnight shadow-xl md:h-28 md:w-28">
                 <Emblem3D name="shamrock" size="100%" sparkles={false} shadow={false} />
               </div>
+            ) : c.symbol === 'fire' ? (
+              <div class="grid h-16 w-16 place-items-center rounded-full bg-midnight shadow-xl md:h-28 md:w-28">
+                <Image src={neriFlame} alt="" width={90} densities={[1, 2]} class="anim-flicker h-11 w-auto object-contain md:h-[4.5rem]" />
+              </div>
             ) : (
               <div class="grid h-16 w-16 place-items-center rounded-full bg-midnight shadow-xl md:h-28 md:w-28">
-                <svg viewBox="0 0 60 60" class="h-9 w-9 md:h-14 md:w-14">
-                  {c.symbol === 'fire' && <path class="anim-flicker" d="M30 54 C16 54 12 42 16 33 C19 27 24 25 23 16 C30 20 34 26 33 33 C36 30 37 26 36 22 C44 29 46 37 44 43 C42 50 37 54 30 54Z" fill="#e1806f" />}
-                  {c.symbol === 'cross' && <path d="M27 8 H33 V22 H46 V28 H33 V54 H27 V28 H14 V22 H27Z" fill="#d9ad65" />}
+                <svg viewBox="0 0 60 60" class="anim-radiate h-9 w-9 overflow-visible md:h-14 md:w-14">
+                  <path d="M27 8 H33 V22 H46 V28 H33 V54 H27 V28 H14 V22 H27Z" fill="#d9ad65" />
                 </svg>
               </div>
             )}
@@ -237,6 +242,7 @@ const companions = [
         <HeartKey class="w-full" />
       </div>
       <p>Come back to yourself, and know that God reigns.</p>
+      <p>Arise in Christ. Live your true identity.</p>
       <p class="font-display text-2xl italic text-midnight">“I arise today through a mighty strength.”<span class="mt-1 block font-sans text-sm not-italic text-ink-soft">St Patrick’s Breastplate</span></p>
       <div class="flex flex-col gap-3 pt-2 sm:flex-row md:justify-start">
         <a href="/journey/" class="btn btn-primary">Journey with me</a>
@@ -331,7 +337,7 @@ const companions = [
       if (wrap && thread) {
         const r = wrap.getBoundingClientRect();
         const t = Math.min(1, Math.max(0, (vh * 0.6 - r.top) / r.height));
-        thread.style.strokeDashoffset = String(1 - t);
+        thread.style.strokeDashoffset = `${(1 - t).toFixed(4)}px`;
       }
     }
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }

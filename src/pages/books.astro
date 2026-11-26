@@ -7,7 +7,7 @@ import Placeholder from '../components/Placeholder.astro';
 
 const all = (await getCollection('books')).sort((a, b) => a.data.order - b.data.order);
 const groups = [
-  { kind: 'children', title: 'For children', intro: 'Stories full of wonder.' },
+  { kind: 'children', title: 'For children', intro: 'Stories full of wonder. You can buy the books on Amazon worldwide.' },
   { kind: 'spirituality', title: 'Spirituality', intro: '' },
   { kind: 'academic', title: 'Research', intro: '' },
   { kind: 'poetry', title: 'Poetry', intro: '' },
@@ -41,7 +41,7 @@ const groups = [
               <h3 class="mt-6 text-2xl text-midnight">{data.title}</h3>
               <p class="text-ink-soft">{[data.publisher, data.year].filter(Boolean).join(', ')}</p>
               {data.blurb && <p class="mt-2 text-ink-soft">{data.blurb}</p>}
-              {data.buyUrl && <a href={data.buyUrl} class="link mt-3 inline-block font-medium">Find the book<span class="sr-only">: {data.title}</span></a>}
+              {data.buyUrl && <a href={data.buyUrl} class="btn btn-primary mt-4">Buy on Amazon<span class="sr-only">: {data.title}</span></a>}
               {!data.verified && <Placeholder class="mt-4" label="Needed">Description and where to buy.</Placeholder>}
             </li>
           ))}
@@ -52,7 +52,7 @@ const groups = [
 
   <section class="rounded-3xl bg-parchment p-8 md:p-14" aria-labelledby="more">
     <h2 id="more" class="text-4xl text-midnight">Articles and radio</h2>
-    <p class="measure mt-4 text-lg text-ink-soft">Over fifteen articles, and reflections on RTÉ Radio 1. Some of my articles are here to read.</p>
+    <p class="measure mt-4 text-lg text-ink-soft">I have written over 30 articles, and contributed reflections for “A Living Word” on RTÉ Radio 1. Some of my articles are here to read.</p>
     <a href="/articles/" class="btn btn-primary mt-6">Read my articles</a>
   </section>
 </PageLayout>
